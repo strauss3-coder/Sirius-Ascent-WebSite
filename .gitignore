@@ -19,6 +19,10 @@
 .DS_Store
 *.pem
 
+# raw upload dump (unprocessed source files, not referenced by the site —
+# the live assets actually used are in images/, icons/, videos/)
+/assest/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
