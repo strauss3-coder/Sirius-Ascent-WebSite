@@ -62,7 +62,7 @@
   <header class="site-header" data-header>
     <div class="container site-header__inner">
       <a class="brand" href="#top" aria-label="Sirius Ascent home">
-        <span class="brand__mark" aria-hidden="true"></span>
+        <img class="brand__mark" src="images/sirius-ascent-logo.png" alt="" aria-hidden="true" />
         <span class="brand__name">Sirius<span class="brand__accent">Ascent</span></span>
       </a>
 
@@ -110,40 +110,42 @@
     <span id="top" aria-hidden="true"></span>
 
     <!-- ============================ 01 · HERO ============================ -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="hero__backdrop" aria-hidden="true">
-        <div class="hero__glow"></div>
+    <section class="hero" aria-labelledby="hero-title" data-hero>
+      <div class="hero__media" aria-hidden="true">
+        <video
+          class="hero__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="images/BMW_M3.jpg"
+        >
+          <source src="videos/hero-bmw.mp4" type="video/mp4" />
+        </video>
+        <div class="hero__overlay"></div>
         <div class="hero__grid"></div>
       </div>
 
       <div class="container hero__inner">
-        <p class="eyebrow" data-reveal>
+        <p class="eyebrow" data-hero-reveal data-range="0.05,0.4">
           Google Business Profile Management · Pretoria
         </p>
 
-        <h1 class="hero__title display" id="hero-title" data-reveal>
-          The first business they find.
-          <span class="hero__title-accent">The obvious one they choose.</span>
+        <h1 class="hero__title" id="hero-title" data-hero-reveal data-range="0.1,0.45">
+          Become the Obvious Choice.
         </h1>
 
-        <p class="hero__subtitle" data-reveal>
-          Most local Google profiles sit neglected — and invisible. We come to you,
-          capture real photography and video on location, and turn your profile into
-          the reason customers choose you first.
+        <p class="hero__subtitle" data-hero-reveal data-range="0.3,0.65">
+          We transform your Google presence into your strongest sales asset
+          through premium photography, cinematic video and Google Business
+          Profile optimisation.
         </p>
 
-        <div class="hero__actions" data-reveal>
-          <a class="btn btn--primary btn--lg" href="#audit">Get your free audit</a>
-          <a class="btn btn--ghost btn--lg" href="#results">See real results →</a>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" data-hero-reveal data-range="0.5,0.82" href="#audit">Get your free audit</a>
+          <a class="btn btn--ghost btn--lg" data-hero-reveal data-range="0.62,1" href="#results">See real results →</a>
         </div>
-
-        <ul class="hero__trust" data-reveal aria-label="What's included">
-          <li>On-site photography &amp; video</li>
-          <li class="hero__trust-dot" aria-hidden="true"></li>
-          <li>Weekly Google posts</li>
-          <li class="hero__trust-dot" aria-hidden="true"></li>
-          <li>One transparent monthly fee</li>
-        </ul>
       </div>
 
       <a class="hero__scroll" href="#problem" aria-label="Scroll to learn more">
@@ -158,32 +160,65 @@
         <header class="section__head" data-reveal>
           <p class="section__label mono">01 — The quiet problem</p>
           <h2 class="section__title display" id="problem-title">
-            An unmanaged profile is an <em>invisible</em> business.
+            Your business deserves better than being <em>invisible</em>.
           </h2>
           <p class="section__lead">
-            Most local businesses set up a Google profile once and never touch it again.
-            To Google's algorithm — and to the customer scrolling the map — that reads as
-            closed, careless, or gone.
+            Most businesses don't lose customers because they're worse.
+            They lose them because they look forgettable.
           </p>
         </header>
 
-        <ol class="problem__list" role="list">
-          <li class="problem__item" data-reveal>
-            <span class="problem__num mono">01</span>
-            <h3 class="problem__heading">No fresh content.</h3>
-            <p>A profile that hasn't posted in months ranks below one that updates every week.</p>
-          </li>
-          <li class="problem__item" data-reveal>
-            <span class="problem__num mono">02</span>
-            <h3 class="problem__heading">No real photos.</h3>
-            <p>Generic stock doesn't sell. Buyers trust businesses they can actually see.</p>
-          </li>
-          <li class="problem__item" data-reveal>
-            <span class="problem__num mono">03</span>
-            <h3 class="problem__heading">No direct line.</h3>
-            <p>Without a WhatsApp button, mobile customers tap your competitor instead.</p>
-          </li>
-        </ol>
+        <div class="problem__grid">
+          <article class="problem__panel problem__panel--photo" data-reveal>
+            <span class="problem__panel-num mono">01</span>
+            <img class="problem__panel-img" src="images/Supreme_Auto_Before.png" alt="" loading="lazy" />
+            <div class="problem__panel-overlay" aria-hidden="true"></div>
+            <div class="problem__panel-body">
+              <h3 class="problem__panel-title">No Fresh Content</h3>
+              <p class="problem__panel-text">
+                Your profile looks abandoned.<br />
+                Customers assume your business is too.
+              </p>
+              <p class="problem__panel-proof mono">
+                Real screenshot — an actual client profile before Sirius Ascent.
+              </p>
+            </div>
+          </article>
+
+          <article class="problem__panel problem__panel--photo" data-reveal>
+            <span class="problem__panel-num mono">02</span>
+            <img class="problem__panel-img" src="images/Work-in-action.jpeg" alt="" loading="lazy" />
+            <div class="problem__panel-overlay" aria-hidden="true"></div>
+            <div class="problem__panel-body">
+              <h3 class="problem__panel-title">Generic Business Photos</h3>
+              <p class="problem__panel-text">
+                Stock-looking images don't build trust.<br />
+                Professional photography makes customers stop scrolling.
+              </p>
+              <p class="problem__panel-proof mono">
+                Our team on-site, prepping a client's car before a real shoot — not stock.
+              </p>
+            </div>
+          </article>
+
+          <article class="problem__panel problem__panel--icon" data-reveal>
+            <span class="problem__panel-num mono">03</span>
+            <div class="problem__panel-glow" aria-hidden="true"></div>
+            <span class="problem__panel-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.6 13.8L3 21l4.4-1.3A9 9 0 1 0 12 3z" /><path d="M9 10c0 3 2 5 5 5" /></svg>
+            </span>
+            <div class="problem__panel-body">
+              <h3 class="problem__panel-title">No Clear Way to Contact You</h3>
+              <p class="problem__panel-text">
+                If customers can't immediately trust or contact you,<br />
+                they simply choose someone else.
+              </p>
+              <p class="problem__panel-proof mono">
+                A direct WhatsApp button means a real reply — not a contact form nobody checks.
+              </p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -193,59 +228,169 @@
         <header class="section__head" data-reveal>
           <p class="section__label mono">02 — Verified results</p>
           <h2 class="section__title display" id="results-title">
-            Same dealership. Same cars.
-            <span class="results__accent">One month of real management.</span>
+            Proof <span class="results__accent">before promises.</span>
           </h2>
           <p class="section__lead">
-            Supreme Auto, Pretoria North — before and after Sirius Ascent took over their
-            Google Business Profile.
+            Sirius Ascent focuses on measurable improvements, not marketing claims.
+            Here's exactly what one month of management did for a real client.
           </p>
         </header>
 
-        <div class="results__compare" data-reveal>
-          <figure class="results__card results__card--before">
-            <div class="results__media" role="img" aria-label="Supreme Auto profile before management">
-              <span class="mono results__media-tag">Before</span>
-            </div>
-            <figcaption class="results__caption">
-              <span class="results__state">Neglected</span>
-            </figcaption>
-          </figure>
-
-          <figure class="results__card results__card--after">
-            <div class="results__media" role="img" aria-label="Supreme Auto profile after management">
-              <span class="mono results__media-tag">After</span>
-            </div>
-            <figcaption class="results__caption">
-              <span class="results__state results__state--good">Active &amp; ranking</span>
-            </figcaption>
-          </figure>
+        <!-- The client -->
+        <div class="results__block results__case" data-reveal>
+          <p class="results__block-label mono">The client</p>
+          <h3 class="results__block-title display">Supreme Auto, Pretoria North</h3>
+          <p class="results__block-body">
+            Supreme Auto is an independent used-car dealership. Their Google Business
+            Profile had sat untouched for months — no new photos, no posts, no replies
+            to reviews. We took it over, visited the dealership in person, and rebuilt
+            it from the ground up: fresh photography, weekly posts, and active review
+            responses. Consistency is what Google — and customers — actually notice;
+            a profile updated once and abandoned reads as closed, even when the
+            business isn't.
+          </p>
         </div>
 
-        <!-- NOTE: replace placeholder figures with verified Google metrics before launch -->
-        <dl class="results__stats" data-reveal>
-          <div class="results__stat">
-            <dt class="results__stat-label mono">Profile interactions · May</dt>
-            <dd class="results__stat-figure" data-count>—</dd>
+        <!-- Before / After -->
+        <div class="results__block" data-reveal>
+          <p class="results__block-label mono">Before / after</p>
+          <p class="results__slider-intro">Drag to compare.</p>
+          <div
+            class="results__slider"
+            data-compare-slider
+            role="slider"
+            tabindex="0"
+            aria-label="Drag to compare the Google Business Profile before and after Sirius Ascent"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="50"
+          >
+            <div class="results__slider-layer results__slider-layer--after">
+              <img src="images/Supreme_Auto_After.png" alt="Supreme Auto profile after Sirius Ascent management" draggable="false" />
+              <span class="mono results__media-tag results__media-tag--after">After</span>
+            </div>
+            <div class="results__slider-layer results__slider-layer--before" data-compare-clip>
+              <img src="images/Supreme_Auto_Before.png" alt="Supreme Auto profile before Sirius Ascent management" draggable="false" />
+              <span class="mono results__media-tag">Before</span>
+            </div>
+            <div class="results__slider-handle" data-compare-handle aria-hidden="true">
+              <span class="results__slider-grip">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5" /></svg>
+              </span>
+            </div>
           </div>
-          <div class="results__stat">
-            <dt class="results__stat-label mono">Direction requests · May</dt>
-            <dd class="results__stat-figure" data-count>—</dd>
+          <div class="results__compare-captions">
+            <p class="results__caption-why">
+              <span class="results__state">Before:</span> a handful of old photos, no recent posts,
+              no activity for months — to a customer scrolling Google Maps, this reads as closed.
+            </p>
+            <p class="results__caption-why">
+              <span class="results__state results__state--good">After:</span> dozens of fresh photos
+              and weekly updates — the same dealership now looks open, professional and worth visiting.
+            </p>
           </div>
-          <div class="results__stat">
-            <dt class="results__stat-label mono">Website clicks · May</dt>
-            <dd class="results__stat-figure" data-count>—</dd>
+        </div>
+
+        <!-- On-site photography -->
+        <div class="results__block" data-reveal>
+          <p class="results__block-label mono">On location</p>
+          <h3 class="results__block-title display">We don't ask for photos. We go and take them.</h3>
+          <p class="results__block-body">
+            Every image on Supreme Auto's profile was shot on-site by Sirius Ascent —
+            not stock photography, not a phone snap from the owner. This is the same
+            process we'd run for your business.
+          </p>
+          <div class="results__gallery">
+            <figure class="results__gallery-item">
+              <img src="images/Work-in-action.jpeg" alt="Sirius Ascent preparing a client vehicle on-site before a shoot" loading="lazy" />
+            </figure>
+            <figure class="results__gallery-item">
+              <img src="images/On-stite-Supreme-Auto.jpeg" alt="Sirius Ascent on-site at Supreme Auto's dealership" loading="lazy" />
+            </figure>
+            <figure class="results__gallery-item">
+              <img src="images/Supreme-Auto-Floor.jpeg" alt="Supreme Auto showroom floor, shot on location" loading="lazy" />
+            </figure>
+            <figure class="results__gallery-item">
+              <img src="images/BMW-320i.jpeg" alt="Stock vehicle photographed on-site at Supreme Auto" loading="lazy" />
+            </figure>
           </div>
-          <div class="results__stat">
-            <dt class="results__stat-label mono">Google star rating</dt>
-            <dd class="results__stat-figure">3.9★</dd>
-          </div>
-        </dl>
+        </div>
+
+        <!-- Performance -->
+        <div class="results__block" data-reveal>
+          <p class="results__block-label mono">The numbers — May 2026</p>
+          <h3 class="results__block-title display">One month, measured.</h3>
+          <dl class="results__stats">
+            <div class="results__stat" data-reveal>
+              <dt class="results__stat-label mono">Profile interactions</dt>
+              <dd class="results__stat-figure" data-count="144">0</dd>
+              <p class="results__stat-why">Customers actively looking — not scrolling past.</p>
+            </div>
+            <div class="results__stat" data-reveal>
+              <dt class="results__stat-label mono">Calls made</dt>
+              <dd class="results__stat-figure" data-count="6">0</dd>
+              <p class="results__stat-why">Real phone calls, ready to talk.</p>
+            </div>
+            <div class="results__stat" data-reveal>
+              <dt class="results__stat-label mono">Direction requests</dt>
+              <dd class="results__stat-figure" data-count="46">0</dd>
+              <p class="results__stat-why">Real foot traffic to the dealership.</p>
+            </div>
+            <div class="results__stat" data-reveal>
+              <dt class="results__stat-label mono">Chat clicks</dt>
+              <dd class="results__stat-figure" data-count="7">0</dd>
+              <p class="results__stat-why">Leads that didn't exist before.</p>
+            </div>
+            <div class="results__stat" data-reveal>
+              <dt class="results__stat-label mono">Website clicks</dt>
+              <dd class="results__stat-figure" data-count="55">0</dd>
+              <p class="results__stat-why">Visits sent straight to their website.</p>
+            </div>
+            <div class="results__stat" data-reveal>
+              <dt class="results__stat-label mono">Review response rate</dt>
+              <dd class="results__stat-figure results__stat-figure--percent" data-count="100">0</dd>
+              <p class="results__stat-why">Every review replied to — 7 out of 7 this month.</p>
+            </div>
+            <div class="results__stat" data-reveal>
+              <dt class="results__stat-label mono">Updates published</dt>
+              <dd class="results__stat-figure" data-count="9">0</dd>
+              <p class="results__stat-why">Kept the profile active all month.</p>
+            </div>
+            <div class="results__stat" data-reveal>
+              <dt class="results__stat-label mono">Photos added</dt>
+              <dd class="results__stat-figure" data-count="48">0</dd>
+              <p class="results__stat-why">Real photos, shot on-site — not stock.</p>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Why it matters -->
+        <div class="results__block results__why" data-reveal>
+          <p class="results__block-label mono">Why it matters</p>
+          <h3 class="results__block-title display">An active profile becomes a sales asset.</h3>
+          <p class="results__block-body">
+            144 interactions. 46 direction requests. 55 website clicks. That's not luck —
+            it's what happens every month a profile stays active instead of sitting quiet.
+          </p>
+          <p class="results__disclaimer">
+            Google rankings are influenced by many factors. Consistent profile
+            optimisation, fresh content and an active Google Business Profile are
+            important contributors to local visibility — not a guarantee, but a
+            meaningful advantage.
+          </p>
+          <a class="btn btn--primary btn--lg" href="#audit">Want results like this for your business?</a>
+        </div>
       </div>
     </section>
 
     <!-- ============================ 04 · PROCESS ============================ -->
     <section class="section process" id="process" aria-labelledby="process-title">
+      <div class="process__media" aria-hidden="true">
+        <video class="process__video" autoplay muted loop playsinline preload="metadata">
+          <source src="videos/sitrak-background.mp4" type="video/mp4" />
+        </video>
+        <div class="process__overlay"></div>
+      </div>
       <div class="container">
         <header class="section__head" data-reveal>
           <p class="section__label mono">03 — How it works</p>
@@ -257,27 +402,79 @@
         </header>
 
         <ol class="process__steps" role="list">
-          <li class="process__step" data-reveal>
-            <span class="process__num mono">01</span>
-            <h3 class="process__heading">We visit</h3>
-            <p>We drive out to your business in person and see exactly what makes it worth choosing.</p>
+          <li class="process__step process__step--featured" data-reveal>
+            <span class="process__step-num" aria-hidden="true">01</span>
+            <span class="process__icon-wrap" aria-hidden="true">
+              <img class="process__icon" src="icons/map-icon.png" alt="" />
+            </span>
+            <span class="process__num mono">Discover</span>
+            <h3 class="process__heading">We Get to Know Your Business</h3>
+            <p>We learn about your business, services, customers and goals before making any changes.</p>
+            <span class="process__time mono">15-minute consultation</span>
           </li>
-          <li class="process__step" data-reveal>
-            <span class="process__num mono">02</span>
-            <h3 class="process__heading">We shoot</h3>
-            <p>Professional photos and video of your real stock, your team, your space — on location.</p>
+
+          <li class="process__step process__step--featured" data-reveal>
+            <span class="process__step-num" aria-hidden="true">02</span>
+            <span class="process__icon-wrap" aria-hidden="true">
+              <img class="process__icon" src="icons/camera-icon.png" alt="" />
+            </span>
+            <span class="process__num mono">Visit</span>
+            <h3 class="process__heading">Professional On-Site Visit</h3>
+            <p>We visit your location to capture authentic photography and video — real content, real people, real business. No stock imagery.</p>
+            <span class="process__time mono">1–2 hour on-site session</span>
           </li>
+
           <li class="process__step" data-reveal>
-            <span class="process__num mono">03</span>
-            <h3 class="process__heading">We optimise</h3>
-            <p>Profile, services, keywords, WhatsApp button and weekly posts — all handled for you.</p>
+            <span class="process__step-num" aria-hidden="true">03</span>
+            <span class="process__icon-wrap" aria-hidden="true">
+              <img class="process__icon" src="icons/google-icon.png" alt="" />
+            </span>
+            <span class="process__num mono">Optimise</span>
+            <h3 class="process__heading">Profile Optimisation</h3>
+            <p>We optimise your Google Business Profile — services, categories, descriptions, images, business information and customer experience.</p>
+            <span class="process__time mono">Completed within 48 hours</span>
           </li>
+
           <li class="process__step" data-reveal>
-            <span class="process__num mono">04</span>
-            <h3 class="process__heading">We report</h3>
-            <p>Every month you see the numbers — interactions, calls, directions and growth.</p>
+            <span class="process__step-num" aria-hidden="true">04</span>
+            <span class="process__icon-wrap" aria-hidden="true">
+              <img class="process__icon" src="icons/google-maps-icon.png" alt="" />
+            </span>
+            <span class="process__num mono">Content</span>
+            <h3 class="process__heading">Consistent Weekly Content</h3>
+            <p>Fresh Google posts, professional photography and regular updates keep your profile active and engaging.</p>
+            <span class="process__time mono">Updated weekly</span>
+          </li>
+
+          <li class="process__step" data-reveal>
+            <span class="process__step-num" aria-hidden="true">05</span>
+            <span class="process__icon-wrap" aria-hidden="true">
+              <svg class="process__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 17l5-5 4 4 7-9" />
+                <path d="M15 6h5v5" />
+              </svg>
+            </span>
+            <span class="process__num mono">Grow</span>
+            <h3 class="process__heading">Increase Local Visibility</h3>
+            <p>A consistently managed profile builds trust, improves local visibility and creates more opportunities for customers to discover your business.</p>
+          </li>
+
+          <li class="process__step" data-reveal>
+            <span class="process__step-num" aria-hidden="true">06</span>
+            <span class="process__icon-wrap" aria-hidden="true">
+              <svg class="process__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3.5" y="4" width="17" height="16" rx="2" />
+                <path d="M7.5 16v-3M12 16V9M16.5 16v-5" />
+              </svg>
+            </span>
+            <span class="process__num mono">Report</span>
+            <h3 class="process__heading">Monthly Performance Reports</h3>
+            <p>Clear monthly reporting on profile activity, customer interactions and overall performance — simple, visual and easy to understand.</p>
+            <span class="process__time mono">Delivered monthly</span>
           </li>
         </ol>
+
+        <p class="process__transition" data-reveal>Ready to see what's included in every Sirius Ascent partnership?</p>
       </div>
     </section>
 
@@ -285,68 +482,135 @@
     <section class="section work" id="work" aria-labelledby="work-title">
       <div class="container">
         <header class="section__head" data-reveal>
-          <p class="section__label mono">04 — The work</p>
+          <p class="section__label mono">04 — Captured on location</p>
           <h2 class="section__title display" id="work-title">
-            Real content, shot <em>on location</em>.
+            Real content. <em>Real businesses.</em>
           </h2>
           <p class="section__lead">
-            No stock images. Every frame is captured at an actual client business — the kind
-            of content that makes a buyer stop scrolling.
+            Every image below was captured on location at a real client's business.
+            No stock photography. No artificial scenes — just authentic content that
+            helps businesses build trust and stand out on Google.
           </p>
         </header>
 
-        <div class="work__grid" data-reveal>
-          <figure class="work__item work__item--tall">
-            <div class="work__media" role="img" aria-label="Audi S3 photographed at a dealership shoot"></div>
-            <figcaption class="work__caption mono">Audi S3 · Dealership shoot</figcaption>
+        <!-- Featured photography -->
+        <div class="work__featured">
+          <figure class="work__feature work__feature--primary" data-reveal>
+            <span class="work__feature-index mono">01</span>
+            <img src="images/TWINNING.jpeg" alt="Two vehicles photographed on location at Supreme Auto's dealership" loading="lazy" />
+            <figcaption class="work__feature-caption">
+              Every image is captured at the client's location to reflect their real business.
+            </figcaption>
           </figure>
-          <figure class="work__item">
-            <div class="work__media" role="img" aria-label="BMW M3"></div>
-            <figcaption class="work__caption mono">BMW M3</figcaption>
+          <figure class="work__feature work__feature--secondary" data-reveal>
+            <span class="work__feature-index mono">02</span>
+            <img src="images/Audi-S4.jpeg" alt="Audi photographed on-site during a dealership visit" loading="lazy" />
+            <figcaption class="work__feature-caption">
+              Professional dealership photography captured during an on-site visit.
+            </figcaption>
           </figure>
-          <figure class="work__item">
-            <div class="work__media" role="img" aria-label="Range Rover in a showroom"></div>
-            <figcaption class="work__caption mono">Range Rover · Showroom</figcaption>
+        </div>
+
+        <!-- Content gallery -->
+        <div class="work__masonry">
+          <figure class="work__masonry-item" data-reveal>
+            <span class="work__feature-index mono">03</span>
+            <img src="images/Ranger-Rover-Lumma.jpeg" alt="Range Rover photographed on location at a dealership" loading="lazy" />
+            <figcaption class="work__masonry-caption">Fresh content builds trust before customers even make contact.</figcaption>
           </figure>
-          <figure class="work__item work__item--wide">
-            <div class="work__media" role="img" aria-label="Mercedes-Benz S-Class"></div>
-            <figcaption class="work__caption mono">Mercedes S-Class</figcaption>
+          <figure class="work__masonry-item work__masonry-item--tall work__masonry-item--cut" data-reveal>
+            <span class="work__feature-index mono">04</span>
+            <img src="images/Mercedes_Benz_1.jpg" alt="Mercedes-Benz detail shot photographed on-site" loading="lazy" />
+            <figcaption class="work__masonry-caption">Authentic content designed to keep Google Business Profiles active.</figcaption>
           </figure>
-          <figure class="work__item">
-            <div class="work__media" role="img" aria-label="Logistics fleet"></div>
-            <figcaption class="work__caption mono">Fleet · Logistics</figcaption>
+          <figure class="work__masonry-item" data-reveal>
+            <span class="work__feature-index mono">05</span>
+            <img src="images/Mercedes_Benz_2.jpg" alt="Mercedes-Benz vehicles photographed on a dealership lot" loading="lazy" />
+            <figcaption class="work__masonry-caption">Real vehicles, real locations — never a stock photo.</figcaption>
           </figure>
+        </div>
+
+        <!-- Why authentic content matters -->
+        <div class="work__why" data-reveal>
+          <h3 class="work__why-title display">Why authentic content matters</h3>
+          <ul class="work__why-list" role="list">
+            <li>Builds credibility</li>
+            <li>Creates stronger first impressions</li>
+            <li>Makes businesses feel active</li>
+            <li>Increases customer confidence</li>
+            <li>Supports an engaging Google Business Profile</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <!-- ============================ 06 · FOUNDER ============================ -->
     <section class="section founder" id="founder" aria-labelledby="founder-title">
-      <div class="container founder__inner">
-        <div class="founder__media" data-reveal>
-          <div class="founder__photo" role="img" aria-label="Aldo Strauss, founder of Sirius Ascent, on location with a client"></div>
+      <div class="container">
+        <div class="founder__inner">
+          <figure class="founder__media" data-reveal>
+            <img class="founder__photo" src="images/Team_Photo.jpg" alt="The team at a client's workshop whose Google Business Profile Sirius Ascent manages" loading="lazy" />
+          </figure>
+
+          <div class="founder__content" data-reveal>
+            <p class="section__label mono">05 — The story behind Sirius Ascent</p>
+            <h2 class="section__title display" id="founder-title">
+              Built by someone who <em>shows up</em>.
+            </h2>
+            <p class="founder__body">
+              I'm Aldo Strauss, founder of Sirius Ascent. This is one of our clients —
+              their team, at their workshop — exactly the kind of real business I'd
+              rather be visiting than sitting behind a desk.
+            </p>
+            <p class="founder__sign">
+              <span class="founder__name">Aldo Strauss</span>
+              <span class="founder__role mono">Founder · Sirius Ascent</span>
+            </p>
+          </div>
         </div>
 
-        <div class="founder__content" data-reveal>
-          <p class="section__label mono">05 — The founder</p>
-          <h2 class="section__title display" id="founder-title">
-            Built by someone who <em>shows up</em>.
-          </h2>
-          <p class="founder__body">
-            I'm Aldo Strauss. I walked away from a diesel-mechanic apprenticeship because I
-            saw a problem nobody was solving properly — local businesses losing customers
-            every day to rivals with better Google profiles. Not better products. Not better
-            service. Just better visibility.
+        <!-- The story -->
+        <div class="founder__block" data-reveal>
+          <p class="founder__block-label mono">The story</p>
+          <h3 class="founder__block-title display">From the workshop floor to Google Business Profiles.</h3>
+          <p class="founder__block-body">
+            I walked away from a diesel-mechanic apprenticeship because I saw a problem
+            nobody was solving properly — local businesses losing customers every day to
+            rivals with better Google profiles. Not better products. Not better service.
+            Just better visibility.
           </p>
-          <p class="founder__body">
-            So I built Sirius Ascent to fix exactly that. I visit every client in person,
-            shoot their content myself, and manage their Google presence week after week.
-            This isn't a side project. It's everything.
+          <p class="founder__block-body">
+            Working alongside real businesses taught me how much that visibility actually
+            matters, and how often it's neglected. So I built Sirius Ascent to fix exactly
+            that: visiting every client in person, shooting their content myself, and
+            managing their Google presence week after week.
           </p>
-          <p class="founder__sign">
-            <span class="founder__name">Aldo Strauss</span>
-            <span class="founder__role mono">Founder · Sirius Ascent</span>
+        </div>
+
+        <!-- Why Sirius Ascent exists -->
+        <div class="founder__block" data-reveal>
+          <p class="founder__block-label mono">Why Sirius Ascent exists</p>
+          <h3 class="founder__block-title display">Helping local businesses look as good as they actually are.</h3>
+          <p class="founder__block-body">
+            Most local businesses do great work and still look invisible online. Sirius
+            Ascent exists to close that gap — creating authentic content, managing Google
+            Business Profiles consistently, and building trust with customers before they
+            ever walk through the door.
           </p>
+        </div>
+
+        <!-- Philosophy -->
+        <div class="founder__block" data-reveal>
+          <p class="founder__block-label mono">Philosophy</p>
+          <h3 class="founder__block-title display">A few things we don't compromise on.</h3>
+          <ol class="founder__principles" role="list">
+            <li class="founder__principle" data-reveal><span class="founder__principle-num" aria-hidden="true">01</span><span class="founder__principle-text">We visit every client personally.</span></li>
+            <li class="founder__principle" data-reveal><span class="founder__principle-num" aria-hidden="true">02</span><span class="founder__principle-text">We never use stock photography.</span></li>
+            <li class="founder__principle" data-reveal><span class="founder__principle-num" aria-hidden="true">03</span><span class="founder__principle-text">We prioritise consistency over shortcuts.</span></li>
+            <li class="founder__principle" data-reveal><span class="founder__principle-num" aria-hidden="true">04</span><span class="founder__principle-text">Every business deserves to look professional online.</span></li>
+            <li class="founder__principle" data-reveal><span class="founder__principle-num" aria-hidden="true">05</span><span class="founder__principle-text">Relationships matter more than transactions.</span></li>
+            <li class="founder__principle" data-reveal><span class="founder__principle-num" aria-hidden="true">06</span><span class="founder__principle-text">Quality always comes before quantity.</span></li>
+          </ol>
         </div>
       </div>
     </section>
@@ -356,37 +620,203 @@
       <div class="container">
         <header class="section__head section__head--center" data-reveal>
           <p class="section__label mono">06 — Simple pricing</p>
-          <h2 class="section__title display" id="pricing-title">
-            Everything included.
-            <span class="pricing__accent">One monthly fee.</span>
-          </h2>
+          <h2 class="section__title display" id="pricing-title">Simple Pricing</h2>
           <p class="section__lead">
-            No packages to decode. No surprise extras. One onboarding, one retainer — the
-            whole profile handled.
+            A straightforward onboarding process followed by consistent monthly
+            management. No complicated packages. No unnecessary upselling. Just
+            professional Google Business Profile management tailored to your business.
           </p>
+          <p class="pricing__fee mono">R4,300 / month · R2,000 onboarding</p>
         </header>
 
-        <div class="pricing__card" data-reveal>
-          <div class="pricing__head">
-            <h3 class="pricing__plan">Full Google Business Profile management</h3>
-            <p class="pricing__price">
-              <span class="pricing__amount">R4,300</span>
-              <span class="pricing__period mono">per month + R2,000 onboarding</span>
+        <!-- The journey -->
+        <ol class="pricing__journey" role="list">
+          <li class="pricing__journey-step" data-reveal>
+            <span class="pricing__journey-num mono">01</span>
+            <h3 class="pricing__journey-title">Onboarding</h3>
+            <p class="pricing__journey-text">
+              We visit your business, capture professional content, optimise your
+              Google Business Profile and prepare everything for long-term management.
             </p>
+          </li>
+          <li class="pricing__journey-step" data-reveal>
+            <span class="pricing__journey-num mono">02</span>
+            <h3 class="pricing__journey-title">First Month</h3>
+            <p class="pricing__journey-text">
+              Your profile becomes active with fresh content, profile improvements and
+              ongoing optimisation.
+            </p>
+          </li>
+          <li class="pricing__journey-step" data-reveal>
+            <span class="pricing__journey-num mono">03</span>
+            <h3 class="pricing__journey-title">Monthly Partnership</h3>
+            <p class="pricing__journey-text">
+              Consistent management keeps your business visible, professional and
+              active every month.
+            </p>
+          </li>
+        </ol>
+
+        <!-- What's included -->
+        <div class="pricing__included" data-reveal>
+          <p class="pricing__block-label mono">What's included</p>
+          <h3 class="pricing__block-title display">Full Google Business Profile management.</h3>
+
+          <div class="pricing__grid">
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true"><img src="icons/google-icon.png" alt="" /></span>
+              <h4 class="pricing__feature-title">Profile Optimisation</h4>
+              <p class="pricing__feature-text">Services, categories and information kept accurate and complete.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3" /><path d="M18 4v3h-3M6 20v-3h3" /></svg>
+              </span>
+              <h4 class="pricing__feature-title">Weekly Google Posts</h4>
+              <p class="pricing__feature-text">Fresh updates published every week to keep the profile active.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true"><img src="icons/camera-icon.png" alt="" /></span>
+              <h4 class="pricing__feature-title">Professional Photography</h4>
+              <p class="pricing__feature-text">Real photos and video, shot on-site — never stock imagery.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17.3l-5.4 3 1-6-4.6-4 6.1-.6L12 4l2.9 5.7 6.1.6-4.6 4 1 6z" /></svg>
+              </span>
+              <h4 class="pricing__feature-title">Review Management</h4>
+              <p class="pricing__feature-text">Every review answered, building trust before customers arrive.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2" /><path d="M7.5 16v-3M12 16V9M16.5 16v-5" /></svg>
+              </span>
+              <h4 class="pricing__feature-title">Performance Reports</h4>
+              <p class="pricing__feature-text">Clear monthly numbers — interactions, calls and directions.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l3-9 3 9M5.5 10h3M14 20V11a3 3 0 0 1 6 0v9" /></svg>
+              </span>
+              <h4 class="pricing__feature-title">Business Information Updates</h4>
+              <p class="pricing__feature-text">Hours, contact details and services always kept current.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3" /><path d="M19.4 13.5a7.6 7.6 0 0 0 0-3l1.8-1.4-2-3.5-2.1.6a7.6 7.6 0 0 0-2.6-1.5L14 2h-4l-.5 2.2a7.6 7.6 0 0 0-2.6 1.5l-2.1-.6-2 3.5L4.6 10.5a7.6 7.6 0 0 0 0 3l-1.8 1.4 2 3.5 2.1-.6a7.6 7.6 0 0 0 2.6 1.5L10 22h4l.5-2.2a7.6 7.6 0 0 0 2.6-1.5l2.1.6 2-3.5z" /></svg>
+              </span>
+              <h4 class="pricing__feature-title">Service Management</h4>
+              <p class="pricing__feature-text">Your service and product list maintained and kept relevant.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4 12 22l-9-9L11.6 1.4H20a1 1 0 0 1 1 1z" /><circle cx="16" cy="6" r="1.4" /></svg>
+              </span>
+              <h4 class="pricing__feature-title">Category Optimisation</h4>
+              <p class="pricing__feature-text">The right categories so the right customers find you first.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true"><img src="icons/map-icon.png" alt="" /></span>
+              <h4 class="pricing__feature-title">Google Maps Monitoring</h4>
+              <p class="pricing__feature-text">Ongoing checks on how your business appears in local search.</p>
+            </div>
+            <div class="pricing__feature" data-reveal>
+              <span class="pricing__feature-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z" /><path d="m9 12 2 2 4-4" /></svg>
+              </span>
+              <h4 class="pricing__feature-title">Ongoing Profile Maintenance</h4>
+              <p class="pricing__feature-text">Continuous care so the profile never goes quiet again.</p>
+            </div>
           </div>
+        </div>
 
-          <ul class="pricing__features" role="list">
-            <li>Monthly in-person visit to your business</li>
-            <li>Professional photos of stock, team &amp; space</li>
-            <li>Video content shot on location</li>
-            <li>Weekly Google posts — every week</li>
-            <li>Review management &amp; responses</li>
-            <li>WhatsApp button integration</li>
-            <li>Local keyword &amp; service optimisation</li>
-            <li>Monthly performance report</li>
-          </ul>
+        <!-- Interactive feature explorer -->
+        <div class="pricing__explorer" data-reveal>
+          <p class="pricing__block-label mono">See it in action</p>
+          <h3 class="pricing__block-title display">Choose a feature to explore.</h3>
 
-          <a class="btn btn--primary btn--lg pricing__cta" href="#audit">Start with a free audit</a>
+          <div class="pricing__explorer-layout">
+            <div class="pricing__explorer-tabs" role="tablist" aria-label="Explore what's included">
+              <button class="pricing__explorer-tab is-active" type="button" data-feature="photography" role="tab" aria-selected="true">Professional Photography</button>
+              <button class="pricing__explorer-tab" type="button" data-feature="posts" role="tab" aria-selected="false">Weekly Google Posts</button>
+              <button class="pricing__explorer-tab" type="button" data-feature="reviews" role="tab" aria-selected="false">Review Management</button>
+              <button class="pricing__explorer-tab" type="button" data-feature="reports" role="tab" aria-selected="false">Performance Reports</button>
+              <button class="pricing__explorer-tab" type="button" data-feature="maps" role="tab" aria-selected="false">Google Maps Monitoring</button>
+            </div>
+
+            <div class="pricing__explorer-stage">
+              <div class="pricing__explorer-panel is-active" data-feature="photography" role="tabpanel">
+                <div class="pricing__explorer-art" aria-hidden="true">
+                  <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <path d="M6 6h14M6 6v14M114 6h-14M114 6v14M6 84h14M6 84v-14M114 84h-14M114 84v-14" stroke-linecap="round" />
+                    <rect x="36" y="32" width="48" height="34" rx="4" />
+                    <circle cx="60" cy="49" r="10" />
+                    <path d="M48 32l3-6h18l3 6" />
+                  </svg>
+                </div>
+                <p class="pricing__explorer-explain">Every shoot happens on-site — your real stock, your real team, your real space.</p>
+                <p class="pricing__explorer-why mono">Why it matters: generic photos lose trust before a customer ever calls.</p>
+              </div>
+
+              <div class="pricing__explorer-panel" data-feature="posts" role="tabpanel">
+                <div class="pricing__explorer-art" aria-hidden="true">
+                  <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <rect x="20" y="14" width="60" height="16" rx="3" />
+                    <rect x="30" y="36" width="60" height="16" rx="3" />
+                    <rect x="20" y="58" width="60" height="16" rx="3" />
+                    <path d="M94 36a14 14 0 1 1-4.5-10.3" stroke-linecap="round" />
+                    <path d="M94 22v6h-6" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <p class="pricing__explorer-explain">Fresh Google Posts go out every week — no gaps, no inactive profile.</p>
+                <p class="pricing__explorer-why mono">Why it matters: Google and customers both rank activity over silence.</p>
+              </div>
+
+              <div class="pricing__explorer-panel" data-feature="reviews" role="tabpanel">
+                <div class="pricing__explorer-art" aria-hidden="true">
+                  <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <path d="M30 30l5.4-11 5.4 11 12 1.5-8.8 8 2.3 12-11-6-11 6 2.3-12-8.8-8z" stroke-linejoin="round" />
+                    <rect x="62" y="22" width="40" height="26" rx="5" />
+                    <path d="M70 56l6-8" stroke-linecap="round" />
+                  </svg>
+                </div>
+                <p class="pricing__explorer-explain">Every review gets a thoughtful, timely reply — good or bad.</p>
+                <p class="pricing__explorer-why mono">Why it matters: a profile that responds reads as active and trustworthy.</p>
+              </div>
+
+              <div class="pricing__explorer-panel" data-feature="reports" role="tabpanel">
+                <div class="pricing__explorer-art" aria-hidden="true">
+                  <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <path d="M14 76V14M14 76h92" stroke-linecap="round" />
+                    <rect x="28" y="50" width="10" height="26" />
+                    <rect x="48" y="36" width="10" height="40" />
+                    <rect x="68" y="22" width="10" height="54" />
+                    <path d="M28 46l20-14 20 8 20-22" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <p class="pricing__explorer-explain">A clear monthly report — interactions, calls, directions, growth.</p>
+                <p class="pricing__explorer-why mono">Why it matters: you see exactly what's working, in plain language.</p>
+              </div>
+
+              <div class="pricing__explorer-panel" data-feature="maps" role="tabpanel">
+                <div class="pricing__explorer-art" aria-hidden="true">
+                  <svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <circle cx="60" cy="45" r="30" stroke-dasharray="2 5" />
+                    <circle cx="60" cy="45" r="18" stroke-dasharray="2 5" />
+                    <path d="M60 24a13 13 0 0 1 13 13c0 9-13 24-13 24s-13-15-13-24a13 13 0 0 1 13-13z" />
+                    <circle cx="60" cy="37" r="4" />
+                  </svg>
+                </div>
+                <p class="pricing__explorer-explain">We monitor where your business shows up for the searches that matter.</p>
+                <p class="pricing__explorer-why mono">Why it matters: visibility is influenced by many factors — we manage the ones we control.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="pricing__transition" data-reveal>Ready to see exactly what this looks like for your business?</p>
+        <div class="pricing__cta-wrap" data-reveal>
+          <a class="btn btn--primary btn--lg" href="#audit">Start with a free audit</a>
           <p class="pricing__note mono">No obligation · We'll show you what's possible first</p>
         </div>
       </div>
@@ -396,79 +826,164 @@
     <section class="section audit" id="audit" aria-labelledby="audit-title">
       <div class="container audit__inner">
         <div class="audit__intro" data-reveal>
-          <p class="section__label mono">07 — Let's talk</p>
+          <p class="section__label mono">07 — Ready to grow</p>
           <h2 class="section__title display" id="audit-title">
-            Start with a <em>free</em> profile audit.
+            Ready to Make Your Business Stand Out on Google?
           </h2>
           <p class="section__lead">
-            We'll look at your current Google presence and show you exactly what's costing you
-            customers — at no charge, no pressure.
+            Every day your Google Business Profile sits inactive is another opportunity
+            for customers to choose a competitor. Let's change that.
           </p>
 
-          <ul class="audit__contacts" role="list">
+          <div class="audit__review">
+            <span class="audit__review-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M19.5 19.5 15 15" /></svg>
+            </span>
+            <div>
+              <h3 class="audit__review-title">Start with a Free Profile Review</h3>
+              <p class="audit__review-text">
+                I'll personally review your Google Business Profile and identify
+                opportunities for improvement before you commit to anything.
+              </p>
+            </div>
+          </div>
+
+          <ul class="audit__methods" role="list">
             <li>
-              <a href="https://wa.me/27816614559">
-                <span class="audit__contact-label mono">WhatsApp</span>
-                <span class="audit__contact-value">081 661 4559</span>
+              <a class="audit__method" data-reveal href="https://wa.me/message/EKKORR4CAX43D1">
+                <span class="audit__method-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-7.6 13.8L3 21l4.4-1.3A9 9 0 1 0 12 3z" /><path d="M9 10c0 3 2 5 5 5" /></svg>
+                </span>
+                <span class="audit__method-title">Book a Free Strategy Chat</span>
+                <span class="audit__method-text">Get a personal response and discuss your business — usually within a few hours.</span>
               </a>
             </li>
             <li>
-              <a href="tel:+27816614559">
-                <span class="audit__contact-label mono">Call</span>
-                <span class="audit__contact-value">081 661 4559</span>
+              <a class="audit__method" data-reveal href="tel:+27816614559">
+                <span class="audit__method-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" /></svg>
+                </span>
+                <span class="audit__method-title">Speak Directly</span>
+                <span class="audit__method-text">Prefer a conversation? Give me a call — 081 661 4559.</span>
               </a>
             </li>
             <li>
-              <a href="mailto:sirius.ascent@gmail.com">
-                <span class="audit__contact-label mono">Email</span>
-                <span class="audit__contact-value">sirius.ascent@gmail.com</span>
+              <a class="audit__method" data-reveal href="https://www.facebook.com/share/196tBeAXPT/">
+                <span class="audit__method-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4" /><path d="M14.5 9h-1.7c-.9 0-1.3.4-1.3 1.3V12h3l-.4 3h-2.6v6" /></svg>
+                </span>
+                <span class="audit__method-title">See Client Results</span>
+                <span class="audit__method-text">Browse recent projects and updates from real businesses.</span>
               </a>
             </li>
             <li>
-              <a href="https://instagram.com/sirius_ascent_">
-                <span class="audit__contact-label mono">Instagram</span>
-                <span class="audit__contact-value">@sirius_ascent_</span>
+              <a class="audit__method" data-reveal href="https://www.tiktok.com/@sirius_ascent?_r=1&amp;_t=ZS-97NGC6gHzVw">
+                <span class="audit__method-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a3.5 3.5 0 1 1-3-3.46" /><path d="M14 4c.6 2.4 2.4 4.2 5 4.6" /></svg>
+                </span>
+                <span class="audit__method-title">Behind the Scenes</span>
+                <span class="audit__method-text">See how Sirius Ascent works with real businesses.</span>
+              </a>
+            </li>
+            <li>
+              <a class="audit__method" data-reveal href="mailto:sirius.ascent@gmail.com">
+                <span class="audit__method-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M4 6.5 12 13l8-6.5" /></svg>
+                </span>
+                <span class="audit__method-title">Send an Enquiry</span>
+                <span class="audit__method-text">Receive a personalised response within 24 hours.</span>
               </a>
             </li>
           </ul>
         </div>
 
-        <form class="audit__form" data-reveal action="#" method="post" novalidate>
-          <div class="field">
-            <label for="name">Your name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required />
+        <div class="audit__form-panel" data-reveal>
+          <a class="audit__proof" href="#results">
+            <p class="audit__proof-label mono">Proof, not promises</p>
+            <dl class="audit__proof-stats">
+              <div>
+                <dt>Profile interactions in one month</dt>
+                <dd>144</dd>
+              </div>
+              <div>
+                <dt>Real photos shot on-site</dt>
+                <dd>48</dd>
+              </div>
+              <div>
+                <dt>Reviews replied to this month</dt>
+                <dd>100%</dd>
+              </div>
+            </dl>
+            <span class="audit__proof-link">See the full Supreme Auto case study →</span>
+          </a>
+
+          <div class="audit__next">
+            <p class="audit__block-label mono">What happens next?</p>
+            <ol class="audit__next-list" role="list">
+              <li><span class="audit__next-num mono">01</span>Free profile review</li>
+              <li><span class="audit__next-num mono">02</span>Personal consultation</li>
+              <li><span class="audit__next-num mono">03</span>Custom action plan</li>
+              <li><span class="audit__next-num mono">04</span>Start growing</li>
+            </ol>
           </div>
-          <div class="field">
-            <label for="business">Business name</label>
-            <input id="business" name="business" type="text" autocomplete="organization" required />
-          </div>
-          <div class="field">
-            <label for="phone">Phone / WhatsApp</label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" required />
-          </div>
-          <div class="field">
-            <label for="industry">Industry</label>
-            <select id="industry" name="industry" required>
-              <option value="" disabled selected>Select…</option>
-              <option>Car Dealership</option>
-              <option>Workshop / Panel Beater</option>
-              <option>Guest House / Hotel</option>
-              <option>Restaurant / Coffee Shop</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="field field--full">
-            <label for="challenge">What's your biggest challenge?</label>
-            <textarea id="challenge" name="challenge" rows="4"></textarea>
-          </div>
-          <button class="btn btn--primary btn--lg field--full" type="submit">
-            Send — get my free audit
-          </button>
-          <p class="audit__reassure mono field--full">
-            We reply within 24 hours — usually much sooner
+
+          <p class="audit__fear-removal">
+            No pressure. No obligations. Just an honest conversation to see if Sirius
+            Ascent is the right fit for your business.
           </p>
-        </form>
+
+          <form class="audit__form" action="#" method="post" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="business">Business name</label>
+              <input id="business" name="business" type="text" autocomplete="organization" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required />
+            </div>
+            <div class="field">
+              <label for="location">Business location</label>
+              <input id="location" name="location" type="text" autocomplete="address-level2" />
+            </div>
+            <div class="field">
+              <label for="industry">Industry</label>
+              <input id="industry" name="industry" type="text" placeholder="e.g. Car dealership" />
+            </div>
+            <div class="field">
+              <label for="service">What would you like help with?</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select…</option>
+                <option>Google Profile Management</option>
+                <option>Professional Photography</option>
+                <option>Google Profile Audit</option>
+                <option>Review Management</option>
+                <option>Monthly Management</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field field--full">
+              <label for="message">Tell me about your business and what you'd like to improve</label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+            <button class="btn btn--primary btn--lg field--full" type="submit">
+              Send — get my free review
+            </button>
+            <p class="audit__reassure mono field--full">
+              We reply within 24 hours — usually much sooner
+            </p>
+          </form>
+        </div>
       </div>
+
+      <p class="audit__closing display">
+        Small businesses deserve premium marketing too.
+        <span>Sirius Ascent exists to help local businesses build trust, improve
+        visibility and grow through a professionally managed Google Business Profile.</span>
+      </p>
     </section>
   </main>
 
@@ -481,9 +996,24 @@
       </div>
 
       <nav class="site-footer__social" aria-label="Social">
-        <a href="https://instagram.com/sirius_ascent_">Instagram</a>
-        <a href="#">Facebook</a>
-        <a href="#">TikTok</a>
+        <a href="https://instagram.com/sirius_ascent_">
+          <span class="site-footer__social-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5" /><circle cx="12" cy="12" r="4.2" /><circle cx="16.6" cy="7.4" r="0.6" fill="currentColor" stroke="none" /></svg>
+          </span>
+          Instagram
+        </a>
+        <a href="https://www.facebook.com/share/196tBeAXPT/">
+          <span class="site-footer__social-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4" /><path d="M14.5 9h-1.7c-.9 0-1.3.4-1.3 1.3V12h3l-.4 3h-2.6v6" /></svg>
+          </span>
+          Facebook
+        </a>
+        <a href="https://www.tiktok.com/@sirius_ascent?_r=1&amp;_t=ZS-97NGC6gHzVw">
+          <span class="site-footer__social-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a3.5 3.5 0 1 1-3-3.46" /><path d="M14 4c.6 2.4 2.4 4.2 5 4.6" /></svg>
+          </span>
+          TikTok
+        </a>
       </nav>
 
       <p class="site-footer__legal mono">
