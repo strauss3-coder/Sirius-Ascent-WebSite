@@ -493,41 +493,96 @@
           </p>
         </header>
 
-        <!-- Featured photography -->
-        <div class="work__featured">
-          <figure class="work__feature work__feature--primary" data-reveal>
-            <span class="work__feature-index mono">01</span>
-            <img src="images/Mercedes-Benz-Twinning.png" alt="Two matching Mercedes-Benz vehicles photographed on location at Supreme Auto's dealership" loading="lazy" />
-            <figcaption class="work__feature-caption">
-              Every image is captured at the client's location to reflect their real business.
-            </figcaption>
-          </figure>
-          <figure class="work__feature work__feature--secondary" data-reveal>
-            <span class="work__feature-index mono">02</span>
-            <img src="images/Audi-S4.jpeg" alt="Audi photographed on-site during a dealership visit" loading="lazy" />
-            <figcaption class="work__feature-caption">
-              Professional dealership photography captured during an on-site visit.
-            </figcaption>
-          </figure>
-        </div>
+        <!-- Brand showcase -->
+        <div class="showcase" role="list">
 
-        <!-- Content gallery -->
-        <div class="work__masonry">
-          <figure class="work__masonry-item" data-reveal>
-            <span class="work__feature-index mono">03</span>
-            <img src="images/Ranger-Rover-Lumma.jpeg" alt="Range Rover photographed on location at a dealership" loading="lazy" />
-            <figcaption class="work__masonry-caption">Fresh content builds trust before customers even make contact.</figcaption>
-          </figure>
-          <figure class="work__masonry-item work__masonry-item--tall work__masonry-item--cut" data-reveal>
-            <span class="work__feature-index mono">04</span>
-            <img src="images/Mercedes_Benz_1.jpg" alt="Mercedes-Benz detail shot photographed on-site" loading="lazy" />
-            <figcaption class="work__masonry-caption">Authentic content designed to keep Google Business Profiles active.</figcaption>
-          </figure>
-          <figure class="work__masonry-item" data-reveal>
-            <span class="work__feature-index mono">05</span>
-            <img src="images/Mercedes_Benz_2.jpg" alt="Mercedes-Benz vehicles photographed on a dealership lot" loading="lazy" />
-            <figcaption class="work__masonry-caption">Real vehicles, real locations — never a stock photo.</figcaption>
-          </figure>
+          <article class="showcase__card" data-reveal role="listitem">
+            <div class="showcase__head">
+              <h3 class="showcase__brand display">BMW</h3>
+              <p class="showcase__tagline display">Precision. Performance. Presence.</p>
+              <p class="showcase__caption mono">Premium dealership photography</p>
+            </div>
+            <div class="showcase__carousel" data-carousel>
+              <div class="showcase__track" data-track tabindex="0" aria-label="BMW photos">
+                <figure class="showcase__slide"><img src="images/BMW_M3.jpg" alt="BMW M3 photographed on-site at a dealership" loading="lazy" /></figure>
+                <figure class="showcase__slide"><img src="images/BMW-320i.jpeg" alt="BMW 3 Series photographed on a dealership lot" loading="lazy" /></figure>
+              </div>
+              <button class="showcase__arrow showcase__arrow--prev" type="button" data-prev aria-label="Previous BMW photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
+              </button>
+              <button class="showcase__arrow showcase__arrow--next" type="button" data-next aria-label="Next BMW photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+              </button>
+              <div class="showcase__dots" data-dots aria-hidden="true"></div>
+            </div>
+          </article>
+
+          <article class="showcase__card" data-reveal role="listitem">
+            <div class="showcase__head">
+              <h3 class="showcase__brand display">Audi</h3>
+              <p class="showcase__tagline display">Progress through technology.</p>
+              <p class="showcase__caption mono">Premium dealership photography</p>
+            </div>
+            <div class="showcase__carousel" data-carousel>
+              <div class="showcase__track" data-track tabindex="0" aria-label="Audi photos">
+                <figure class="showcase__slide"><img src="images/Audi-S5.png" alt="Audi S5 photographed on-site at a dealership" loading="lazy" /></figure>
+                <figure class="showcase__slide"><img src="images/Audi-S4.jpeg" alt="Audi S4 Avant photographed on a dealership lot" loading="lazy" /></figure>
+                <figure class="showcase__slide"><img src="images/Audi-S3.jpg" alt="Audi S3 photographed on a dealership lot" loading="lazy" /></figure>
+              </div>
+              <button class="showcase__arrow showcase__arrow--prev" type="button" data-prev aria-label="Previous Audi photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
+              </button>
+              <button class="showcase__arrow showcase__arrow--next" type="button" data-next aria-label="Next Audi photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+              </button>
+              <div class="showcase__dots" data-dots aria-hidden="true"></div>
+            </div>
+          </article>
+
+          <article class="showcase__card" data-reveal role="listitem">
+            <div class="showcase__head">
+              <h3 class="showcase__brand display">Land Rover</h3>
+              <p class="showcase__tagline display">Above and beyond.</p>
+              <p class="showcase__caption mono">Premium dealership photography</p>
+            </div>
+            <div class="showcase__carousel" data-carousel>
+              <div class="showcase__track" data-track tabindex="0" aria-label="Land Rover photos">
+                <figure class="showcase__slide"><img src="images/Range_Rover.jpg" alt="Range Rover Velar photographed on-site" loading="lazy" /></figure>
+                <figure class="showcase__slide"><img src="images/Ranger-Rover-Lumma.jpeg" alt="Range Rover Sport photographed on location at a dealership" loading="lazy" /></figure>
+                <figure class="showcase__slide"><img src="images/Land-Rover.png" alt="Land Rover Defender photographed on a dealership lot" loading="lazy" /></figure>
+              </div>
+              <button class="showcase__arrow showcase__arrow--prev" type="button" data-prev aria-label="Previous Land Rover photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
+              </button>
+              <button class="showcase__arrow showcase__arrow--next" type="button" data-next aria-label="Next Land Rover photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+              </button>
+              <div class="showcase__dots" data-dots aria-hidden="true"></div>
+            </div>
+          </article>
+
+          <article class="showcase__card" data-reveal role="listitem">
+            <div class="showcase__head">
+              <h3 class="showcase__brand display">Mercedes-Benz</h3>
+              <p class="showcase__tagline display">The best or nothing.</p>
+              <p class="showcase__caption mono">Premium dealership photography</p>
+            </div>
+            <div class="showcase__carousel" data-carousel>
+              <div class="showcase__track" data-track tabindex="0" aria-label="Mercedes-Benz photos">
+                <figure class="showcase__slide"><img src="images/Mercedes_Benz_1.jpg" alt="Mercedes-Benz S-Class photographed on-site" loading="lazy" /></figure>
+                <figure class="showcase__slide"><img src="images/Mercedes_Benz_2.jpg" alt="Mercedes-Benz E-Class photographed on a dealership lot" loading="lazy" /></figure>
+                <figure class="showcase__slide"><img src="images/Mercedes-Benz-Twinning.png" alt="Two matching Mercedes-Benz vehicles photographed on location at Supreme Auto's dealership" loading="lazy" /></figure>
+              </div>
+              <button class="showcase__arrow showcase__arrow--prev" type="button" data-prev aria-label="Previous Mercedes-Benz photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7" /></svg>
+              </button>
+              <button class="showcase__arrow showcase__arrow--next" type="button" data-next aria-label="Next Mercedes-Benz photo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7" /></svg>
+              </button>
+              <div class="showcase__dots" data-dots aria-hidden="true"></div>
+            </div>
+          </article>
+
         </div>
 
         <!-- Why authentic content matters -->
