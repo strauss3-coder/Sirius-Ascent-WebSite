@@ -1,7 +1,7 @@
 /* =========================================================
    Sirius Ascent
    Design system + full single-page structure
-   Aesthetic: Audi-grade restraint — obsidian, silver, white,
+    Aesthetic: Audi-grade restraint — obsidian, silver, white,
    serif display, mono precision labels.
    (Structure pass — refined per-section polish to follow.)
    ========================================================= */
@@ -25,6 +25,7 @@
   --on-accent: #070708;
 
   --success: #27ae60;
+  --danger: #e0654f;
 
   /* Surfaces — the only two "glass" intensities used across the site */
   --surface-1: rgba(255, 255, 255, 0.035);
@@ -1429,6 +1430,52 @@ em { font-style: italic; }
 .field textarea:focus { outline: none; border-color: var(--accent); background: var(--panel-2); }
 .field textarea { resize: vertical; }
 .audit__reassure { text-align: center; font-size: 0.72rem; color: var(--muted-deep); text-transform: uppercase; margin: 0.25rem 0 0; }
+
+/* Invalid state — shares the same border/background language as :focus,
+   just in --danger, so a missing field still reads as "this site's own
+   styling" rather than a jarring browser-default red outline. */
+.field input.is-invalid,
+.field textarea.is-invalid,
+.dropdown.is-invalid .dropdown__trigger {
+  border-color: var(--danger);
+  background: rgba(224, 101, 79, 0.07);
+}
+.field input.is-invalid:focus,
+.field textarea.is-invalid:focus { border-color: var(--danger); }
+.is-shake { animation: fieldShake 0.4s var(--ease); }
+@keyframes fieldShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+
+.audit__form-error {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(224, 101, 79, 0.35);
+  background: rgba(224, 101, 79, 0.08);
+  color: #f3a392;
+  font-size: 0.88rem;
+  text-align: center;
+  max-height: 0;
+  padding-block: 0;
+  border-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-4px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), max-height 0.3s var(--ease), padding-block 0.3s var(--ease), border-width 0.3s var(--ease);
+}
+.audit__form-error.is-visible {
+  max-height: 80px;
+  padding-block: 0.85rem;
+  border-width: 1px;
+  opacity: 1;
+  transform: translateY(0);
+}
 
 /* ----- Custom dropdowns (Industry / biggest challenge / timeline) -----
    A native <select>'s popup can't be styled — wrong tool for a "feels

@@ -327,6 +327,98 @@
     if (!e.target.closest("[data-dropdown]")) closeAllDropdowns();
   });
 
+  /* ---- Audit form -> WhatsApp ----
+     The form never had a real backend (action="#"), so rather than fake a
+     submission, it builds a pre-filled WhatsApp message and opens that —
+     wa.me resolves to the app on mobile and WhatsApp Web on desktop with
+     no branching needed. Validation reuses the dropdown's own trigger
+     button as the thing to highlight, since the real form control is a
+     hidden input a visitor never sees. */
+  const auditForm = document.querySelector(".audit__form");
+  if (auditForm) {
+    const WHATSAPP_NUMBER = "27816614559";
+    const errorBanner = auditForm.querySelector("[data-form-error]");
+
+    const fields = [
+      { input: auditForm.querySelector("#name"), invalidEl: auditForm.querySelector("#name"), label: "Full Name" },
+      { input: auditForm.querySelector("#business"), invalidEl: auditForm.querySelector("#business"), label: "Business Name" },
+      { input: auditForm.querySelector("#phone"), invalidEl: auditForm.querySelector("#phone"), label: "Phone Number" },
+      { input: auditForm.querySelector("#location"), invalidEl: auditForm.querySelector("#location"), label: "Business Location" },
+      { input: auditForm.querySelector('[name="industry"]'), invalidEl: auditForm.querySelector('[name="industry"]').closest(".dropdown"), label: "Business Type" },
+      { input: auditForm.querySelector('[name="challenge"]'), invalidEl: auditForm.querySelector('[name="challenge"]').closest(".dropdown"), label: "Biggest Challenge" },
+      { input: auditForm.querySelector('[name="timeline"]'), invalidEl: auditForm.querySelector('[name="timeline"]').closest(".dropdown"), label: "Timeline" },
+    ];
+
+    const clearInvalid = () => {
+      fields.forEach((f) => f.invalidEl.classList.remove("is-invalid"));
+      errorBanner.classList.remove("is-visible");
+      errorBanner.textContent = "";
+    };
+
+    fields.forEach((f) => {
+      f.input.addEventListener(f.input.tagName === "INPUT" && f.input.type === "hidden" ? "change" : "input", () => {
+        if (f.input.value.trim()) f.invalidEl.classList.remove("is-invalid");
+        if (fields.every((field) => field.input.value.trim())) {
+          errorBanner.classList.remove("is-visible");
+        }
+      });
+    });
+
+    auditForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      clearInvalid();
+
+      const empty = fields.filter((f) => !f.input.value.trim());
+      if (empty.length) {
+        empty.forEach((f) => {
+          f.invalidEl.classList.add("is-invalid");
+          if (!reduceMotion) {
+            f.invalidEl.classList.add("is-shake");
+            f.invalidEl.addEventListener("animationend", () => f.invalidEl.classList.remove("is-shake"), { once: true });
+          }
+        });
+        errorBanner.textContent = "Please fill in the highlighted fields so I can get back to you properly.";
+        errorBanner.classList.add("is-visible");
+        empty[0].invalidEl.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+        const focusTarget = empty[0].invalidEl.matches(".dropdown") ? empty[0].invalidEl.querySelector(".dropdown__trigger") : empty[0].invalidEl;
+        focusTarget.focus({ preventScroll: true });
+        return;
+      }
+
+      const get = (name) => auditForm.querySelector(`[name="${name}"]`).value.trim();
+      const message = `Hi Sirius Ascent,
+
+I'd like to enquire about improving my online presence.
+
+Name:
+${get("name")}
+
+Business:
+${get("business")}
+
+Phone:
+${get("phone")}
+
+Business Location:
+${get("location")}
+
+Business Type:
+${get("industry")}
+
+Biggest Challenge:
+${get("challenge")}
+
+Timeline:
+${get("timeline")}
+
+I'm looking forward to discussing how Sirius Ascent can help my business become the obvious choice.
+
+Thank you.`;
+
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+    });
+  }
+
   /* ---- Mobile menu ---- */
   const toggle = document.querySelector("[data-nav-toggle]");
   const menu = document.querySelector("[data-mobile-menu]");

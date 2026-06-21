@@ -991,7 +991,7 @@
             </div>
             <div class="field">
               <label for="location">Business location</label>
-              <input id="location" name="location" type="text" autocomplete="address-level2" />
+              <input id="location" name="location" type="text" autocomplete="address-level2" required />
             </div>
             <div class="field">
               <label id="industry-label">Industry</label>
@@ -1015,7 +1015,7 @@
                   <li role="option" data-value="Hospitality">Hospitality</li>
                   <li role="option" data-value="Other">Other</li>
                 </ul>
-                <input type="hidden" name="industry" data-dropdown-input />
+                <input type="hidden" name="industry" data-dropdown-input required />
               </div>
             </div>
             <div class="field">
@@ -1052,15 +1052,16 @@
                   <li role="option" data-value="Within 3 months">Within 3 months</li>
                   <li role="option" data-value="Just exploring">Just exploring</li>
                 </ul>
-                <input type="hidden" name="timeline" data-dropdown-input />
+                <input type="hidden" name="timeline" data-dropdown-input required />
               </div>
             </div>
             <div class="field field--full">
               <label for="message">Tell me about your business and what you'd like to improve</label>
               <textarea id="message" name="message" rows="4"></textarea>
             </div>
+            <p class="audit__form-error field--full" data-form-error role="alert" aria-live="polite"></p>
             <button class="btn btn--primary btn--lg field--full" type="submit">
-              Send — get my free review
+              Send via WhatsApp
             </button>
             <p class="audit__reassure mono field--full">
               We reply within 24 hours — usually much sooner
