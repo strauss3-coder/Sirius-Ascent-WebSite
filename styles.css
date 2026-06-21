@@ -1419,7 +1419,6 @@ em { font-style: italic; }
 .field--full { grid-column: 1 / -1; }
 .field label { font-size: 0.8rem; color: var(--muted); font-family: var(--mono); letter-spacing: 0.02em; }
 .field input,
-.field select,
 .field textarea {
   font-family: var(--body); font-size: 1rem; color: var(--cream);
   background: var(--panel); border: 1px solid var(--border);
@@ -1427,11 +1426,92 @@ em { font-style: italic; }
   transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease);
 }
 .field input:focus,
-.field select:focus,
 .field textarea:focus { outline: none; border-color: var(--accent); background: var(--panel-2); }
 .field textarea { resize: vertical; }
-.field select { appearance: none; }
 .audit__reassure { text-align: center; font-size: 0.72rem; color: var(--muted-deep); text-transform: uppercase; margin: 0.25rem 0 0; }
+
+/* ----- Custom dropdowns (Industry / biggest challenge / timeline) -----
+   A native <select>'s popup can't be styled — wrong tool for a "feels
+   custom-built" requirement. This is the standard ARIA listbox pattern:
+   a button toggles a list of options; a hidden input carries the actual
+   form value. The menu stays in the DOM at all times (never `display:
+   none`) so opacity/transform can transition both ways — toggling via
+   the `hidden` attribute would make the close animation invisible. */
+.dropdown { position: relative; }
+.dropdown__trigger {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.75rem;
+  font-family: var(--body); font-size: 1rem; color: var(--cream);
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 0.85rem 1rem;
+  cursor: pointer; text-align: left;
+  transition: border-color 0.2s var(--ease), background-color 0.2s var(--ease), box-shadow 0.3s var(--ease);
+}
+.dropdown__trigger span { color: var(--cream); }
+.dropdown__trigger[data-placeholder] span { color: var(--muted); }
+.dropdown__trigger:hover { border-color: var(--border-strong); }
+.dropdown__trigger:focus-visible { outline: none; border-color: var(--accent); }
+.dropdown.is-open .dropdown__trigger {
+  border-color: var(--accent);
+  background: var(--panel-2);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.08);
+}
+.dropdown__chevron {
+  width: 18px; height: 18px; flex-shrink: 0;
+  color: var(--muted);
+  transition: transform 0.25s var(--ease), color 0.25s var(--ease);
+}
+.dropdown.is-open .dropdown__chevron { transform: rotate(180deg); color: var(--accent-soft); }
+
+.dropdown__menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0; right: 0;
+  z-index: 20;
+  margin: 0; padding: 0.4rem;
+  list-style: none;
+  max-height: 280px;
+  overflow-y: auto;
+  border-radius: var(--radius-sm);
+  background: rgba(20, 20, 23, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-card-hover), var(--inset-light);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top center;
+  pointer-events: none;
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease), visibility 0s linear 0.22s;
+}
+.dropdown.is-open .dropdown__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+  transition: opacity 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dropdown__menu [role="option"] {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: calc(var(--radius-sm) - 4px);
+  font-size: 0.92rem; color: var(--cream);
+  cursor: pointer;
+  transition: background-color 0.15s var(--ease);
+}
+.dropdown__menu [role="option"].is-highlighted { background: var(--surface-2); }
+.dropdown__menu [role="option"][aria-selected="true"] { color: var(--accent-soft); font-weight: 500; }
+.dropdown__check {
+  display: inline-flex; width: 16px; height: 16px; flex-shrink: 0;
+  color: var(--accent-soft);
+  opacity: 0; transform: scale(0.5);
+  transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+}
+.dropdown__menu [role="option"][aria-selected="true"] .dropdown__check { opacity: 1; transform: scale(1); }
+.dropdown__check svg { width: 100%; height: 100%; }
 
 .audit__closing {
   margin: clamp(4rem, 7vw, 6rem) auto 0;

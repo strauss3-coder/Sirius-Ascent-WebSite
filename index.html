@@ -1005,20 +1005,66 @@
               <input id="location" name="location" type="text" autocomplete="address-level2" />
             </div>
             <div class="field">
-              <label for="industry">Industry</label>
-              <input id="industry" name="industry" type="text" placeholder="e.g. Car dealership" />
+              <label id="industry-label">Industry</label>
+              <div class="dropdown" data-dropdown>
+                <button type="button" class="dropdown__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="industry-label" data-dropdown-trigger>
+                  <span data-dropdown-value>Select…</span>
+                  <svg class="dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                </button>
+                <ul class="dropdown__menu" id="industry-menu" role="listbox" aria-labelledby="industry-label" data-dropdown-menu tabindex="-1">
+                  <li role="option" data-value="Automotive Dealership">Automotive Dealership</li>
+                  <li role="option" data-value="Independent Workshop">Independent Workshop</li>
+                  <li role="option" data-value="Panel Beater">Panel Beater</li>
+                  <li role="option" data-value="Car Detailing">Car Detailing</li>
+                  <li role="option" data-value="Restaurant">Restaurant</li>
+                  <li role="option" data-value="Café / Coffee Shop">Café / Coffee Shop</li>
+                  <li role="option" data-value="Gym / Fitness Studio">Gym / Fitness Studio</li>
+                  <li role="option" data-value="Medical Practice">Medical Practice</li>
+                  <li role="option" data-value="Real Estate Agency">Real Estate Agency</li>
+                  <li role="option" data-value="Retail Store">Retail Store</li>
+                  <li role="option" data-value="Professional Services">Professional Services</li>
+                  <li role="option" data-value="Hospitality">Hospitality</li>
+                  <li role="option" data-value="Other">Other</li>
+                </ul>
+                <input type="hidden" name="industry" data-dropdown-input />
+              </div>
             </div>
             <div class="field">
-              <label for="service">What would you like help with?</label>
-              <select id="service" name="service" required>
-                <option value="" disabled selected>Select…</option>
-                <option>Google Profile Management</option>
-                <option>Professional Photography</option>
-                <option>Google Profile Audit</option>
-                <option>Review Management</option>
-                <option>Monthly Management</option>
-                <option>Other</option>
-              </select>
+              <label id="challenge-label">What's your biggest challenge?</label>
+              <div class="dropdown" data-dropdown>
+                <button type="button" class="dropdown__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="challenge-label" data-dropdown-trigger>
+                  <span data-dropdown-value>Select…</span>
+                  <svg class="dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                </button>
+                <ul class="dropdown__menu" id="challenge-menu" role="listbox" aria-labelledby="challenge-label" data-dropdown-menu tabindex="-1">
+                  <li role="option" data-value="Not showing up on Google">Not showing up on Google</li>
+                  <li role="option" data-value="Low visibility in local searches">Low visibility in local searches</li>
+                  <li role="option" data-value="My Google Business Profile is outdated">My Google Business Profile is outdated</li>
+                  <li role="option" data-value="Poor quality photos and videos">Poor quality photos and videos</li>
+                  <li role="option" data-value="Not getting enough enquiries">Not getting enough enquiries</li>
+                  <li role="option" data-value="Losing customers to competitors">Losing customers to competitors</li>
+                  <li role="option" data-value="My online presence doesn't reflect my business">My online presence doesn't reflect my business</li>
+                  <li role="option" data-value="I need a complete profile makeover">I need a complete profile makeover</li>
+                  <li role="option" data-value="Other">Other</li>
+                </ul>
+                <input type="hidden" name="challenge" data-dropdown-input required />
+              </div>
+            </div>
+            <div class="field field--full">
+              <label id="timeline-label">How soon are you looking to improve your Google presence?</label>
+              <div class="dropdown" data-dropdown>
+                <button type="button" class="dropdown__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="timeline-label" data-dropdown-trigger>
+                  <span data-dropdown-value>Select…</span>
+                  <svg class="dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                </button>
+                <ul class="dropdown__menu" id="timeline-menu" role="listbox" aria-labelledby="timeline-label" data-dropdown-menu tabindex="-1">
+                  <li role="option" data-value="As soon as possible">As soon as possible</li>
+                  <li role="option" data-value="Within the next month">Within the next month</li>
+                  <li role="option" data-value="Within 3 months">Within 3 months</li>
+                  <li role="option" data-value="Just exploring">Just exploring</li>
+                </ul>
+                <input type="hidden" name="timeline" data-dropdown-input />
+              </div>
             </div>
             <div class="field field--full">
               <label for="message">Tell me about your business and what you'd like to improve</label>

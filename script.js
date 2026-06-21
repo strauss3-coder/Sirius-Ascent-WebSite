@@ -212,6 +212,121 @@
     syncUI();
   });
 
+  /* ---- Custom dropdowns (Industry / biggest challenge / timeline) ----
+     Standard ARIA listbox pattern: the trigger button owns aria-expanded,
+     the menu owns aria-activedescendant pointing at whichever option is
+     currently highlighted, and a hidden input carries the actual value
+     since role="listbox" isn't a real form control the browser submits. */
+  const closeAllDropdowns = (except) => {
+    document.querySelectorAll(".dropdown.is-open").forEach((d) => {
+      if (d !== except) d.dispatchEvent(new CustomEvent("dropdown:close"));
+    });
+  };
+
+  document.querySelectorAll("[data-dropdown]").forEach((dropdown) => {
+    const trigger = dropdown.querySelector("[data-dropdown-trigger]");
+    const menu = dropdown.querySelector("[data-dropdown-menu]");
+    const valueEl = dropdown.querySelector("[data-dropdown-value]");
+    const input = dropdown.querySelector("[data-dropdown-input]");
+    const options = Array.from(menu.querySelectorAll('[role="option"]'));
+    let activeIndex = -1;
+
+    trigger.setAttribute("data-placeholder", "");
+
+    options.forEach((opt) => {
+      const check = document.createElement("span");
+      check.className = "dropdown__check";
+      check.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7" /></svg>';
+      opt.appendChild(check);
+    });
+
+    const highlight = (i) => {
+      options.forEach((o, oi) => o.classList.toggle("is-highlighted", oi === i));
+      if (options[i]) menu.setAttribute("aria-activedescendant", options[i].id);
+    };
+
+    const close = () => {
+      dropdown.classList.remove("is-open");
+      trigger.setAttribute("aria-expanded", "false");
+    };
+    dropdown.addEventListener("dropdown:close", close);
+
+    const open = () => {
+      closeAllDropdowns(dropdown);
+      dropdown.classList.add("is-open");
+      trigger.setAttribute("aria-expanded", "true");
+      const selected = options.findIndex((o) => o.getAttribute("aria-selected") === "true");
+      activeIndex = selected >= 0 ? selected : 0;
+      highlight(activeIndex);
+      menu.focus({ preventScroll: true });
+    };
+
+    const select = (i) => {
+      options.forEach((o) => o.removeAttribute("aria-selected"));
+      const opt = options[i];
+      opt.setAttribute("aria-selected", "true");
+      valueEl.textContent = opt.dataset.value;
+      trigger.removeAttribute("data-placeholder");
+      input.value = opt.dataset.value;
+      input.dispatchEvent(new Event("change", { bubbles: true }));
+      close();
+      trigger.focus();
+    };
+
+    trigger.addEventListener("click", () => {
+      if (dropdown.classList.contains("is-open")) close();
+      else open();
+    });
+
+    trigger.addEventListener("keydown", (e) => {
+      if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
+        e.preventDefault();
+        open();
+      }
+    });
+
+    menu.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        activeIndex = Math.min(options.length - 1, activeIndex + 1);
+        highlight(activeIndex);
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        activeIndex = Math.max(0, activeIndex - 1);
+        highlight(activeIndex);
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        activeIndex = 0;
+        highlight(activeIndex);
+      } else if (e.key === "End") {
+        e.preventDefault();
+        activeIndex = options.length - 1;
+        highlight(activeIndex);
+      } else if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        if (activeIndex >= 0) select(activeIndex);
+      } else if (e.key === "Escape") {
+        e.preventDefault();
+        close();
+        trigger.focus();
+      } else if (e.key === "Tab") {
+        close();
+      }
+    });
+
+    options.forEach((opt, i) => {
+      opt.addEventListener("click", () => select(i));
+      opt.addEventListener("mouseenter", () => {
+        activeIndex = i;
+        highlight(i);
+      });
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-dropdown]")) closeAllDropdowns();
+  });
+
   /* ---- Mobile menu ---- */
   const toggle = document.querySelector("[data-nav-toggle]");
   const menu = document.querySelector("[data-mobile-menu]");
