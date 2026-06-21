@@ -1401,9 +1401,13 @@ em { font-style: italic; }
   width: 30px; height: 30px;
   color: var(--accent-soft);
   transition: transform 0.35s var(--ease);
+  /* Own compositing layer — WebKit can otherwise fail to repaint an SVG
+     nested inside a [data-reveal] parent once its blur-filter transition
+     finishes, leaving the icon stuck invisible. */
+  transform: translateZ(0);
 }
 .audit__method-icon svg { width: 26px; height: 26px; }
-.audit__method:hover .audit__method-icon { transform: scale(1.1); }
+.audit__method:hover .audit__method-icon { transform: translateZ(0) scale(1.1); }
 .audit__method-title { font-size: var(--fs-h4); font-weight: 600; line-height: 1.3; color: var(--cream); }
 .audit__method-text { font-size: 0.84rem; color: var(--muted); line-height: 1.4; }
 
@@ -1552,11 +1556,12 @@ em { font-style: italic; }
   .results__stats,
   .results__gallery,
   .audit__form { grid-template-columns: 1fr; }
+  .process__step--featured { grid-column: 1; }
   .hero__actions .btn { flex: 1 1 100%; }
   .hero__scroll { display: none; }
   .work__featured { grid-template-columns: 1fr; row-gap: 2.5rem; padding-bottom: 0; }
   .work__feature--primary,
-  .work__feature--secondary { grid-column: 1; margin-top: 0; }
+  .work__feature--secondary { grid-column: 1; grid-row: auto; margin-top: 0; }
   .work__feature-caption { position: static; margin-top: 0.85rem; bottom: auto; left: auto; right: auto; }
   .work__masonry { column-count: 1; }
   .pricing__journey { grid-template-columns: 1fr; }
