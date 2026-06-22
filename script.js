@@ -327,66 +327,199 @@
     if (!e.target.closest("[data-dropdown]")) closeAllDropdowns();
   });
 
-  /* ---- Audit form -> WhatsApp ----
-     The form never had a real backend (action="#"), so rather than fake a
-     submission, it builds a pre-filled WhatsApp message and opens that —
-     wa.me resolves to the app on mobile and WhatsApp Web on desktop with
-     no branching needed. Validation reuses the dropdown's own trigger
-     button as the thing to highlight, since the real form control is a
-     hidden input a visitor never sees. */
-  const auditForm = document.querySelector(".audit__form");
-  if (auditForm) {
+  /* ---- Enquiry wizard -> WhatsApp ----
+     One question per step inside a floating card. Steps stay in the DOM
+     at all times (never `display: none` mid-transition, same reasoning
+     as the dropdown menus) so the slide/fade/scale can animate both
+     directions. The form never had a real backend (action="#" was
+     removed entirely), so the final step builds a pre-filled WhatsApp
+     message and opens wa.me, which resolves to the app on mobile and
+     WhatsApp Web on desktop with no branching needed. */
+  const wizard = document.querySelector("[data-wizard]");
+  if (wizard) {
     const WHATSAPP_NUMBER = "27816614559";
-    const errorBanner = auditForm.querySelector("[data-form-error]");
+    const bar = wizard.querySelector("[data-wizard-bar-fill]");
+    const count = wizard.querySelector("[data-wizard-count]");
+    const prevBtn = wizard.querySelector("[data-wizard-prev]");
+    const nextBtn = wizard.querySelector("[data-wizard-next]");
+    const startBtn = wizard.querySelector("[data-wizard-start]");
+    const summaryDl = wizard.querySelector("[data-wizard-summary]");
+    const successEl = wizard.querySelector("[data-wizard-success]");
+    const steps = Array.from(wizard.querySelectorAll(".wizard__step"));
+    const fieldSteps = steps.filter((el) => el.hasAttribute("data-field-step"));
+    const prevDefaultHTML = prevBtn.innerHTML;
+    const nextDefaultHTML = nextBtn.innerHTML;
+    let index = 0;
 
-    const fields = [
-      { input: auditForm.querySelector("#name"), invalidEl: auditForm.querySelector("#name"), label: "Full Name" },
-      { input: auditForm.querySelector("#business"), invalidEl: auditForm.querySelector("#business"), label: "Business Name" },
-      { input: auditForm.querySelector("#phone"), invalidEl: auditForm.querySelector("#phone"), label: "Phone Number" },
-      { input: auditForm.querySelector("#location"), invalidEl: auditForm.querySelector("#location"), label: "Business Location" },
-      { input: auditForm.querySelector('[name="industry"]'), invalidEl: auditForm.querySelector('[name="industry"]').closest(".dropdown"), label: "Business Type" },
-      { input: auditForm.querySelector('[name="challenge"]'), invalidEl: auditForm.querySelector('[name="challenge"]').closest(".dropdown"), label: "Biggest Challenge" },
-      { input: auditForm.querySelector('[name="timeline"]'), invalidEl: auditForm.querySelector('[name="timeline"]').closest(".dropdown"), label: "Timeline" },
-    ];
-
-    const clearInvalid = () => {
-      fields.forEach((f) => f.invalidEl.classList.remove("is-invalid"));
-      errorBanner.classList.remove("is-visible");
-      errorBanner.textContent = "";
+    const SUMMARY_LABELS = {
+      name: "Name",
+      business: "Business",
+      phone: "Phone",
+      location: "Location",
+      industry: "Business Type",
+      challenge: "Biggest Challenge",
+      timeline: "Timeline",
+      notes: "Additional Notes",
     };
 
-    fields.forEach((f) => {
-      f.input.addEventListener(f.input.tagName === "INPUT" && f.input.type === "hidden" ? "change" : "input", () => {
-        if (f.input.value.trim()) f.invalidEl.classList.remove("is-invalid");
-        if (fields.every((field) => field.input.value.trim())) {
-          errorBanner.classList.remove("is-visible");
-        }
+    const fieldOf = (step) => step.querySelector("[data-wizard-field]");
+    const invalidElOf = (step) => {
+      const field = fieldOf(step);
+      return field.closest(".dropdown") || field;
+    };
+    const errorElOf = (step) => step.querySelector("[data-field-error]");
+    const focusTargetOf = (step) => {
+      const invalidEl = invalidElOf(step);
+      return invalidEl.matches(".dropdown") ? invalidEl.querySelector(".dropdown__trigger") : invalidEl;
+    };
+
+    const updateProgress = () => {
+      const step = steps[index];
+      if (step.dataset.step === "welcome") {
+        bar.style.width = "0%";
+        count.textContent = "";
+      } else if (step.dataset.step === "summary") {
+        bar.style.width = "100%";
+        count.textContent = "Almost done";
+      } else {
+        const fieldIndex = fieldSteps.indexOf(step);
+        bar.style.width = `${((fieldIndex + 1) / fieldSteps.length) * 100}%`;
+        count.textContent = `Step ${fieldIndex + 1} of ${fieldSteps.length}`;
+      }
+    };
+
+    const pulseBar = () => {
+      if (reduceMotion) return;
+      bar.classList.add("is-pulsing");
+      setTimeout(() => bar.classList.remove("is-pulsing"), 320);
+    };
+
+    const updateNav = () => {
+      const stepName = steps[index].dataset.step;
+      wizard.dataset.current = stepName;
+      if (stepName === "summary") {
+        prevBtn.className = "wizard__arrow wizard__arrow--edit";
+        prevBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7" /></svg><span>Edit</span>';
+        nextBtn.className = "wizard__arrow wizard__arrow--send";
+        nextBtn.innerHTML = '<span>Send via WhatsApp</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7" /></svg>';
+      } else {
+        prevBtn.className = "wizard__arrow wizard__arrow--prev";
+        prevBtn.innerHTML = prevDefaultHTML;
+        nextBtn.className = "wizard__arrow wizard__arrow--next";
+        nextBtn.innerHTML = nextDefaultHTML;
+      }
+    };
+
+    const populateSummary = () => {
+      summaryDl.innerHTML = "";
+      summaryDl.classList.remove("is-hidden");
+      successEl.classList.remove("is-active");
+      fieldSteps.forEach((step) => {
+        const value = fieldOf(step).value.trim();
+        if (!value) return;
+        const row = document.createElement("div");
+        row.className = "wizard__summary-row";
+        row.innerHTML = `<dt>${SUMMARY_LABELS[step.dataset.step]}</dt><dd>${value.replace(/</g, "&lt;")}</dd>`;
+        summaryDl.appendChild(row);
       });
-    });
+    };
 
-    auditForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      clearInvalid();
-
-      const empty = fields.filter((f) => !f.input.value.trim());
-      if (empty.length) {
-        empty.forEach((f) => {
-          f.invalidEl.classList.add("is-invalid");
-          if (!reduceMotion) {
-            f.invalidEl.classList.add("is-shake");
-            f.invalidEl.addEventListener("animationend", () => f.invalidEl.classList.remove("is-shake"), { once: true });
-          }
-        });
-        errorBanner.textContent = "Please fill in the highlighted fields so I can get back to you properly.";
-        errorBanner.classList.add("is-visible");
-        empty[0].invalidEl.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
-        const focusTarget = empty[0].invalidEl.matches(".dropdown") ? empty[0].invalidEl.querySelector(".dropdown__trigger") : empty[0].invalidEl;
-        focusTarget.focus({ preventScroll: true });
+    const focusStep = (step) => {
+      if (reduceMotion) {
+        if (step.dataset.step !== "welcome" && step.dataset.step !== "summary") focusTargetOf(step).focus({ preventScroll: true });
         return;
       }
+      setTimeout(() => {
+        if (step.dataset.step !== "welcome" && step.dataset.step !== "summary") focusTargetOf(step).focus({ preventScroll: true });
+      }, 260);
+    };
 
-      const get = (name) => auditForm.querySelector(`[name="${name}"]`).value.trim();
-      const message = `Hi Sirius Ascent,
+    const goTo = (newIndex, direction) => {
+      const oldEl = steps[index];
+      const newEl = steps[newIndex];
+
+      if (reduceMotion) {
+        oldEl.classList.remove("is-active");
+        newEl.classList.add("is-active");
+      } else {
+        const exitClass = direction > 0 ? "wizard__step--exit-left" : "wizard__step--exit-right";
+        const enterClass = direction > 0 ? "wizard__step--enter-right" : "wizard__step--enter-left";
+        oldEl.classList.add(exitClass);
+        // setTimeout, not transitionend — transitionend is unreliable here (won't
+        // fire at all if the property never visually changes, and can double-fire
+        // across opacity+transform), so a timer matched to the CSS duration is
+        // the more dependable way to know the exit animation is done.
+        setTimeout(() => oldEl.classList.remove("is-active", "wizard__step--exit-left", "wizard__step--exit-right"), 230);
+        newEl.classList.add("is-active", enterClass);
+        newEl.getBoundingClientRect();
+        requestAnimationFrame(() => newEl.classList.remove(enterClass));
+      }
+
+      index = newIndex;
+      updateProgress();
+      updateNav();
+      if (newEl.dataset.step === "summary") populateSummary();
+      focusStep(newEl);
+    };
+
+    const validateStep = (step) => {
+      if (!step.hasAttribute("data-required")) return true;
+      const field = fieldOf(step);
+      if (field.value.trim()) return true;
+
+      const invalidEl = invalidElOf(step);
+      const errorEl = errorElOf(step);
+      invalidEl.classList.add("is-invalid");
+      errorEl.classList.add("is-visible");
+      if (!reduceMotion) {
+        invalidEl.classList.add("is-shake");
+        invalidEl.addEventListener("animationend", () => invalidEl.classList.remove("is-shake"), { once: true });
+      }
+      focusTargetOf(step).focus({ preventScroll: true });
+      return false;
+    };
+
+    fieldSteps.forEach((step) => {
+      if (!step.hasAttribute("data-required")) return;
+      const field = fieldOf(step);
+      const eventName = field.tagName === "INPUT" && field.type === "hidden" ? "change" : "input";
+      field.addEventListener(eventName, () => {
+        if (field.value.trim()) {
+          invalidElOf(step).classList.remove("is-invalid");
+          errorElOf(step).classList.remove("is-visible");
+        }
+      });
+      if (field.tagName === "INPUT" && field.type !== "hidden") {
+        field.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            nextBtn.click();
+          }
+        });
+      }
+    });
+
+    startBtn.addEventListener("click", () => goTo(index + 1, 1));
+
+    prevBtn.addEventListener("click", () => {
+      if (index > 0) goTo(index - 1, -1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const step = steps[index];
+
+      if (step.dataset.step === "summary") {
+        const invalidStep = fieldSteps.find((s) => !validateStep(s));
+        if (invalidStep) {
+          goTo(steps.indexOf(invalidStep), -1);
+          return;
+        }
+        summaryDl.classList.add("is-hidden");
+        successEl.classList.add("is-active");
+
+        const get = (name) => wizard.querySelector(`[name="${name}"]`).value.trim();
+        const notes = get("notes");
+        const message = `Hi Sirius Ascent,
 
 I'd like to enquire about improving my online presence.
 
@@ -409,14 +542,24 @@ Biggest Challenge:
 ${get("challenge")}
 
 Timeline:
-${get("timeline")}
+${get("timeline")}${notes ? `\n\nAdditional Notes:\n${notes}` : ""}
 
 I'm looking forward to discussing how Sirius Ascent can help my business become the obvious choice.
 
 Thank you.`;
 
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+        setTimeout(() => {
+          window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+        }, reduceMotion ? 0 : 650);
+        return;
+      }
+
+      if (!validateStep(step)) return;
+      pulseBar();
+      goTo(index + 1, 1);
     });
+
+    wizard.dataset.current = "welcome";
   }
 
   /* ---- Mobile menu ---- */
