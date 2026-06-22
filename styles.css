@@ -1451,13 +1451,16 @@ em { font-style: italic; }
 .wizard[data-current="welcome"] .wizard__bar,
 .wizard[data-current="welcome"] .wizard__count { opacity: 0; }
 
-.wizard__viewport { position: relative; overflow: hidden; margin-top: 1.5rem; min-height: 60px; }
+.wizard__viewport { position: relative; margin-top: 1.5rem; min-height: 60px; }
 
 .wizard__step { display: none; }
 .wizard__step.is-active {
   display: block;
   opacity: 1;
-  transform: translateX(0) scale(1);
+  /* `none`, not translateX(0) scale(1) — an identity transform still opens
+     a new stacking context, which was trapping the dropdown menu's
+     z-index below the nav row sitting right after it in the DOM. */
+  transform: none;
   transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
 }
 .wizard__step.is-active.wizard__step--enter-right,
@@ -1763,7 +1766,7 @@ em { font-style: italic; }
   .results__gallery { grid-template-columns: 1fr; }
   .process__step--featured { grid-column: 1; }
   .wizard { padding: 1.5rem; }
-  .wizard__arrow { width: 52px; height: 52px; }
+  .wizard__arrow:not(.wizard__arrow--edit):not(.wizard__arrow--send) { width: 52px; height: 52px; }
   .hero__actions .btn { flex: 1 1 100%; }
   .hero__scroll { display: none; }
   .pricing__journey { grid-template-columns: 1fr; }
