@@ -976,6 +976,11 @@
             Ascent is the right fit for your business.
           </p>
 
+          <!-- Marks where #wizardForm normally lives — the floating enquiry
+               button relocates that exact node into its panel on open and
+               reinserts it right here on close, so the in-progress form
+               (and the wizard's own state) is never duplicated or reset. -->
+          <div data-wizard-anchor aria-hidden="true"></div>
           <form class="audit__form" id="wizardForm" novalidate>
             <div class="wizard" data-wizard>
 
@@ -1161,6 +1166,33 @@
       </p>
     </div>
   </footer>
+
+  <!-- ============================ FLOATING ENQUIRY ============================ -->
+  <button type="button" class="fab" data-fab aria-haspopup="dialog" aria-expanded="false" aria-controls="fabPanel" aria-label="Open free strategy call enquiry">
+    <span class="fab__ring" aria-hidden="true"></span>
+    <span class="fab__icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></svg>
+    </span>
+    <span class="fab__text" data-fab-text>
+      <span class="fab__eyebrow mono">Free 20–60 min</span>
+      <span class="fab__label">Strategy Call</span>
+    </span>
+    <span class="fab__hint" data-fab-hint aria-hidden="true">Need help growing your business?</span>
+  </button>
+
+  <div class="fab-overlay" data-fab-overlay>
+    <div class="fab-panel" data-fab-panel role="dialog" aria-modal="true" aria-labelledby="fabPanelTitle" id="fabPanel" tabindex="-1">
+      <button type="button" class="fab-panel__close" data-fab-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <div class="fab-panel__header">
+        <h2 class="fab-panel__title display" id="fabPanelTitle">Let's Build Your Online Presence</h2>
+        <p class="fab-panel__subtitle">Tell us a little about your business and we'll prepare a strategy tailored to your goals.</p>
+        <p class="fab-panel__meta mono">Estimated time: 45–60 seconds</p>
+      </div>
+      <div class="fab-panel__slot" data-fab-slot></div>
+    </div>
+  </div>
 
   <script src="script.js" defer></script>
 </body>
