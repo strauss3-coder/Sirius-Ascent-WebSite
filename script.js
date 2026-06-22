@@ -818,6 +818,29 @@ Thank you.`;
     const ring = fab.querySelector(".fab__ring");
     let lastFocused = null;
     let engaged = false;
+    let savedScrollY = 0;
+
+    // Locks scroll by pinning body to a fixed offset rather than
+    // overflow:hidden, which resets scrollTop to 0 in most browsers when
+    // applied anywhere below the very top of the page.
+    const lockScroll = () => {
+      savedScrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${savedScrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
+      document.body.style.width = "100%";
+      document.documentElement.classList.add("fab-locked");
+    };
+    const unlockScroll = () => {
+      document.documentElement.classList.remove("fab-locked");
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
+      window.scrollTo(0, savedScrollY);
+    };
 
     const trapFocus = (e) => {
       if (e.key !== "Tab") return;
@@ -854,7 +877,7 @@ Thank you.`;
       if (wizardEl && wizardEl.dataset.current === "welcome" && startBtn) startBtn.click();
 
       overlay.classList.add("is-open");
-      document.documentElement.classList.add("fab-locked");
+      lockScroll();
       fab.setAttribute("aria-expanded", "true");
       document.addEventListener("keydown", onKeydown);
       setTimeout(() => panel.focus({ preventScroll: true }), reduceMotion ? 0 : 360);
@@ -862,7 +885,7 @@ Thank you.`;
 
     function closePanel() {
       overlay.classList.remove("is-open");
-      document.documentElement.classList.remove("fab-locked");
+      unlockScroll();
       fab.setAttribute("aria-expanded", "false");
       document.removeEventListener("keydown", onKeydown);
       anchor.after(wizardForm);

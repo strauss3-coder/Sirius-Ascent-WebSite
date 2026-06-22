@@ -1742,8 +1742,11 @@ em { font-style: italic; }
 /* ============================ FLOATING ENQUIRY ============================ */
 /* Sitewide, independent of every section's own layout — fixed to the
    viewport, not the page flow, so nothing above could ever push on it. */
-html.fab-locked,
-html.fab-locked body { overflow: hidden; height: 100%; }
+/* Locking scroll mid-page is handled via JS pinning body to a fixed
+   offset (see script.js) rather than overflow:hidden — that combination
+   resets scrollTop to 0 in most browsers when applied below the top of
+   the page, which is exactly the bug this avoids. */
+html.fab-locked { overflow: hidden; }
 
 .fab {
   position: fixed;
