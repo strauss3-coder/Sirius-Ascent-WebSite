@@ -1,0 +1,10 @@
+/* =========================================================
+   Sirius Ascent — stylesheet entry point
+   Imports the design system in cascade order: tokens first,
+   then components, then motion, then responsive overrides last.
+   ========================================================= */
+
+@import url("variables.css");
+@import url("components.css");
+@import url("animations.css");
+@import url("responsive.css");

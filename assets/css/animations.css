@@ -1,0 +1,64 @@
+/* =========================================================
+   Sirius Ascent — motion
+   All @keyframes plus the cross-cutting reveal-on-scroll and hero
+   entrance systems. Component-specific hover/transition behaviour
+   (card lift, button fill, etc.) stays with its component in
+   components.css rather than being fragmented across two files.
+   ========================================================= */
+
+/* ----- Generic reveal-on-scroll system -----
+   animations.js toggles .is-visible on [data-reveal] elements via
+   IntersectionObserver; this is the fade/rise those elements animate
+   through. Falls back to fully visible with no JS or reduced motion. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+.no-js [data-reveal] { opacity: 1; transform: none; }
+
+/* ----- Hero entrance ----- */
+[data-hero-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.hero.is-revealed [data-hero-reveal] { opacity: 1; transform: none; }
+/* If script.js never runs, don't leave the hero permanently invisible */
+.no-js [data-hero-reveal] { opacity: 1; transform: none; }
+
+/* ----- Keyframes ----- */
+@keyframes seamBreathe {
+  0%, 100% { opacity: 0.75; transform: translateX(-50%) translateY(var(--seam-shift, 0px)) scale(1); }
+  50%      { opacity: 1;    transform: translateX(-50%) translateY(var(--seam-shift, 0px)) scale(1.1); }
+}
+
+@keyframes glowDriftA {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(3%, 4%) scale(1.08); }
+}
+
+@keyframes glowDriftB {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-4%, -3%) scale(1.1); }
+}
+
+@keyframes particleFloat {
+  0%   { opacity: 0; transform: translateY(0); }
+  10%  { opacity: var(--peak, 0.55); }
+  90%  { opacity: var(--peak, 0.55); }
+  100% { opacity: 0; transform: translateY(-140px); }
+}
+
+@keyframes scrollPulse {
+  0% { transform: scaleY(0.3); opacity: 0.3; }
+  50% { transform: scaleY(1); opacity: 0.85; }
+  100% { transform: scaleY(0.3); opacity: 0.3; }
+}
+
+@keyframes barPulse { 50% { filter: brightness(1.4); } }
+
+@keyframes inputShake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+
+@keyframes fabRipple { 0% { opacity: 0.8; transform: scale(0.9); } 100% { opacity: 0; transform: scale(1.5); } }

@@ -1,0 +1,78 @@
+/* =========================================================
+   Sirius Ascent — design tokens
+   Colour, type, spacing and motion variables shared by every
+   other stylesheet. Change a value here, it propagates everywhere.
+   ========================================================= */
+
+:root {
+  /* Color — Carbon Black + Electric Blue */
+  --carbon: #0a0a0c;
+  --carbon-soft: #101014;
+  --panel: #17181d;
+  --panel-2: #1d1f26;
+  --border: rgba(244, 246, 250, 0.09);
+  --border-strong: rgba(244, 246, 250, 0.18);
+
+  --white: #f6f7fa;
+  --muted: #9ba0ac;
+  --muted-deep: #6d7280;
+
+  --blue: #3b7dff;
+  --blue-bright: #6ea1ff;
+  --blue-deep: #1c4fd6;
+  --on-accent: #06070a;
+
+  --success: #2ecc82;
+  --danger: #e0654f;
+
+  /* Surfaces — glass intensities */
+  --surface-1: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.07);
+  --surface-blue: rgba(59, 125, 255, 0.09);
+  --border-on-media: rgba(255, 255, 255, 0.16);
+  --border-blue: rgba(59, 125, 255, 0.4);
+
+  /* Elevation */
+  --shadow-card: 0 1px 2px -1px rgba(0, 0, 0, 0.5), 0 22px 44px -26px rgba(0, 0, 0, 0.65);
+  --shadow-card-hover: 0 2px 3px -1px rgba(0, 0, 0, 0.55), 0 30px 58px -24px rgba(0, 0, 0, 0.75);
+  --shadow-media: 0 2px 4px -2px rgba(0, 0, 0, 0.55), 0 30px 60px -34px rgba(0, 0, 0, 0.75);
+  --shadow-media-hover: 0 3px 6px -2px rgba(0, 0, 0, 0.6), 0 40px 76px -32px rgba(0, 0, 0, 0.85);
+  --glow-blue: 0 1px 2px rgba(59, 125, 255, 0.25), 0 14px 38px -14px rgba(59, 125, 255, 0.55);
+  --glow-blue-hover: 0 1px 2px rgba(59, 125, 255, 0.3), 0 22px 52px -14px rgba(59, 125, 255, 0.7);
+  --inset-light: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+
+  --lift-card: translateY(-4px) scale(1.012);
+  --lift-media: translateY(-8px);
+
+  --tracking-label: 0.16em;
+
+  /* Typography */
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --fs-h1: clamp(2.75rem, 1.6rem + 4.9vw, 5.5rem);
+  --fs-h2: clamp(2rem, 1.4rem + 2.6vw, 3.4rem);
+  --fs-h3-lg: clamp(1.55rem, 1.25rem + 1.5vw, 2.2rem);
+  --fs-h3: clamp(1.3rem, 1.15rem + 0.6vw, 1.5rem);
+  --fs-h4: 1rem;
+  --fs-lead: clamp(1.1875rem, 1.1rem + 0.5vw, 1.375rem);
+  --fs-body: 1.0625rem;
+  --fs-sm: 0.9375rem;
+  --fs-label: 0.75rem;
+
+  /* Layout */
+  --container: 1180px;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --section-py: clamp(5rem, 3rem + 8vw, 9rem);
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.7s;
+
+  /* Icon tint — normalises the flat PNG icon set to electric blue */
+  --icon-tint: grayscale(1) brightness(1.35) sepia(1) saturate(6) hue-rotate(193deg) brightness(1.08);
+}

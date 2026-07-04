@@ -20,7 +20,7 @@
 *.pem
 
 # raw upload dump (unprocessed source files, not referenced by the site —
-# the live assets actually used are in images/, icons/, videos/)
+# the live assets actually used are in assets/)
 /assest/
 
 # debug
