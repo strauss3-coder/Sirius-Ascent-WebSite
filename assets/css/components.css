@@ -226,8 +226,12 @@ em { font-style: italic; }
   position: fixed;
   inset: 0 0 auto 0;
   z-index: 100;
-  padding-block: 1.35rem;
-  transition: padding-block 0.35s var(--ease);
+  /* Horizontal gutter keeps the glass pill (and mobile menu) floating inset
+     from the screen edges at every width below the container max — without
+     it the pill spans edge-to-edge on phones/small laptops and stops
+     reading as "floating". */
+  padding: 1.35rem var(--gutter);
+  transition: padding 0.35s var(--ease);
 }
 .site-header__inner {
   display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
@@ -255,7 +259,30 @@ em { font-style: italic; }
   font-size: 1.1rem;
   letter-spacing: 0.01em;
 }
-.brand__mark { width: 24px; height: 24px; object-fit: contain; }
+/* Generated "SA" app-icon brand mark — a rounded-square blue glass tile with
+   white type and a soft blue glow, so the navigation mark belongs to the
+   site's palette instead of the uploaded logo's black photographic background.
+   (The uploaded logo is still used for social/Open Graph + schema imagery.) */
+.brand__mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(150deg, var(--blue-bright) 0%, var(--blue) 48%, var(--blue-deep) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 2px 12px -2px rgba(59, 125, 255, 0.7);
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
 .brand__accent { color: var(--blue-bright); }
 
 .site-nav__list { display: flex; gap: 1.85rem; font-size: 0.92rem; color: var(--muted); }
@@ -295,11 +322,14 @@ em { font-style: italic; }
   background: rgba(10, 10, 12, 0.96);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  padding: 1.5rem var(--gutter) 2rem;
+  /* Box is already inset from the screen edges by the header's gutter, so the
+     interior padding no longer needs the full gutter. */
+  padding: 1.25rem 1.35rem 1.75rem;
 }
 .mobile-menu[hidden] { display: none; }
-.mobile-menu__list { display: flex; flex-direction: column; gap: 0.25rem; font-size: 1.2rem; }
-.mobile-menu__list a { display: block; padding: 0.6rem 0; color: var(--white); border-bottom: 1px solid var(--border); }
+.mobile-menu__list { display: flex; flex-direction: column; gap: 0.15rem; font-size: 1.2rem; }
+/* Comfortable tap targets — each row clears the ~44px minimum. */
+.mobile-menu__list a { display: block; padding: 0.85rem 0; color: var(--white); border-bottom: 1px solid var(--border); }
 .mobile-menu__list a[aria-current="page"] { color: var(--blue-bright); }
 .mobile-menu__cta { margin-top: 1.5rem; width: 100%; }
 
