@@ -636,6 +636,18 @@ em { font-style: italic; }
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
 }
+/* Real site screenshot filling the browser frame, below the chrome bar.
+   object-position: top keeps each capture's hero/nav in view. */
+.project-card__shot {
+  position: absolute;
+  inset: 30px 0 0 0;
+  width: 100%; height: calc(100% - 30px);
+  object-fit: cover;
+  object-position: top center;
+  transform: scale(1.001); /* avoids a hairline gap under the chrome bar */
+  transition: transform 0.6s var(--ease);
+}
+.project-card:hover .project-card__shot { transform: scale(1.04); }
 .project-card__soon {
   position: absolute; top: 12px; right: 12px;
   padding: 0.28rem 0.65rem;
@@ -667,6 +679,37 @@ em { font-style: italic; }
 .project-card__cta svg { width: 14px; height: 14px; transition: transform 0.3s var(--ease); }
 .project-card:hover .project-card__cta svg { transform: translateX(4px); }
 .project-card__cta--muted { color: var(--muted-deep); }
+
+/* Screenshot gallery for a project case study — real page captures shown in
+   rounded browser-style frames, two-up on desktop, stacked on mobile. */
+.shot-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+.shot-gallery figure {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-media);
+  background: var(--panel);
+  transition: transform 0.5s var(--ease), border-color 0.4s var(--ease), box-shadow 0.5s var(--ease);
+}
+.shot-gallery figure:hover {
+  transform: var(--lift-media);
+  border-color: var(--border-blue);
+  box-shadow: var(--shadow-media-hover);
+}
+.shot-gallery img { width: 100%; height: auto; display: block; }
+.shot-gallery figcaption {
+  padding: 0.7rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
 
 /* ============================ COMPARISON ============================ */
 .compare { position: relative; isolation: isolate; background: var(--carbon-soft); }
