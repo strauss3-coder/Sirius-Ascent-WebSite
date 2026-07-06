@@ -683,6 +683,13 @@ em { font-style: italic; }
   color: var(--success);
   background: rgba(46, 204, 130, 0.1);
 }
+/* DEMO status — a concept/preview build, distinguished from a LIVE (green)
+   site by the site's own electric-blue accent. */
+.project-card__demo {
+  border-color: var(--border-blue);
+  color: var(--blue-bright);
+  background: var(--surface-blue);
+}
 .project-card__body { padding: clamp(1.5rem, 2.5vw, 1.85rem); flex-grow: 1; display: flex; flex-direction: column; }
 .project-card__category {
   display: inline-block;
