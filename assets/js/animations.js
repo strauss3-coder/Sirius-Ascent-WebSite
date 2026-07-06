@@ -78,6 +78,35 @@ if (hero) {
   }
 }
 
+/* ---- Ambient particles across the homepage ----
+   Continue the hero's floating dots behind every section below it so the
+   background feels alive top-to-bottom. One lightweight field per section
+   (fewer on small screens), varied in size/opacity/speed, all pure CSS
+   transform + opacity animation for compositor-friendly 60fps. Homepage only
+   (gated on the hero, which is unique to index.html) and skipped entirely
+   under reduced motion. */
+if (hero && !reduceMotion) {
+  const perSection = window.matchMedia("(max-width: 760px)").matches ? 3 : 6;
+  document.querySelectorAll("#main > section:not(.hero)").forEach((section) => {
+    section.classList.add("particles-host");
+    const field = document.createElement("div");
+    field.className = "particle-field";
+    field.setAttribute("aria-hidden", "true");
+    for (let i = 0; i < perSection; i++) {
+      const dot = document.createElement("span");
+      dot.className = "particle";
+      dot.style.left = `${Math.random() * 100}%`;
+      dot.style.top = `${Math.random() * 100}%`;
+      dot.style.setProperty("--size", `${1.5 + Math.random() * 2.5}px`);
+      dot.style.setProperty("--dur", `${14 + Math.random() * 12}s`);
+      dot.style.setProperty("--delay", `${Math.random() * 16}s`);
+      dot.style.setProperty("--peak", `${0.12 + Math.random() * 0.28}`);
+      field.appendChild(dot);
+    }
+    section.prepend(field);
+  });
+}
+
 /* ---- Reveal-on-scroll for sections (natural transitions) ---- */
 const revealables = document.querySelectorAll("[data-reveal]");
 // Hero reveals are handled by the cinematic intro above; observe the rest.

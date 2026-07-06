@@ -38,6 +38,23 @@
   .site-header__inner { padding: 0.55rem 0.6rem 0.55rem 0.85rem; gap: 1rem; }
 }
 
+@media (max-width: 760px) {
+  /* Mobile vertical rhythm — pull each section's first row of content up
+     toward its heading so the title, subtitle and first cards read together
+     within the viewport. Section-to-section breathing (padding-block) is left
+     intact; only the heading-to-content gap tightens, and nothing shrinks. */
+  .section__head { margin-bottom: 1.6rem; }
+  .section__lead { margin-top: 1.15rem; }
+  .card-grid,
+  .project-grid,
+  .compare__grid,
+  .testimonial-track,
+  .tech-grid,
+  .estimator__panel { margin-top: 1.6rem; }
+  .timeline { margin-top: 1.9rem; }
+  .results__block { margin-top: 2rem; padding-top: 2rem; }
+}
+
 @media (max-width: 620px) {
   .card-grid,
   .values-grid,
@@ -65,6 +82,7 @@
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  .hero__particle { display: none; }
+  .hero__particle,
+  .particle { display: none; }
 }
 

@@ -398,6 +398,27 @@ em { font-style: italic; }
   animation-delay: var(--delay, 0s);
 }
 
+/* Ambient particle field — the hero's floating dots continued across the rest
+   of the homepage. animations.js injects one field per section (behind that
+   section's content, above its background wash, clipped to the section so the
+   dots fade within each band). Pure transform + opacity animation for
+   compositor-friendly 60fps. */
+.particles-host { position: relative; isolation: isolate; }
+.particle-field {
+  position: absolute; inset: 0; z-index: -1;
+  overflow: hidden; pointer-events: none;
+}
+.particle {
+  position: absolute;
+  width: var(--size, 3px); height: var(--size, 3px);
+  border-radius: 50%;
+  background: var(--blue-bright);
+  opacity: 0;
+  box-shadow: 0 0 5px 1px rgba(110, 161, 255, 0.4);
+  animation: particleFloat var(--dur, 16s) linear infinite;
+  animation-delay: var(--delay, 0s);
+}
+
 .hero::after {
   content: "";
   position: absolute; left: 0; right: 0; bottom: 0; height: 22vh;
