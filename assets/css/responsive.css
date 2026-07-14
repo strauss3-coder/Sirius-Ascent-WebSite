@@ -76,7 +76,9 @@
      rather than letting them wrap awkwardly. */
   .hero__actions { flex-direction: column; align-items: stretch; }
   .hero__actions .btn { width: 100%; }
-  .brand__name { font-size: 1rem; }
+  .site-header__inner .brand__mark { width: 30px; height: 30px; }
+  .site-header__inner .brand__name { font-size: 1.05rem; letter-spacing: 0.14em; }
+  .site-header__inner .brand__sub { font-size: 0.44rem; letter-spacing: 0.34em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -84,5 +86,8 @@
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   .hero__particle,
   .particle { display: none; }
+  /* Skip the intro/loader and page-transition entirely — no flash of overlay. */
+  .page-loader,
+  .page-exit { display: none !important; }
 }
 

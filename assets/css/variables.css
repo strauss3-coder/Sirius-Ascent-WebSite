@@ -1,25 +1,30 @@
 /* =========================================================
    Sirius Ascent — design tokens
-   Colour, type, spacing and motion variables shared by every
-   other stylesheet. Change a value here, it propagates everywhere.
+   Brand kit: "Crowned Peak". Carbon + Silver + Blue (#4D6BFF),
+   Sora headings / Cormorant Garamond wordmark / Inter body.
+   Change a value here, it propagates everywhere.
    ========================================================= */
 
 :root {
-  /* Color — Carbon Black + Electric Blue */
-  --carbon: #0a0a0c;
-  --carbon-soft: #101014;
-  --panel: #17181d;
-  --panel-2: #1d1f26;
-  --border: rgba(244, 246, 250, 0.09);
-  --border-strong: rgba(244, 246, 250, 0.18);
+  /* Surfaces — Carbon Black + Panel */
+  --carbon: #08090c;
+  --carbon-soft: #0c0e13;
+  --panel: #0e1016;
+  --panel-2: #12141b;
+  --border: rgba(200, 215, 240, 0.12);
+  --border-strong: rgba(200, 215, 240, 0.22);
 
-  --white: #f6f7fa;
-  --muted: #9ba0ac;
-  --muted-deep: #6d7280;
+  /* Brand silver + text */
+  --silver: #e4e8ee;
+  --silver-2: #98a0b0;
+  --white: #eef1f6;        /* primary text (name kept for existing rules) */
+  --muted: #98a0b0;
+  --muted-deep: #666e80;
 
-  --blue: #3b7dff;
-  --blue-bright: #6ea1ff;
-  --blue-deep: #1c4fd6;
+  /* Blue accent */
+  --blue: #4d6bff;
+  --blue-bright: #7d94ff;
+  --blue-deep: #2e44c9;
   --on-accent: #06070a;
 
   --success: #2ecc82;
@@ -28,17 +33,18 @@
   /* Surfaces — glass intensities */
   --surface-1: rgba(255, 255, 255, 0.035);
   --surface-2: rgba(255, 255, 255, 0.07);
-  --surface-blue: rgba(59, 125, 255, 0.09);
+  --surface-blue: rgba(77, 107, 255, 0.09);
   --border-on-media: rgba(255, 255, 255, 0.16);
-  --border-blue: rgba(59, 125, 255, 0.4);
+  --border-blue: rgba(77, 107, 255, 0.42);
 
   /* Elevation */
   --shadow-card: 0 1px 2px -1px rgba(0, 0, 0, 0.5), 0 22px 44px -26px rgba(0, 0, 0, 0.65);
   --shadow-card-hover: 0 2px 3px -1px rgba(0, 0, 0, 0.55), 0 30px 58px -24px rgba(0, 0, 0, 0.75);
   --shadow-media: 0 2px 4px -2px rgba(0, 0, 0, 0.55), 0 30px 60px -34px rgba(0, 0, 0, 0.75);
   --shadow-media-hover: 0 3px 6px -2px rgba(0, 0, 0, 0.6), 0 40px 76px -32px rgba(0, 0, 0, 0.85);
-  --glow-blue: 0 1px 2px rgba(59, 125, 255, 0.25), 0 14px 38px -14px rgba(59, 125, 255, 0.55);
-  --glow-blue-hover: 0 1px 2px rgba(59, 125, 255, 0.3), 0 22px 52px -14px rgba(59, 125, 255, 0.7);
+  --glow-blue: 0 1px 2px rgba(77, 107, 255, 0.25), 0 14px 38px -14px rgba(77, 107, 255, 0.55);
+  --glow-blue-hover: 0 1px 2px rgba(77, 107, 255, 0.32), 0 22px 52px -14px rgba(77, 107, 255, 0.72);
+  --glow-silver: 0 0 34px -6px rgba(228, 232, 238, 0.45);
   --inset-light: inset 0 1px 0 rgba(255, 255, 255, 0.06), inset 0 -1px 0 rgba(0, 0, 0, 0.3);
 
   --lift-card: translateY(-4px) scale(1.012);
@@ -46,14 +52,18 @@
 
   --tracking-label: 0.16em;
 
+  /* Metallic "chrome" finish — logo / hero accents only, never a dependency */
+  --chrome: linear-gradient(160deg, #ffffff 0%, #e2e6ec 35%, #8c94a3 55%, #e8ebf0 75%, #9aa2b0 100%);
+
   /* Typography */
-  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --display: "Sora", -apple-system, "Segoe UI", sans-serif;   /* headings */
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif; /* wordmark + emphasis */
   --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  --fs-h1: clamp(2.75rem, 1.6rem + 4.9vw, 5.5rem);
-  --fs-h2: clamp(2rem, 1.4rem + 2.6vw, 3.4rem);
-  --fs-h3-lg: clamp(1.55rem, 1.25rem + 1.5vw, 2.2rem);
+  --fs-h1: clamp(2.6rem, 1.5rem + 4.9vw, 5.25rem);
+  --fs-h2: clamp(2rem, 1.4rem + 2.6vw, 3.3rem);
+  --fs-h3-lg: clamp(1.55rem, 1.25rem + 1.5vw, 2.15rem);
   --fs-h3: clamp(1.3rem, 1.15rem + 0.6vw, 1.5rem);
   --fs-h4: 1rem;
   --fs-lead: clamp(1.1875rem, 1.1rem + 0.5vw, 1.375rem);
@@ -73,6 +83,6 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur: 0.7s;
 
-  /* Icon tint — normalises the flat PNG icon set to electric blue */
-  --icon-tint: grayscale(1) brightness(1.35) sepia(1) saturate(6) hue-rotate(193deg) brightness(1.08);
+  /* Icon tint — normalises the flat PNG icon set to brand blue */
+  --icon-tint: grayscale(1) brightness(1.3) sepia(1) saturate(6) hue-rotate(198deg) brightness(1.05);
 }

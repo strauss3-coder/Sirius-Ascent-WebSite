@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 130" role="img" aria-label="Sirius Ascent">
+  <title>Sirius Ascent</title>
+  <defs>
+    <linearGradient id="chrome" x1="0" y1="0" x2=".3" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/><stop offset=".35" stop-color="#E2E6EC"/>
+      <stop offset=".55" stop-color="#8C94A3"/><stop offset=".75" stop-color="#E8EBF0"/>
+      <stop offset="1" stop-color="#9AA2B0"/>
+    </linearGradient>
+  </defs>
+  <g fill="url(#chrome)">
+  <mask id="core">
+    <rect width="120" height="130" fill="#fff"/>
+    <circle cx="60" cy="28" r="5.2" fill="#000"/>
+  </mask>
+  <g mask="url(#core)">
+    <path d="M60 40 L64.5 45 L44 122 L29 122 Z"/>
+    <path d="M60 40 L55.5 45 L76 122 L91 122 Z"/>
+    <path d="M27 112 C48 97 70 89 102 66 C80 92 54 105 33 117 Z"/>
+    <path d="M60 2 L64 24 L60 42 L56 24 Z M60 2 L56 24 L34 28 L57 31 Z M60 2 L64 24 L86 28 L63 31 Z M60 42 L56 30 L34 28 L57 31 Z M60 42 L64 30 L86 28 L63 31 Z"/>
+  </g>
+  <circle cx="60" cy="28" r="2.6"/>
+  </g>
+</svg>

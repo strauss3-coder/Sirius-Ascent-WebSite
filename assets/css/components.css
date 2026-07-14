@@ -59,7 +59,7 @@ em { font-style: italic; }
   padding-inline: var(--gutter);
 }
 
-.display { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; }
+.display { font-family: var(--display); font-weight: 600; letter-spacing: -0.02em; }
 .mono {
   font-family: var(--mono);
   font-weight: 400;
@@ -82,7 +82,7 @@ em { font-style: italic; }
   transform: translateX(-50%) translateY(var(--seam-shift, 0px));
   width: min(1100px, 92vw);
   height: 380px;
-  background: radial-gradient(ellipse at center, rgba(59, 125, 255, 0.09) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(77, 107, 255, 0.09) 0%, transparent 70%);
   filter: blur(40px);
   pointer-events: none;
   animation: seamBreathe 11s var(--ease) infinite;
@@ -106,9 +106,16 @@ em { font-style: italic; }
   margin: 0;
   color: var(--white);
 }
+/* Emphasis words switch to the brand's Cormorant Garamond italic with a
+   silver-to-blue shimmer — a serif accent against the Sora headings, echoing
+   the wordmark. Sized up slightly so the lighter serif holds equal weight. */
 .section__title em {
+  font-family: var(--serif);
+  font-weight: 500;
   font-style: italic;
-  background: linear-gradient(100deg, var(--blue-bright) 0%, #fff 50%, var(--blue-bright) 100%);
+  font-size: 1.06em;
+  letter-spacing: 0;
+  background: linear-gradient(100deg, var(--silver) 0%, var(--blue-bright) 55%, var(--silver) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -177,6 +184,8 @@ em { font-style: italic; }
 }
 .btn--lg { --btn-py: 1.05rem; --btn-px: 2.1rem; font-size: 1rem; }
 .btn--sm { --btn-py: 0.55rem; --btn-px: 1.1rem; font-size: 0.85rem; }
+/* Tactile press feedback on every button */
+.btn:active { transform: translateY(0) scale(0.97); }
 
 .btn--primary {
   background: linear-gradient(135deg, var(--blue-bright), var(--blue));
@@ -188,6 +197,7 @@ em { font-style: italic; }
   transform: translateY(-2px);
   box-shadow: var(--glow-blue-hover);
 }
+.btn--primary:active { transform: scale(0.97); }
 .btn--ghost {
   background: transparent;
   color: var(--white);
@@ -216,7 +226,7 @@ em { font-style: italic; }
   border-color: var(--border-blue);
 }
 .btn--outline-blue:hover {
-  background: rgba(59, 125, 255, 0.18);
+  background: rgba(77, 107, 255, 0.18);
   border-color: var(--blue-bright);
   transform: translateY(-2px);
 }
@@ -251,39 +261,49 @@ em { font-style: italic; }
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, var(--glow-blue);
 }
 
+/* Brand lockup — the "Crowned Peak" mark + Cormorant Garamond wordmark.
+   The mark is an inline SVG that inherits `color`, so it renders in silver;
+   the wordmark carries the chrome (metallic) finish over the dark bar. */
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: 0.01em;
+  gap: 11px;
+  text-decoration: none;
 }
-/* Generated "SA" app-icon brand mark — a rounded-square blue glass tile with
-   white type and a soft blue glow, so the navigation mark belongs to the
-   site's palette instead of the uploaded logo's black photographic background.
-   (The uploaded logo is still used for social/Open Graph + schema imagery.) */
 .brand__mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 34px; height: 34px;
-  flex-shrink: 0;
-  border-radius: 10px;
-  background: linear-gradient(150deg, var(--blue-bright) 0%, var(--blue) 48%, var(--blue-deep) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.32),
-    0 2px 12px -2px rgba(59, 125, 255, 0.7);
-  font-family: var(--body);
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  line-height: 1;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  flex: 0 0 auto;
+  color: var(--silver);
+  transition: transform 0.5s var(--ease), filter 0.5s var(--ease);
 }
-.brand__accent { color: var(--blue-bright); }
+.brand__mark svg { width: 100%; height: 100%; display: block; }
+.brand:hover .brand__mark {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 3px 10px rgba(228, 232, 238, 0.35));
+}
+.brand__wordmark { display: flex; flex-direction: column; line-height: 1; }
+.brand__name {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.22rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--silver);
+  background: var(--chrome);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.brand__sub {
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 0.48rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 5px;
+  padding-left: 2px;
+}
 
 .site-nav__list { display: flex; gap: 1.85rem; font-size: 0.92rem; color: var(--muted); }
 .site-nav__list a { position: relative; transition: color 0.2s var(--ease); padding-block: 0.2rem; }
@@ -367,13 +387,13 @@ em { font-style: italic; }
 .hero__glow-a {
   top: -12%; left: 8%;
   width: min(56vw, 780px); height: min(56vw, 780px);
-  background: radial-gradient(circle, rgba(59, 125, 255, 0.32) 0%, transparent 68%);
+  background: radial-gradient(circle, rgba(77, 107, 255, 0.32) 0%, transparent 68%);
   animation: glowDriftA 16s var(--ease) infinite alternate;
 }
 .hero__glow-b {
   bottom: -18%; right: 4%;
   width: min(46vw, 640px); height: min(46vw, 640px);
-  background: radial-gradient(circle, rgba(110, 161, 255, 0.22) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(125, 148, 255, 0.22) 0%, transparent 70%);
   animation: glowDriftB 19s var(--ease) infinite alternate;
 }
 
@@ -393,7 +413,7 @@ em { font-style: italic; }
   border-radius: 50%;
   background: var(--blue-bright);
   opacity: 0;
-  box-shadow: 0 0 6px 1px rgba(110, 161, 255, 0.7);
+  box-shadow: 0 0 6px 1px rgba(125, 148, 255, 0.7);
   animation: particleFloat var(--dur, 12s) linear infinite;
   animation-delay: var(--delay, 0s);
 }
@@ -414,7 +434,7 @@ em { font-style: italic; }
   border-radius: 50%;
   background: var(--blue-bright);
   opacity: 0;
-  box-shadow: 0 0 5px 1px rgba(110, 161, 255, 0.4);
+  box-shadow: 0 0 5px 1px rgba(125, 148, 255, 0.4);
   animation: particleFloat var(--dur, 16s) linear infinite;
   animation-delay: var(--delay, 0s);
 }
@@ -432,15 +452,19 @@ em { font-style: italic; }
 .hero__title {
   margin: 0;
   font-family: var(--display);
-  font-weight: 400;
+  font-weight: 700;
   font-size: var(--fs-h1);
-  line-height: 1.04;
-  letter-spacing: -0.01em;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
   color: var(--white);
 }
 .hero__title em {
+  font-family: var(--serif);
+  font-weight: 500;
   font-style: italic;
-  background: linear-gradient(100deg, var(--blue-bright) 0%, #fff 45%, var(--blue-bright) 100%);
+  font-size: 1.06em;
+  letter-spacing: 0;
+  background: linear-gradient(100deg, var(--silver) 0%, var(--blue-bright) 50%, var(--silver) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -500,7 +524,7 @@ em { font-style: italic; }
   transform: var(--lift-card);
   border-color: var(--border-blue);
   background: var(--surface-2);
-  box-shadow: var(--shadow-card-hover), 0 0 0 1px rgba(59, 125, 255, 0.12), var(--inset-light);
+  box-shadow: var(--shadow-card-hover), 0 0 0 1px rgba(77, 107, 255, 0.12), var(--inset-light);
 }
 
 .icon-orb {
@@ -509,7 +533,7 @@ em { font-style: italic; }
   width: 52px; height: 52px;
   margin-bottom: 1.4rem;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 20%, rgba(59, 125, 255, 0.28), rgba(59, 125, 255, 0.06));
+  background: radial-gradient(circle at 30% 20%, rgba(77, 107, 255, 0.28), rgba(77, 107, 255, 0.06));
   border: 1px solid var(--border-blue);
   color: var(--blue-bright);
   transition: transform 0.45s var(--ease), background-color 0.4s var(--ease);
@@ -525,7 +549,7 @@ em { font-style: italic; }
   position: absolute; z-index: -1;
   top: 8%; left: 50%; transform: translateX(-50%);
   width: min(900px, 80vw); height: 500px;
-  background: radial-gradient(ellipse at center, rgba(59, 125, 255, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(77, 107, 255, 0.08) 0%, transparent 70%);
   filter: blur(60px);
   pointer-events: none;
 }
@@ -563,8 +587,8 @@ em { font-style: italic; }
   content: "";
   position: absolute; z-index: -1; inset: 0;
   background:
-    radial-gradient(60% 50% at 15% 0%, rgba(59, 125, 255, 0.1), transparent 70%),
-    radial-gradient(50% 40% at 90% 100%, rgba(59, 125, 255, 0.08), transparent 70%);
+    radial-gradient(60% 50% at 15% 0%, rgba(77, 107, 255, 0.1), transparent 70%),
+    radial-gradient(50% 40% at 90% 100%, rgba(77, 107, 255, 0.08), transparent 70%);
 }
 
 .timeline {
@@ -755,7 +779,7 @@ em { font-style: italic; }
 }
 .compare__panel--us {
   border-color: var(--border-blue);
-  background: linear-gradient(180deg, rgba(59, 125, 255, 0.1), rgba(59, 125, 255, 0.02));
+  background: linear-gradient(180deg, rgba(77, 107, 255, 0.1), rgba(77, 107, 255, 0.02));
   box-shadow: var(--glow-blue);
 }
 .compare__panel-title {
@@ -905,7 +929,7 @@ em { font-style: italic; }
   flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center;
   width: 42px; height: 42px; border-radius: 50%;
-  background: rgba(59, 125, 255, 0.18);
+  background: rgba(77, 107, 255, 0.18);
   color: var(--blue-bright);
 }
 .audit__review-icon svg { width: 20px; height: 20px; }
@@ -1055,7 +1079,7 @@ em { font-style: italic; }
   content: "";
   position: absolute; z-index: -1; top: 4%; left: 8%;
   width: min(640px, 70vw); height: 640px;
-  background: radial-gradient(ellipse at center, rgba(59, 125, 255, 0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(77, 107, 255, 0.08) 0%, transparent 70%);
   filter: blur(60px);
   pointer-events: none;
 }
@@ -1137,7 +1161,7 @@ em { font-style: italic; }
   content: "";
   position: absolute; z-index: -1; top: -10%; left: 50%; transform: translateX(-50%);
   width: min(1000px, 90vw); height: 500px;
-  background: radial-gradient(ellipse at center, rgba(59, 125, 255, 0.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(77, 107, 255, 0.12) 0%, transparent 70%);
   filter: blur(70px);
 }
 .portfolio-filters { display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: clamp(2rem, 4vw, 3rem); }
@@ -1283,8 +1307,10 @@ em { font-style: italic; }
 /* ============================ FOOTER ============================ */
 .site-footer { padding-block: clamp(3rem, 2rem + 4vw, 5rem) 2.5rem; background: var(--carbon); border-top: 1px solid var(--border); }
 .site-footer__inner { display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); gap: clamp(2rem, 4vw, 3rem); }
-.site-footer__brand .brand__name { font-size: 1.3rem; }
-.site-footer__tagline { margin: 1rem 0 0; color: var(--muted); font-style: italic; max-width: 32ch; }
+.brand--footer .brand__mark { width: 40px; height: 40px; }
+.brand--footer .brand__name { font-size: 1.5rem; }
+.brand--footer .brand__sub { font-size: 0.55rem; }
+.site-footer__tagline { margin: 1.25rem 0 0; color: var(--muted); font-style: italic; font-family: var(--serif); font-size: 1.15rem; max-width: 32ch; }
 .footer-col__title { margin: 0 0 1.1rem; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-deep); }
 .footer-col__list { display: grid; gap: 0.65rem; }
 .footer-col__list a { color: var(--muted); font-size: 0.92rem; transition: color 0.2s var(--ease); }
@@ -1387,5 +1413,62 @@ html.fab-locked { overflow: hidden; }
    JS moves #wizardForm out of this wrapper into the FAB panel on open, so
    only the wrapper (not the form itself) needs to be hidden at rest. */
 .wizard-off-page { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ============================ INTRO / PAGE LOADER ============================
+   The entry loader covers every page on load — the "Crowned Peak" mark inside
+   a rotating ring over a soft glow. On the first homepage visit of a session it
+   also shows the welcome line, then fades into the site. A separate exit overlay
+   fades to carbon on internal navigation for a cinematic page-to-page transition.
+   Both are purely decorative: hidden entirely under reduced motion, and the
+   loader fail-safe-hides via CSS animation even if its JS never runs. */
+.page-loader {
+  position: fixed; inset: 0; z-index: 3000;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 50% 42%, #0e1016 0%, #08090c 72%);
+  opacity: 1;
+  animation: loaderSafety 0.6s var(--ease) 3.2s forwards;
+}
+.page-loader.is-done {
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.7s var(--ease), visibility 0.7s;
+  animation: none;
+}
+@keyframes loaderSafety { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+
+.page-loader__inner { display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+.page-loader__badge { position: relative; width: 132px; height: 132px; display: flex; align-items: center; justify-content: center; }
+.page-loader__badge::before {
+  content: ""; position: absolute; inset: -18px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(77, 107, 255, 0.32) 0%, transparent 68%);
+  filter: blur(6px);
+  animation: loaderGlow 2.4s var(--ease) infinite;
+}
+.page-loader__ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1.5px solid rgba(200, 215, 240, 0.12);
+  border-top-color: var(--blue);
+  border-right-color: rgba(77, 107, 255, 0.4);
+  animation: loaderSpin 1.15s linear infinite;
+}
+.page-loader__mark { width: 80px; height: 87px; color: var(--silver); animation: loaderMarkIn 0.9s var(--ease) both; }
+.page-loader__mark svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 0 18px rgba(125, 148, 255, 0.4)); }
+.page-loader__text { display: none; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
+.page-loader.is-welcome .page-loader__text { display: flex; animation: loaderTextIn 0.9s var(--ease) 0.25s both; }
+.page-loader__title { font-family: var(--display); font-weight: 600; font-size: clamp(1.15rem, 1rem + 0.8vw, 1.5rem); letter-spacing: 0.01em; color: var(--silver); }
+.page-loader__tag { font-family: var(--serif); font-style: italic; font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem); color: var(--muted); }
+
+@keyframes loaderSpin { to { transform: rotate(360deg); } }
+@keyframes loaderGlow { 0%, 100% { opacity: 0.55; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.06); } }
+@keyframes loaderMarkIn { from { opacity: 0; transform: translateY(8px) scale(0.94); } to { opacity: 1; transform: none; } }
+@keyframes loaderTextIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Exit overlay — fades to carbon on internal navigation */
+.page-exit {
+  position: fixed; inset: 0; z-index: 2999;
+  background: var(--carbon);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity 0.42s var(--ease), visibility 0.42s;
+}
+.page-exit.is-active { opacity: 1; visibility: visible; pointer-events: auto; }
 
 

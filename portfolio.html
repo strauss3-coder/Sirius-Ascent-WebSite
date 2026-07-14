@@ -10,17 +10,18 @@
     content="See the businesses Sirius Ascent builds for — real client results including a full Supreme Auto Google Business Profile case study, plus projects currently in production."
   />
   <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#0a0a0c" />
+  <meta name="theme-color" content="#08090c" />
   <link rel="canonical" href="https://siriusascent.co.za/portfolio.html" />
 
   <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
   <link rel="icon" type="image/x-icon" href="favicon/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
   <meta name="msapplication-config" content="browserconfig.xml" />
-  <meta name="msapplication-TileColor" content="#0a0a0c" />
+  <meta name="msapplication-TileColor" content="#08090c" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Sirius Ascent" />
@@ -37,7 +38,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Sora:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="assets/css/styles.css" />
@@ -53,13 +54,28 @@
   </script>
 </head>
 <body>
+  <!-- Intro / page loader -->
+  <div class="page-loader" data-page-loader aria-hidden="true">
+    <div class="page-loader__inner">
+      <div class="page-loader__badge">
+        <span class="page-loader__ring"></span>
+        <span class="page-loader__mark"><svg viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg"><mask id="salc"><rect width="120" height="130" fill="#fff"/><circle cx="60" cy="28" r="5.2" fill="#000"/></mask><g fill="currentColor" mask="url(#salc)"><path d="M60 40 L64.5 45 L44 122 L29 122 Z"/><path d="M60 40 L55.5 45 L76 122 L91 122 Z"/><path d="M27 112 C48 97 70 89 102 66 C80 92 54 105 33 117 Z"/><path d="M60 2 L64 24 L60 42 L56 24 Z M60 2 L56 24 L34 28 L57 31 Z M60 2 L64 24 L86 28 L63 31 Z M60 42 L56 30 L34 28 L57 31 Z M60 42 L64 30 L86 28 L63 31 Z"/></g><circle cx="60" cy="28" r="2.6" fill="currentColor"/></svg></span>
+      </div>
+      <div class="page-loader__text">
+        <span class="page-loader__title">Welcome to Sirius Ascent</span>
+        <span class="page-loader__tag">Elevating Digital Experiences</span>
+      </div>
+    </div>
+  </div>
+  <div class="page-exit" data-page-exit aria-hidden="true"></div>
+
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" data-header>
     <div class="container site-header__inner">
       <a class="brand" href="index.html" aria-label="Sirius Ascent home">
-        <span class="brand__mark" aria-hidden="true">SA</span>
-        <span class="brand__name">Sirius<span class="brand__accent">Ascent</span></span>
+        <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M60 12 L64 30 L60 40 L56 30 Z M60 12 L56 30 L38 34 L57 36 Z M60 12 L64 30 L82 34 L63 36 Z M60 40 L56 34 L38 34 L57 36 Z M60 40 L64 34 L82 34 L63 36 Z"/><path d="M60 44 L66 50 L46 108 L28 108 Z"/><path d="M60 44 L54 50 L74 108 L92 108 Z"/><path d="M30 98 C48 86 66 80 96 62 C74 84 52 94 36 102 Z"/></svg></span>
+        <span class="brand__wordmark"><span class="brand__name">Sirius</span><span class="brand__sub">Ascent</span></span>
       </a>
       <nav class="site-nav" aria-label="Primary" data-nav>
         <ul class="site-nav__list">
@@ -435,7 +451,10 @@
   <footer class="site-footer">
     <div class="container site-footer__inner">
       <div class="site-footer__brand">
-        <span class="brand__name">Sirius<span class="brand__accent">Ascent</span></span>
+        <a class="brand brand--footer" href="index.html" aria-label="Sirius Ascent home">
+          <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M60 12 L64 30 L60 40 L56 30 Z M60 12 L56 30 L38 34 L57 36 Z M60 12 L64 30 L82 34 L63 36 Z M60 40 L56 34 L38 34 L57 36 Z M60 40 L64 34 L82 34 L63 36 Z"/><path d="M60 44 L66 50 L46 108 L28 108 Z"/><path d="M60 44 L54 50 L74 108 L92 108 Z"/><path d="M30 98 C48 86 66 80 96 62 C74 84 52 94 36 102 Z"/></svg></span>
+          <span class="brand__wordmark"><span class="brand__name">Sirius</span><span class="brand__sub">Ascent</span></span>
+        </a>
         <p class="site-footer__tagline display">"To surpass our yesterday with our today."</p>
       </div>
       <div>

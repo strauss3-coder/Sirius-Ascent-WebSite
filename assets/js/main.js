@@ -6,6 +6,7 @@
    the same main.js works unmodified across all four pages.
    ========================================================= */
 
+import "./intro.js";
 import "./navigation.js";
 import "./animations.js";
 import "./portfolio.js";

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect width="120" height="120" rx="26" fill="#0E1016"/>
+  <g fill="#FFFFFF">
+    <!-- compact star (no hole at this size — it would close up anyway) -->
+    <path d="M60 12 L64 30 L60 40 L56 30 Z M60 12 L56 30 L38 34 L57 36 Z M60 12 L64 30 L82 34 L63 36 Z M60 40 L56 34 L38 34 L57 36 Z M60 40 L64 34 L82 34 L63 36 Z"/>
+    <!-- heavier A -->
+    <path d="M60 44 L66 50 L46 108 L28 108 Z"/>
+    <path d="M60 44 L54 50 L74 108 L92 108 Z"/>
+    <!-- swoosh -->
+    <path d="M30 98 C48 86 66 80 96 62 C74 84 52 94 36 102 Z"/>
+  </g>
+</svg>
