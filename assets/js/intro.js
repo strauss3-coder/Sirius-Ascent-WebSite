@@ -29,12 +29,31 @@ if (loader) {
     if (firstVisit) loader.classList.add("is-welcome");
 
     const hold = firstVisit ? 2500 : 600;
+
+    // Count 0 -> 100 across the hold so the wait reads as deliberate.
+    const counter = loader.querySelector("[data-loader-count]");
+    if (counter) {
+      const start = performance.now();
+      const easeOut = (t) => 1 - Math.pow(1 - t, 3);
+      const tick = (now) => {
+        const t = Math.min((now - start) / hold, 1);
+        counter.textContent = String(Math.round(easeOut(t) * 100));
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+
     window.setTimeout(() => loader.classList.add("is-done"), hold);
   }
 }
 
-/* Fade to carbon before following an internal link. */
-if (exit && !reduceMotion) {
+/* Fade to carbon before following an internal link — but only where the
+   browser can't do it natively. Chromium/Safari 18+ handle the crossfade via
+   the @view-transition rule in CSS, which is smoother than intercepting the
+   click, so we stay out of the way there. */
+const hasNativeViewTransitions = typeof document.startViewTransition === "function";
+
+if (exit && !reduceMotion && !hasNativeViewTransitions) {
   document.addEventListener("click", (e) => {
     if (e.defaultPrevented || e.button !== 0) return;
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return; // let new-tab/save through

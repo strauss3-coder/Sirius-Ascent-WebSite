@@ -94,6 +94,7 @@
         <span class="page-loader__ring"></span>
         <span class="page-loader__mark"><svg viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg"><mask id="salc"><rect width="120" height="130" fill="#fff"/><circle cx="60" cy="28" r="5.2" fill="#000"/></mask><g fill="currentColor" mask="url(#salc)"><path d="M60 40 L64.5 45 L44 122 L29 122 Z"/><path d="M60 40 L55.5 45 L76 122 L91 122 Z"/><path d="M27 112 C48 97 70 89 102 66 C80 92 54 105 33 117 Z"/><path d="M60 2 L64 24 L60 42 L56 24 Z M60 2 L56 24 L34 28 L57 31 Z M60 2 L64 24 L86 28 L63 31 Z M60 42 L56 30 L34 28 L57 31 Z M60 42 L64 30 L86 28 L63 31 Z"/></g><circle cx="60" cy="28" r="2.6" fill="currentColor"/></svg></span>
       </div>
+      <span class="page-loader__count" data-loader-count>0</span>
       <div class="page-loader__text">
         <span class="page-loader__title">Welcome to Sirius Ascent</span>
         <span class="page-loader__tag">Elevating Digital Experiences</span>
@@ -121,7 +122,7 @@
         </ul>
       </nav>
 
-      <a class="btn btn--primary site-header__cta" href="#contact">Book a Free Consultation</a>
+      <a class="btn btn--primary site-header__cta" data-magnetic href="#contact">Start a Project</a>
 
       <button
         class="nav-toggle"
@@ -145,7 +146,7 @@
           <li><a href="about.html">About</a></li>
         </ul>
       </nav>
-      <a class="btn btn--primary btn--lg mobile-menu__cta" href="#contact">Book a Free Consultation</a>
+      <a class="btn btn--primary btn--lg mobile-menu__cta" href="#contact">Start a Project</a>
     </div>
   </header>
 
@@ -165,41 +166,29 @@
 
       <div class="container hero__inner">
         <p class="eyebrow" data-hero-reveal data-range="0.05,0.4">
-          Web Design · Development · SEO · Google Business Profile — Pretoria
+          Digital Precision — Pretoria, South Africa
         </p>
 
         <h1 class="hero__title" id="hero-title" data-hero-reveal data-range="0.1,0.45">
-          Premium Websites That <em>Grow Your Business.</em>
+          Digital Architecture.<br /><em>Engineered.</em>
         </h1>
 
         <p class="hero__subtitle" data-hero-reveal data-range="0.3,0.65">
-          Sirius Ascent designs and builds fast, beautiful, mobile-first websites for
-          South African businesses — backed by SEO, Google Business Profile management
-          and ongoing support that keeps you visible long after launch.
+          Websites built with mechanical precision — for businesses that
+          intend to be taken seriously.
         </p>
 
         <div class="hero__actions">
-          <a class="btn btn--primary btn--lg" data-hero-reveal data-range="0.5,0.82" href="#contact">Start Your Project</a>
-          <a class="btn btn--ghost btn--lg" data-hero-reveal data-range="0.62,1" href="portfolio.html">View Portfolio →</a>
+          <a class="btn btn--primary btn--lg" data-hero-reveal data-range="0.5,0.82" href="#contact" data-magnetic>Start a Project</a>
+          <a class="btn btn--ghost btn--lg" data-hero-reveal data-range="0.62,1" href="portfolio.html" data-magnetic>See the work →</a>
         </div>
 
-        <div class="trust-badges" data-hero-reveal data-range="0.7,1">
-          <span class="trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5z" /><path d="m9 12 2 2 4-4" /></svg>
-            Pretoria-based, hands-on process
-          </span>
-          <span class="trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 11-14h-8z" /></svg>
-            Fast, performance-first builds
-          </span>
-          <span class="trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-            SEO built in from day one
-          </span>
-          <span class="trust-badge">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" /></svg>
-            No lock-in contracts
-          </span>
+        <div class="hero__meta" data-hero-reveal data-range="0.7,1">
+          <span class="hero__meta-item"><span class="hero__meta-num" data-count="5">0</span> builds shipped</span>
+          <span class="hero__meta-rule" aria-hidden="true"></span>
+          <span class="hero__meta-item"><span class="hero__meta-num" data-count="144">0</span> interactions in a month</span>
+          <span class="hero__meta-rule" aria-hidden="true"></span>
+          <span class="hero__meta-item">Est. <span class="hero__meta-num-static">2025</span></span>
         </div>
       </div>
 
@@ -287,7 +276,7 @@
           </p>
         </header>
 
-        <div class="card-grid" role="list">
+        <div class="card-grid card-grid--bento" role="list">
           <article class="glass-card service-card" data-reveal role="listitem">
             <span class="icon-orb" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M8 4v5" /></svg>
@@ -738,7 +727,7 @@
             <div>
               <span class="estimator__result-label mono">Estimated investment</span>
               <p class="estimator__result-figure" data-estimator-output>R 4,500 – <span>R 5,000</span></p>
-              <p class="estimator__disclaimer">A rough starting range, not a fixed quote — every project is scoped properly during a free consultation.</p>
+              <p class="estimator__disclaimer">A rough starting range, not a fixed quote — every project is scoped precisely before a proposal.</p>
             </div>
             <a class="btn btn--primary btn--lg" href="#contact">Get My Exact Quote</a>
           </div>
@@ -774,7 +763,7 @@
             </div>
           </div>
           <div class="estimator__result" style="justify-content: flex-end;">
-            <button type="submit" class="btn btn--primary btn--lg">Request My Free Audit</button>
+            <button type="submit" class="btn btn--primary btn--lg">Request a Review</button>
           </div>
         </form>
       </div>
@@ -798,7 +787,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M19.5 19.5 15 15" /></svg>
             </span>
             <div>
-              <h3 class="audit__review-title">Start with a Free Consultation</h3>
+              <h3 class="audit__review-title">Start with a Proposal</h3>
               <p class="audit__review-text">
                 We'll personally review your goals and current online presence before
                 you commit to anything.
@@ -1049,7 +1038,7 @@
         <p class="footer-col__title mono">Resources</p>
         <nav class="footer-col__list" aria-label="Resources">
           <a href="#estimator">Cost Estimator</a>
-          <a href="#free-audit">Free Website Audit</a>
+          <a href="#free-audit">Website Review</a>
           <a href="portfolio.html">Case Studies</a>
         </nav>
       </div>
@@ -1085,14 +1074,14 @@
   </footer>
 
   <!-- ============================ FLOATING ENQUIRY ============================ -->
-  <button type="button" class="fab" data-fab aria-haspopup="dialog" aria-expanded="false" aria-controls="fabPanel" aria-label="Open free consultation enquiry">
+  <button type="button" class="fab" data-fab aria-haspopup="dialog" aria-expanded="false" aria-controls="fabPanel" aria-label="Open project enquiry">
     <span class="fab__ring" aria-hidden="true"></span>
     <span class="fab__icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></svg>
     </span>
     <span class="fab__text" data-fab-text>
-      <span class="fab__eyebrow mono">Free 20–60 min</span>
-      <span class="fab__label">Strategy Call</span>
+      <span class="fab__eyebrow mono">New projects</span>
+      <span class="fab__label">Start a Project</span>
     </span>
     <span class="fab__hint" data-fab-hint aria-hidden="true">Ready to grow your business online?</span>
   </button>

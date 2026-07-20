@@ -12,5 +12,6 @@ import "./animations.js";
 import "./portfolio.js";
 import "./forms.js";
 import "./testimonials.js";
+import "./interactions.js";
 
 document.documentElement.classList.remove("no-js");

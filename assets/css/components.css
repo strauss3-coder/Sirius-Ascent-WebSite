@@ -454,8 +454,8 @@ em { font-style: italic; }
   font-family: var(--display);
   font-weight: 700;
   font-size: var(--fs-h1);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: 0.96;
+  letter-spacing: -0.038em;
   color: var(--white);
 }
 .hero__title em {
@@ -489,22 +489,27 @@ em { font-style: italic; }
   transform-origin: top; animation: scrollPulse 2.4s var(--ease) infinite;
 }
 
-/* Trust badges beneath hero */
-.trust-badges {
-  display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem;
-  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+/* Hero meta — proof as data, not badges. Numbers tick up on reveal. */
+.hero__meta {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 0.65rem 1.4rem;
+  margin-top: clamp(2.75rem, 5vw, 4rem);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-deep);
 }
-.trust-badge {
-  display: inline-flex; align-items: center; gap: 0.55rem;
-  padding: 0.55rem 1rem;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface-1);
-  backdrop-filter: blur(8px);
-  font-size: 0.82rem;
-  color: var(--muted);
+.hero__meta-item { display: inline-flex; align-items: baseline; gap: 0.5rem; }
+.hero__meta-num,
+.hero__meta-num-static {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--silver);
 }
-.trust-badge svg { width: 15px; height: 15px; color: var(--blue-bright); flex-shrink: 0; }
+.hero__meta-rule { width: 28px; height: 1px; background: var(--border-strong); }
 
 /* ============================ CARD PRIMITIVES ============================
    Shared glass-card language used by feature/service/timeline/comparison
@@ -559,6 +564,19 @@ em { font-style: italic; }
   gap: clamp(1.25rem, 2.5vw, 1.75rem);
   margin-top: clamp(2.5rem, 5vw, 4rem);
 }
+/* Bento variant — asymmetric cells so the services read as a composed grid
+   rather than six identical boxes. Collapses to the standard responsive
+   card grid below desktop. */
+@media (min-width: 961px) {
+  .card-grid--bento { grid-template-columns: repeat(6, 1fr); }
+  .card-grid--bento > *:nth-child(1) { grid-column: span 4; }
+  .card-grid--bento > *:nth-child(2) { grid-column: span 2; }
+  .card-grid--bento > *:nth-child(3) { grid-column: span 2; }
+  .card-grid--bento > *:nth-child(4) { grid-column: span 4; }
+  .card-grid--bento > *:nth-child(5) { grid-column: span 3; }
+  .card-grid--bento > *:nth-child(6) { grid-column: span 3; }
+}
+
 .feature-card { padding: clamp(1.85rem, 3vw, 2.35rem); }
 .feature-card__title { margin: 0 0 0.65rem; font-family: var(--display); font-size: var(--fs-h3); font-weight: 400; color: var(--white); }
 .feature-card__text { margin: 0; color: var(--muted); font-size: 0.96rem; line-height: 1.6; }
@@ -1414,6 +1432,14 @@ html.fab-locked { overflow: hidden; }
    only the wrapper (not the form itself) needs to be hidden at rest. */
 .wizard-off-page { position: absolute; width: 0; height: 0; overflow: hidden; }
 
+/* Native cross-document view transitions where supported (Chromium, Safari 18+):
+   the browser morphs between pages instead of hard-cutting, and the header
+   carries across. Browsers without it fall back to the JS carbon fade below. */
+@view-transition { navigation: auto; }
+.site-header { view-transition-name: site-header; }
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 0.45s; animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+
 /* ============================ INTRO / PAGE LOADER ============================
    The entry loader covers every page on load — the "Crowned Peak" mark inside
    a rotating ring over a soft glow. On the first homepage visit of a session it
@@ -1452,6 +1478,14 @@ html.fab-locked { overflow: hidden; }
 }
 .page-loader__mark { width: 80px; height: 87px; color: var(--silver); animation: loaderMarkIn 0.9s var(--ease) both; }
 .page-loader__mark svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 0 18px rgba(125, 148, 255, 0.4)); }
+.page-loader__count {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  color: var(--muted-deep);
+  font-variant-numeric: tabular-nums;
+}
+.page-loader__count::after { content: "%"; }
 .page-loader__text { display: none; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
 .page-loader.is-welcome .page-loader__text { display: flex; animation: loaderTextIn 0.9s var(--ease) 0.25s both; }
 .page-loader__title { font-family: var(--display); font-weight: 600; font-size: clamp(1.15rem, 1rem + 0.8vw, 1.5rem); letter-spacing: 0.01em; color: var(--silver); }
@@ -1461,6 +1495,72 @@ html.fab-locked { overflow: hidden; }
 @keyframes loaderGlow { 0%, 100% { opacity: 0.55; transform: scale(0.94); } 50% { opacity: 1; transform: scale(1.06); } }
 @keyframes loaderMarkIn { from { opacity: 0; transform: translateY(8px) scale(0.94); } to { opacity: 1; transform: none; } }
 @keyframes loaderTextIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ============================ SIGNATURE INTERACTIONS ============================
+   Desktop-only (pointer:fine) flourishes wired up by interactions.js:
+   a two-part custom cursor, magnetic CTAs, and a light that tracks the
+   pointer across glass cards so the surface feels alive. All of it is
+   additive — nothing here is required to read or operate the site. */
+.cursor-dot,
+.cursor-ring {
+  position: fixed; top: 0; left: 0;
+  pointer-events: none;
+  z-index: 4000;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 6px; height: 6px;
+  background: var(--silver);
+  transition: opacity 0.3s var(--ease), width 0.25s var(--ease), height 0.25s var(--ease);
+}
+.cursor-ring {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(228, 232, 238, 0.45);
+  transition: opacity 0.3s var(--ease), width 0.3s var(--ease), height 0.3s var(--ease),
+    border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+.has-cursor .cursor-dot,
+.has-cursor .cursor-ring { opacity: 1; }
+/* Over an interactive target the ring swells and the dot recedes */
+.has-cursor.cursor-active .cursor-ring {
+  width: 56px; height: 56px;
+  border-color: var(--blue-bright);
+  background: rgba(77, 107, 255, 0.1);
+}
+.has-cursor.cursor-active .cursor-dot { width: 3px; height: 3px; }
+
+/* Hide the OS cursor only where the custom one is active — never over text
+   inputs, which still need a real caret. */
+@media (pointer: fine) {
+  .has-cursor,
+  .has-cursor a,
+  .has-cursor button,
+  .has-cursor [role="button"] { cursor: none; }
+  .has-cursor input,
+  .has-cursor textarea,
+  .has-cursor select { cursor: auto; }
+}
+
+/* Pointer-tracked light across glass cards */
+.glass-card { position: relative; }
+.glass-card::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease);
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(125, 148, 255, 0.13),
+    transparent 62%
+  );
+}
+.glass-card:hover::after { opacity: 1; }
+
+[data-magnetic] { will-change: transform; }
 
 /* Exit overlay — fades to carbon on internal navigation */
 .page-exit {

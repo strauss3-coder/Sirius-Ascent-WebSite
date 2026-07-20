@@ -61,8 +61,8 @@
   --body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  --fs-h1: clamp(2.6rem, 1.5rem + 4.9vw, 5.25rem);
-  --fs-h2: clamp(2rem, 1.4rem + 2.6vw, 3.3rem);
+  --fs-h1: clamp(2.9rem, 1.4rem + 6vw, 6.25rem);
+  --fs-h2: clamp(2.1rem, 1.3rem + 3.4vw, 4.2rem);
   --fs-h3-lg: clamp(1.55rem, 1.25rem + 1.5vw, 2.15rem);
   --fs-h3: clamp(1.3rem, 1.15rem + 0.6vw, 1.5rem);
   --fs-h4: 1rem;
