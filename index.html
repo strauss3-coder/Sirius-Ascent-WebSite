@@ -934,6 +934,24 @@
                   <p class="wizard__field-error" data-field-error>Please complete this field before continuing.</p>
                 </div>
 
+                <div class="wizard__step" data-step="budget" data-field-step data-required>
+                  <label class="wizard__question display" id="wizard-budget-label">What budget are you working with?</label>
+                  <div class="dropdown" data-dropdown>
+                    <button type="button" class="dropdown__trigger" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="wizard-budget-label" data-dropdown-trigger>
+                      <span data-dropdown-value>Select…</span>
+                      <svg class="dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>
+                    </button>
+                    <ul class="dropdown__menu" id="wizard-budget-menu" role="listbox" aria-labelledby="wizard-budget-label" data-dropdown-menu tabindex="-1">
+                      <li role="option" data-value="R4,500 – R7,000">R4,500 – R7,000 · Standard</li>
+                      <li role="option" data-value="R7,000 – R15,000">R7,000 – R15,000 · Advanced</li>
+                      <li role="option" data-value="R15,000+">R15,000+ · Bespoke</li>
+                      <li role="option" data-value="Not sure yet">Not sure yet — guide me</li>
+                    </ul>
+                    <input type="hidden" name="budget" data-dropdown-input data-wizard-field />
+                  </div>
+                  <p class="wizard__field-error" data-field-error>Please complete this field before continuing.</p>
+                </div>
+
                 <div class="wizard__step" data-step="notes" data-field-step>
                   <label class="wizard__question display" for="wizard-notes">Anything else you'd like us to know?</label>
                   <textarea class="wizard__input wizard__textarea" id="wizard-notes" name="notes" rows="4" data-wizard-field></textarea>

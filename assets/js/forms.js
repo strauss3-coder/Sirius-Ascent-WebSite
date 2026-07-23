@@ -155,6 +155,7 @@ if (wizard) {
     industry: "Business Type",
     challenge: "What You Need",
     timeline: "Timeline",
+    budget: "Budget",
     notes: "Additional Notes",
   };
 
@@ -338,7 +339,10 @@ What I Need:
 ${get("challenge")}
 
 Timeline:
-${get("timeline")}${notes ? `\n\nAdditional Notes:\n${notes}` : ""}
+${get("timeline")}
+
+Budget:
+${get("budget")}${notes ? `\n\nAdditional Notes:\n${notes}` : ""}
 
 I'm looking forward to discussing how Sirius Ascent can help my business grow online.
 
