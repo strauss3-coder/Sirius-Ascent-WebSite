@@ -41,3 +41,6 @@ next-env.d.ts
 
 # Source brand kit (assets already copied into assets/ and favicon/)
 /sirius-ascent-brand_1/
+
+# Internal rebuild strategy doc (kept local, not deployed)
+/REBUILD-PLAN.md
