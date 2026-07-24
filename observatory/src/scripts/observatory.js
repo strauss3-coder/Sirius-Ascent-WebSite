@@ -103,6 +103,7 @@ export function initObservatory(){
   var revealed=false,hudIn=false;
   var boot=document.querySelector(".boot"),bootText=document.getElementById("bootText"),hud=document.getElementById("hud"),hero=document.getElementById("hero");
   var legend=document.getElementById("legend"),prog=document.getElementById("prog"),progDots=[].slice.call(prog.querySelectorAll("a"));
+  var portfolioCount=document.getElementById("portfolioCount");
   var ease=function(t){return 1-Math.pow(1-t,3)},c01=function(t){return t<0?0:t>1?1:t};
   var smooth=function(t){t=c01(t);return t*t*(3-2*t)};
 
@@ -187,21 +188,29 @@ export function initObservatory(){
 
     if(sec.type==="constellation"&&A>0.02){
       var R=scl();
-      // edges Sirius->each + outer chain
-      for(var pi=0;pi<PROJECTS.length;pi++){
-        var p=PROJECTS[pi],pxp=sirX+p.nx*R,pyp=sirY+p.ny*R;
-        ctx.strokeStyle="rgba(125,148,255,"+(0.18*A)+")";ctx.lineWidth=1*DPR;ctx.beginPath();ctx.moveTo(sirX,sirY);ctx.lineTo(pxp,pyp);ctx.stroke();
-      }
+      // Travel: the star reaches out to each project in turn as you scroll THROUGH
+      // the (tall) portfolio section. Cinematic but free — never locks the scroll.
+      var travelP=c01((smoothScroll - sec.top + innerHeight*0.5)/Math.max(1,sec.h - innerHeight*0.55));
+      var activeF=travelP*PROJECTS.length;
+      var curIdx=Math.max(0,Math.min(PROJECTS.length-1,Math.round(activeF-0.5)));
       for(var pj=0;pj<PROJECTS.length;pj++){
         var pp=PROJECTS[pj],sx3=sirX+pp.nx*R,sy3=sirY+pp.ny*R;
+        var rev=c01(activeF-pj); if(rev<=0.002)continue; // sequential reveal
+        // connecting line reaches out from Sirius toward the project
+        ctx.strokeStyle="rgba(125,148,255,"+(0.2*A*rev)+")";ctx.lineWidth=1*DPR;
+        ctx.beginPath();ctx.moveTo(sirX,sirY);ctx.lineTo(sirX+(sx3-sirX)*Math.min(1,rev/0.6),sirY+(sy3-sirY)*Math.min(1,rev/0.6));ctx.stroke();
+        if(rev<0.55)continue; // star arrives once the line reaches it
+        var isCur=(pj===curIdx);
         var scr={x:sx3/DPR,y:sy3/DPR};
         var hov=fine&&Math.hypot(px-scr.x,py-scr.y)<26;
         if(hov){hoverName=pp.name;hoverLive=pp.live;hoverX=sx3;hoverY=sy3;hoverSub=pp.tag;}
         if(pp.url)clickTargets.push({x:scr.x,y:scr.y,url:pp.url});
-        if(showAll)bodyLabels.push({x:sx3,y:sy3,name:pp.name,live:pp.live});
-        var rr=pp.mag*DPR*(hov?1.5:1);
-        gstar(sx3,sy3,rr,(pp.live?.75:.45)*A*(hov?1.6:1),pp.live?"rgba(234,240,255,"+A+")":"rgba(205,216,242,"+(A*.9)+")");
+        if(showAll||isCur)bodyLabels.push({x:sx3,y:sy3,name:pp.name,live:pp.live});
+        var rr=pp.mag*DPR*(hov||isCur?1.55:1);
+        var em=(hov||isCur?1.7:1)*rev;
+        gstar(sx3,sy3,rr,(pp.live?.75:.45)*A*em,pp.live?"rgba(234,240,255,"+(A*rev)+")":"rgba(205,216,242,"+(A*rev*.9)+")");
       }
+      if(portfolioCount){var shown=Math.min(PROJECTS.length,Math.floor(activeF)+1);portfolioCount.textContent=(shown<10?"0"+shown:""+shown)+" / "+(PROJECTS.length<10?"0"+PROJECTS.length:PROJECTS.length);}
     }
     else if(sec.type==="orbit"&&A>0.02){
       var baseR=Math.min(W,H)*0.13;
