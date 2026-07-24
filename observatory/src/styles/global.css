@@ -112,5 +112,5 @@
 }
 
 /* --- portfolio travel: tall section gives the star room to journey star-to-star --- */
-.sec--travel{min-height:230vh}
+.sec--travel{min-height:340vh}
 .count{margin-top:1.4rem;font-size:.72rem;letter-spacing:.28em;color:var(--blue-lit);font-variant-numeric:tabular-nums}

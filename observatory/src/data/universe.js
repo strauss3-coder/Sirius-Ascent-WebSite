@@ -4,57 +4,18 @@
 
 /** @typedef {"risen"|"plotted"} Status  risen = live on its own domain; plotted = demo */
 
+// Order = the order the star travels to them in the constellation.
 export const projects = [
-  {
-    slug: "supreme-auto",
-    name: "Supreme Auto",
-    designation: "α",
-    industry: "Automotive",
-    status: "risen",
-    url: "https://supremeautonorth.co.za",
-    magnitude: -1.4,
-  },
-  {
-    slug: "venom-racing",
-    name: "Venom Racing",
-    designation: "β",
-    industry: "Automotive",
-    status: "risen",
-    url: "https://venomracing.co.za",
-    magnitude: -1.1,
-  },
-  {
-    slug: "rhinos-pool-club",
-    name: "Rhino's Pool Club",
-    designation: "ζ",
-    industry: "Leisure",
-    status: "plotted",
-    magnitude: 1.5,
-  },
-  {
-    slug: "the-view-lodge",
-    name: "The View Lodge",
-    designation: "δ",
-    industry: "Hospitality",
-    status: "plotted",
-    magnitude: 1.5,
-  },
-  {
-    slug: "bankenveld",
-    name: "Bankenveld Golf Estate",
-    designation: "γ",
-    industry: "Hospitality",
-    status: "plotted",
-    magnitude: 1.5,
-  },
-  {
-    slug: "riverview-padel",
-    name: "Riverview Padel",
-    designation: "ε",
-    industry: "Leisure",
-    status: "plotted",
-    magnitude: 1.4,
-  },
+  { slug: "supreme-auto", name: "Supreme Auto", designation: "α", industry: "Automotive", status: "risen", url: "https://supremeautonorth.co.za", magnitude: -1.4 },
+  { slug: "venom-racing", name: "Venom Racing", designation: "β", industry: "Automotive", status: "risen", url: "https://venomracing.co.za/", magnitude: -1.1 },
+  { slug: "riverside-padel", name: "Riverside Padel", designation: "γ", industry: "Leisure", status: "plotted", url: "https://strauss3-coder.github.io/riverside-padel-website/", magnitude: 1.5 },
+  { slug: "rhinos-pool-club", name: "Rhino's Pool Club", designation: "δ", industry: "Leisure", status: "plotted", url: "https://strauss3-coder.github.io/rhinos-pool-club/", magnitude: 1.5 },
+  { slug: "xtreme-bikes", name: "Xtreme Bikes", designation: "ε", industry: "Automotive", status: "plotted", url: "https://strauss3-coder.github.io/xtreme-bikes-website/", magnitude: 1.4 },
+  { slug: "revline-panel-beating", name: "Revline Panel Beating", designation: "ζ", industry: "Automotive", status: "plotted", url: "https://strauss3-coder.github.io/revline-panelbeating-website/", magnitude: 1.5 },
+  { slug: "the-view-lodge", name: "The View Lodge", designation: "η", industry: "Hospitality", status: "plotted", url: "https://strauss3-coder.github.io/the-view-lodge/", magnitude: 1.5 },
+  { slug: "bankenveld", name: "Bankenveld", designation: "θ", industry: "Hospitality", status: "plotted", url: "https://strauss3-coder.github.io/bankenveld-demo/index.html", magnitude: 1.4 },
+  { slug: "crossfit-indefinite", name: "CrossFit Indefinite", designation: "ι", industry: "Fitness", status: "plotted", url: "https://strauss3-coder.github.io/crossfit-indefinite/", magnitude: 1.4 },
+  { slug: "smallies-car-wash", name: "Smallie's Car Wash", designation: "κ", industry: "Automotive", status: "plotted", url: "https://strauss3-coder.github.io/smallies-car-wash/", magnitude: 1.4 },
 ];
 
 export const services = [

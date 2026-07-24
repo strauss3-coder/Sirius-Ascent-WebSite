@@ -18,15 +18,19 @@ export function initObservatory(){
   ];
   SECS.forEach(function(s){s.el=document.getElementById(s.id);s.heads=[].slice.call(s.el.querySelectorAll("[data-head]"));s.focus=0;});
 
+  // Order = the order the star travels to them. Two live (custom-domain) first.
   var PROJECTS=[
-    {name:"Supreme Auto",tag:"α · risen",nx:-0.26,ny:-0.16,mag:2.1,live:true,url:"https://supremeautonorth.co.za"},
-    {name:"Venom Racing",tag:"β · risen",nx:0.24,ny:-0.20,mag:2.0,live:true,url:"https://venomracing.co.za"},
-    {name:"Rhino's Pool Club",tag:"ζ · plotted",nx:0.36,ny:0.07,mag:1.5,live:false},
-    {name:"The View Lodge",tag:"δ · plotted",nx:0.13,ny:0.20,mag:1.5,live:false},
-    {name:"Bankenveld",tag:"γ · plotted",nx:-0.17,ny:0.16,mag:1.5,live:false},
-    {name:"Riverview Padel",tag:"ε · plotted",nx:-0.36,ny:0.01,mag:1.4,live:false}
+    {name:"Supreme Auto",tag:"α · risen",nx:-0.26,ny:-0.16,mag:2.2,live:true,url:"https://supremeautonorth.co.za"},
+    {name:"Venom Racing",tag:"β · risen",nx:0.25,ny:-0.19,mag:2.1,live:true,url:"https://venomracing.co.za/"},
+    {name:"Riverside Padel",tag:"γ · plotted",nx:0.39,ny:0.03,mag:1.5,live:false,url:"https://strauss3-coder.github.io/riverside-padel-website/"},
+    {name:"Rhino's Pool Club",tag:"δ · plotted",nx:0.30,ny:0.21,mag:1.5,live:false,url:"https://strauss3-coder.github.io/rhinos-pool-club/"},
+    {name:"Xtreme Bikes",tag:"ε · plotted",nx:0.08,ny:0.27,mag:1.4,live:false,url:"https://strauss3-coder.github.io/xtreme-bikes-website/"},
+    {name:"Revline Panel Beating",tag:"ζ · plotted",nx:-0.13,ny:0.24,mag:1.5,live:false,url:"https://strauss3-coder.github.io/revline-panelbeating-website/"},
+    {name:"The View Lodge",tag:"η · plotted",nx:-0.31,ny:0.15,mag:1.5,live:false,url:"https://strauss3-coder.github.io/the-view-lodge/"},
+    {name:"Bankenveld",tag:"θ · plotted",nx:-0.40,ny:-0.03,mag:1.4,live:false,url:"https://strauss3-coder.github.io/bankenveld-demo/index.html"},
+    {name:"CrossFit Indefinite",tag:"ι · plotted",nx:-0.19,ny:-0.25,mag:1.4,live:false,url:"https://strauss3-coder.github.io/crossfit-indefinite/"},
+    {name:"Smallie's Car Wash",tag:"κ · plotted",nx:0.07,ny:-0.29,mag:1.4,live:false,url:"https://strauss3-coder.github.io/smallies-car-wash/"}
   ];
-  var PEDGES=[[0],[1],[2],[3],[4],[5]]; // each connects to Sirius; plus chain
   var SERVICES=[
     {name:"Web Design",ring:1,ang:0.3,sp:0.00016},
     {name:"Development",ring:2,ang:1.5,sp:-0.0001},
