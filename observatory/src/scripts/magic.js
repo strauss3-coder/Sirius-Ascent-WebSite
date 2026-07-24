@@ -2,10 +2,27 @@
    - "Welcome back, explorer." for returning visitors (localStorage).
    - The Observatory Log: how many systems you've discovered this session. */
 export function initMagic() {
+  // ---- Returning from a transmission (e.g. WhatsApp hand-off) ----
+  // Takes priority over the welcome-back so the visitor knows the signal landed.
+  let showedReturn = false;
+  try {
+    const sent = Number(sessionStorage.getItem("sa-tx-sent")) || 0;
+    const note = document.querySelector("[data-return-note]");
+    if (sent && Date.now() - sent < 15 * 60 * 1000 && note) {
+      sessionStorage.removeItem("sa-tx-sent");
+      showedReturn = true;
+      setTimeout(() => {
+        note.hidden = false;
+        requestAnimationFrame(() => note.classList.add("in"));
+        setTimeout(() => note.classList.remove("in"), 7000);
+      }, 1200);
+    }
+  } catch (e) {}
+
   // ---- Welcome back ----
   const wb = document.querySelector("[data-welcome]");
   try {
-    if (localStorage.getItem("sa-visited") && wb) {
+    if (!showedReturn && localStorage.getItem("sa-visited") && wb) {
       setTimeout(() => {
         wb.hidden = false;
         requestAnimationFrame(() => wb.classList.add("in"));

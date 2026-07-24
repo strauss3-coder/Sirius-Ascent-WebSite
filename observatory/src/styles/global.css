@@ -359,3 +359,6 @@ body.console-open{overflow:hidden}
 /* console: the native cursor must always be visible over every element */
 body.console-open, body.console-open *{cursor:auto!important}
 body.console-open button,body.console-open a,body.console-open [role="radio"]{cursor:pointer!important}
+
+/* transmission-return confirmation (returning from WhatsApp) */
+.return-note{max-width:min(88vw,34rem);white-space:normal;text-align:center;line-height:1.5;color:var(--risen);border-color:rgba(111,240,192,.35)}

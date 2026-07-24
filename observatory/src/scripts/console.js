@@ -40,6 +40,9 @@ export function initConsole() {
       answers.phone ? "Phone: " + answers.phone : "",
       "Preferred channel: " + (answers.method || ""),
     ].filter(Boolean).join("\n");
+    // remember we transmitted, so if WhatsApp navigates away we can greet the
+    // visitor with a confirmation when they return
+    try { sessionStorage.setItem("sa-tx-sent", String(Date.now())); } catch (e) {}
     try {
       window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines), "_blank", "noopener");
     } catch (e) { /* pop-up blocked — the cinematic success still plays */ }
@@ -216,6 +219,8 @@ export function initConsole() {
   }
 
   function close() {
+    // saw the in-tab success already; don't double-greet on a later reload
+    try { sessionStorage.removeItem("sa-tx-sent"); } catch (e) {}
     el.classList.remove("is-open", "is-live");
     document.body.classList.remove("console-open");
     setTimeout(() => {
