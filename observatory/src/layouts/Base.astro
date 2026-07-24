@@ -10,10 +10,12 @@ export interface Props {
   noindex?: boolean;
 }
 
+const base = import.meta.env.BASE_URL; // "/" in prod, "/sirius-observatory/" in preview
+
 const {
   title,
   description,
-  image = "/og/observatory.png",
+  image = `${base}og/observatory.png`,
   noindex = false,
 } = Astro.props;
 
@@ -42,7 +44,7 @@ const org = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <meta name="theme-color" content="#08090c" />
 
     <title>{title}</title>

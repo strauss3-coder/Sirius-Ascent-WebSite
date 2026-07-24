@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+const home = import.meta.env.BASE_URL;
 ---
 
 <Base
@@ -14,7 +15,7 @@ import Base from "../layouts/Base.astro";
       There's no body at these coordinates — the star you were following has drifted
       beyond the map. Let's navigate you back to the observatory.
     </p>
-    <a class="btn btn--p" href="/">Return to the observatory ↓</a>
+    <a class="btn btn--p" href={home}>Return to the observatory ↓</a>
     <p class="lost__coords" aria-hidden="true">RA 00ʰ 00ᵐ · DEC +00° 00′ · MAG —</p>
   </main>
 </Base>
