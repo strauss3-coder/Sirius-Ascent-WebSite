@@ -16,7 +16,8 @@ export function initObservatory(opts){
     {id:"deepfield",tx:0.54,ty:-0.34,ts:0.45,type:"drift"},
     {id:"services", tx:0.00,ty:-0.02,ts:0.85,type:"orbit"},
     {id:"process",  tx:0.00,ty:-0.02,ts:0.80,type:"solar"},
-    {id:"contact",  tx:0.00,ty:-0.05,ts:1.30,type:"beacon"}
+    {id:"contact",  tx:0.00,ty:-0.05,ts:1.30,type:"beacon"},
+    {id:"outro",    tx:0.00,ty:-0.04,ts:1.00,type:"recede"}
   ];
   SECS.forEach(function(s){s.el=document.getElementById(s.id);s.heads=[].slice.call(s.el.querySelectorAll("[data-head]"));s.focus=0;});
 
@@ -116,6 +117,7 @@ export function initObservatory(opts){
   var boot=document.querySelector(".boot"),bootText=document.getElementById("bootText"),hud=document.getElementById("hud"),hero=document.getElementById("hero");
   var legend=document.getElementById("legend"),prog=document.getElementById("prog"),progDots=[].slice.call(prog.querySelectorAll("a"));
   var portfolioCount=document.getElementById("portfolioCount");
+  var outroEnd=document.querySelector("[data-outro-end]");
   var ease=function(t){return 1-Math.pow(1-t,3)},c01=function(t){return t<0?0:t>1?1:t};
   var smooth=function(t){t=c01(t);return t*t*(3-2*t)};
 
@@ -196,6 +198,7 @@ export function initObservatory(opts){
     // ================= SET-PIECES =================
     var A=amax; // active section focus strength
     var sec=SECS[active];
+    var outroVeil=0,outroP=0; // the ending's fade-to-black + pull-back progress
     ctx.globalCompositeOperation="lighter";
 
     if(sec.type==="constellation"&&A>0.02){
@@ -249,6 +252,18 @@ export function initObservatory(opts){
     else if(sec.type==="beacon"&&A>0.02){
       for(var bi=0;bi<3;bi++){var ph=((t*0.0004+bi/3)%1);var pr=ph*Math.min(W,H)*0.4;ctx.strokeStyle="rgba(125,148,255,"+(0.35*A*(1-ph))+")";ctx.lineWidth=1.4*DPR;ctx.beginPath();ctx.arc(sirX,sirY,pr,0,7);ctx.stroke();}
     }
+    else if(sec.type==="recede"&&A>0.02){
+      // the ending: the work recomposes into the constellation and pulls back
+      var op=c01((smoothScroll - sec.top + innerHeight*0.5)/Math.max(1,sec.h - innerHeight*0.6));
+      outroP=op;outroVeil=op*op;
+      var shrink=1-op*0.82,Ro=scl()*shrink;
+      for(var ri=0;ri<PROJECTS.length;ri++){
+        var rp=PROJECTS[ri],rbx=sirX+rp.nx*Ro,rby=sirY+rp.ny*Ro;
+        ctx.strokeStyle="rgba(125,148,255,"+(0.16*A*(1-op*0.5))+")";ctx.lineWidth=1*DPR;
+        ctx.beginPath();ctx.moveTo(sirX,sirY);ctx.lineTo(rbx,rby);ctx.stroke();
+        gstar(rbx,rby,Math.max(0.6,(rp.live?2:1.5)*DPR*shrink),(rp.live?.7:.45)*A,rp.live?"rgba(234,240,255,"+A+")":"rgba(205,216,242,"+(A*.9)+")");
+      }
+    }
 
     // Sirius itself (the guide) — the first light in, always readable, never overpowering
     var beaconBoost=sec.type==="beacon"?(1+A*0.7):1;
@@ -280,6 +295,11 @@ export function initObservatory(opts){
         ctx.fillText(B.name.toUpperCase(),B.x+(left?-9*DPR:9*DPR),B.y);}
       ctx.textAlign="left";}
     if(hoverName)label(hoverName,hoverSub,hoverX/DPR*DPR,hoverY,hoverLive);
+
+    // the ending: rise a black veil over everything, fade the HUD, reveal the message
+    if(outroVeil>0){ctx.fillStyle="rgba(0,0,0,"+outroVeil.toFixed(3)+")";ctx.fillRect(0,0,W,H);}
+    if(hudIn)hud.style.opacity=outroP>0.02?(1-outroP).toFixed(3):"";
+    if(outroEnd)outroEnd.style.opacity=smooth((outroP-0.72)/0.28).toFixed(3);
 
     // cursor + magnetism
     if(fine){
