@@ -99,3 +99,14 @@
 /* skip link — a11y */
 .skip-link{position:fixed;top:-60px;left:1rem;z-index:200;background:var(--silver);color:var(--carbon);font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;padding:.7rem 1rem;border-radius:6px;transition:top .2s ease}
 .skip-link:focus{top:1rem}
+
+/* --- polish: keep section text legible over the bright star --- */
+.h2,.hero__title,.eye,.subl,.hero__eye,.hero__sub,.beat__t,.beat__k,.lost__title{
+  text-shadow:0 1px 26px rgba(5,7,12,.72),0 0 10px rgba(5,7,12,.5);
+}
+
+/* --- mobile HUD: sound stays on top; nav floats to the bottom so nothing collides --- */
+@media (max-width:640px){
+  .sys{z-index:3}
+  .nav{top:auto;bottom:1.1rem;z-index:2;background:rgba(10,12,18,.62)}
+}

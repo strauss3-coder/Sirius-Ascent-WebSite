@@ -109,13 +109,13 @@ export function initObservatory(){
   function gstar(x,y,r,glow,core){if(glow>.01){var g=ctx.createRadialGradient(x,y,0,x,y,r*15*glow);g.addColorStop(0,"rgba(234,240,255,"+(.5*glow)+")");g.addColorStop(.2,"rgba(125,148,255,"+(.3*glow)+")");g.addColorStop(1,"rgba(77,107,255,0)");ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,r*15*glow,0,7);ctx.fill();}ctx.beginPath();ctx.arc(x,y,r,0,7);ctx.fillStyle=core;ctx.fill();}
   /* Sirius: layered bloom with soft falloff so it always reads, never overpowers */
   function drawSirius(x,y,r,b){
-    var h1=ctx.createRadialGradient(x,y,0,x,y,r*30);
-    h1.addColorStop(0,"rgba(150,178,255,"+(.42*b)+")");h1.addColorStop(.28,"rgba(100,128,255,"+(.16*b)+")");h1.addColorStop(1,"rgba(77,107,255,0)");
-    ctx.fillStyle=h1;ctx.beginPath();ctx.arc(x,y,r*30,0,7);ctx.fill();
-    var h2=ctx.createRadialGradient(x,y,0,x,y,r*8);
-    h2.addColorStop(0,"rgba(255,255,255,"+(.9*b)+")");h2.addColorStop(.35,"rgba(224,234,255,"+(.5*b)+")");h2.addColorStop(1,"rgba(160,185,255,0)");
-    ctx.fillStyle=h2;ctx.beginPath();ctx.arc(x,y,r*8,0,7);ctx.fill();
-    ctx.fillStyle="rgba(255,255,255,"+Math.min(1,b)+")";ctx.beginPath();ctx.arc(x,y,r*1.15,0,7);ctx.fill();
+    var h1=ctx.createRadialGradient(x,y,0,x,y,r*22);
+    h1.addColorStop(0,"rgba(150,178,255,"+(.34*b)+")");h1.addColorStop(.3,"rgba(100,128,255,"+(.12*b)+")");h1.addColorStop(1,"rgba(77,107,255,0)");
+    ctx.fillStyle=h1;ctx.beginPath();ctx.arc(x,y,r*22,0,7);ctx.fill();
+    var h2=ctx.createRadialGradient(x,y,0,x,y,r*6.5);
+    h2.addColorStop(0,"rgba(255,255,255,"+(.82*b)+")");h2.addColorStop(.38,"rgba(224,234,255,"+(.4*b)+")");h2.addColorStop(1,"rgba(160,185,255,0)");
+    ctx.fillStyle=h2;ctx.beginPath();ctx.arc(x,y,r*6.5,0,7);ctx.fill();
+    ctx.fillStyle="rgba(255,255,255,"+Math.min(1,b)+")";ctx.beginPath();ctx.arc(x,y,r*1.1,0,7);ctx.fill();
   }
   function label(txt,sub,lx,ly,live){ctx.font=(13*DPR)+"px ui-monospace,'SF Mono',Menlo,monospace";ctx.textBaseline="middle";ctx.fillStyle="rgba(234,240,255,.97)";ctx.fillText(txt.toUpperCase(),lx+16*DPR,ly-(sub?4*DPR:0));if(sub){ctx.font=(9.5*DPR)+"px ui-monospace,'SF Mono',Menlo,monospace";ctx.fillStyle=live?"rgba(111,240,192,.95)":"rgba(125,148,255,.95)";ctx.fillText(sub.toUpperCase(),lx+16*DPR,ly+11*DPR);}ctx.strokeStyle="rgba(125,148,255,.55)";ctx.lineWidth=1*DPR;ctx.beginPath();ctx.moveTo(lx+7*DPR,ly);ctx.lineTo(lx+13*DPR,ly);ctx.stroke();}
 
@@ -178,6 +178,7 @@ export function initObservatory(){
     starX+=(tX-starX)*k;starY+=(tY-starY)*k;starS+=(tS-starS)*k;
     var sirX=starX,sirY=starY,sirScale=starS;
     clickTargets=[];hoverName=null;
+    var showAll=!fine;bodyLabels.length=0; // touch has no hover, so name every body
 
     // ================= SET-PIECES =================
     var A=amax; // active section focus strength
@@ -197,6 +198,7 @@ export function initObservatory(){
         var hov=fine&&Math.hypot(px-scr.x,py-scr.y)<26;
         if(hov){hoverName=pp.name;hoverLive=pp.live;hoverX=sx3;hoverY=sy3;hoverSub=pp.tag;}
         if(pp.url)clickTargets.push({x:scr.x,y:scr.y,url:pp.url});
+        if(showAll)bodyLabels.push({x:sx3,y:sy3,name:pp.name,live:pp.live});
         var rr=pp.mag*DPR*(hov?1.5:1);
         gstar(sx3,sy3,rr,(pp.live?.75:.45)*A*(hov?1.6:1),pp.live?"rgba(234,240,255,"+A+")":"rgba(205,216,242,"+(A*.9)+")");
       }
@@ -207,6 +209,7 @@ export function initObservatory(){
       for(var vi=0;vi<SERVICES.length;vi++){var v=SERVICES[vi];var ang=v.ang+(reduce?0:t*v.sp);var ox2=sirX+Math.cos(ang)*baseR*v.ring,oy2=sirY+Math.sin(ang)*baseR*v.ring;
         var scr2={x:ox2/DPR,y:oy2/DPR};var hov2=fine&&Math.hypot(px-scr2.x,py-scr2.y)<24;
         if(hov2){hoverName=v.name;hoverLive=true;hoverX=ox2;hoverY=oy2;hoverSub=null;}
+        if(showAll)bodyLabels.push({x:ox2,y:oy2,name:v.name,live:true});
         gstar(ox2,oy2,(hov2?4:2.6)*DPR,0.7*A*(hov2?1.5:1),"rgba(234,240,255,"+A+")");
       }
     }
@@ -229,6 +232,8 @@ export function initObservatory(){
     var beaconBoost=sec.type==="beacon"?(1+A*0.7):1;
     var twinkle=reduce?1:1+Math.sin(t*0.0013)*0.09;
     var sirBright=(reduce?1:ease(c01((t-200)/1500)))*twinkle*beaconBoost;
+    // recede behind docked content so section text always reads over the star
+    if(sec.type!=="beacon")sirBright*=(1-darken*0.34);
     var pulse=reduce?1:1+Math.sin(t*.0016)*.12;
     var sr=Math.max(2.7*DPR,3.2*DPR*sirScale)*beaconBoost;
     var sp=34*DPR*pulse*Math.max(0.92,sirScale);
@@ -242,6 +247,13 @@ export function initObservatory(){
     // labels (source-over so text is crisp)
     if(sec.type==="solar"&&A>0.3){for(var sl=0;sl<stageLabels.length;sl++){var S=stageLabels[sl];ctx.font=(10*DPR)+"px ui-monospace,'SF Mono',Menlo,monospace";ctx.textBaseline="middle";ctx.fillStyle="rgba(125,148,255,"+A+")";ctx.fillText("0"+S.n,S.x/DPR*DPR+10*DPR,S.y-8*DPR);ctx.fillStyle="rgba(234,240,255,"+(A*.95)+")";ctx.fillText(S.name.toUpperCase(),S.x+10*DPR,S.y+6*DPR);}}
     stageLabels.length=0;
+    // persistent body labels (mobile): name each project/service beside its star
+    if(bodyLabels.length&&A>0.3){ctx.textBaseline="middle";
+      for(var bl2=0;bl2<bodyLabels.length;bl2++){var B=bodyLabels[bl2];var left=B.x<sirX;
+        ctx.textAlign=left?"right":"left";ctx.font=(9.5*DPR)+"px ui-monospace,'SF Mono',Menlo,monospace";
+        ctx.fillStyle=(B.live?"rgba(234,240,255,":"rgba(205,216,242,")+(A*0.92)+")";
+        ctx.fillText(B.name.toUpperCase(),B.x+(left?-9*DPR:9*DPR),B.y);}
+      ctx.textAlign="left";}
     if(hoverName)label(hoverName,hoverSub,hoverX/DPR*DPR,hoverY,hoverLive);
 
     // cursor + magnetism
@@ -266,7 +278,7 @@ export function initObservatory(){
 
     requestAnimationFrame(frame);
   }
-  var stageLabels=[],hoverSub=null;
+  var stageLabels=[],bodyLabels=[],hoverSub=null;
 
   addEventListener("resize",resize,{passive:true});
   resize();
