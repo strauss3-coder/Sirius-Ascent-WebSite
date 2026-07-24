@@ -8,6 +8,8 @@ missionYear: 2026
 designation: "η"
 magnitude: 1.5
 coordinates: { ra: "11ʰ 03ᵐ", dec: "+02° 17′" }
+x: -0.31
+y: 0.15
 url: "https://strauss3-coder.github.io/the-view-lodge/"
 accent: "#d8b06a"
 summary: "A lodge concept designed to feel calm and cinematic — the kind of presence that makes someone book the escape."
@@ -18,6 +20,9 @@ development: "Hand-coded and responsive, structured for gallery, rates and an en
 performance: "Optimised imagery and lean markup keep an image-led design fast and smooth across devices."
 result: "A demo that captures the stillness of the place and makes the escape feel one tap away — ready to rise into a booking-driving site."
 stack: ["Hand-coded", "Responsive", "Gallery-led", "WebP imagery"]
+observations: >-
+  Restraint was the hardest and best decision. Every instinct on a hospitality site is to add; the lodge got better each time we removed. Learning to let whitespace and a single wide image carry the mood — while keeping an image-led page fast — refined how we pace calm, premium experiences.
+
 ---
 
 _Plotted — a quiet system charted, ready to rise._

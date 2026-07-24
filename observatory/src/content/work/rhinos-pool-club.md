@@ -8,6 +8,8 @@ missionYear: 2026
 designation: "δ"
 magnitude: 1.5
 coordinates: { ra: "08ʰ 12ᵐ", dec: "−12° 41′" }
+x: 0.3
+y: 0.21
 url: "https://strauss3-coder.github.io/rhinos-pool-club/"
 accent: "#37c8e8"
 summary: "A pool and social club concept built around atmosphere — a dark, cinematic experience that sells a night out before you arrive."
@@ -18,6 +20,9 @@ development: "Hand-coded with layered visuals and smooth motion kept efficient, 
 performance: "Optimised media and lean code keep the mood-heavy design loading fast and running smoothly on mobile."
 result: "A demo that proves a recreation brand can feel genuinely premium — an experience that makes you want to be there, chart-ready to launch."
 stack: ["Hand-coded", "Cinematic UI", "Responsive", "WebP imagery"]
+observations: >-
+  This was where we proved atmosphere doesn't have to cost performance. Layering glow and depth while keeping the page fast forced a discipline around compositing and image weight that carried straight into the Sirius homepage. Dark, cinematic, and quick can coexist — but only if you budget every effect.
+
 ---
 
 _Plotted — atmosphere charted, waiting to rise._

@@ -8,6 +8,8 @@ missionYear: 2026
 designation: "θ"
 magnitude: 1.4
 coordinates: { ra: "12ʰ 31ᵐ", dec: "−09° 48′" }
+x: -0.4
+y: -0.03
 url: "https://strauss3-coder.github.io/bankenveld-demo/index.html"
 accent: "#8fb56a"
 summary: "A golf estate concept that balances prestige and calm — selling lifestyle, membership and the setting."
@@ -18,6 +20,9 @@ development: "Hand-coded and responsive, structured for amenities, membership an
 performance: "Optimised media and lean code keep an image-rich estate site quick and stable on every device."
 result: "A demo that gives the estate a presence as composed as its grounds — ready to rise into a site that drives membership and stays."
 stack: ["Hand-coded", "Responsive", "Membership-ready", "WebP imagery"]
+observations: >-
+  Prestige without coldness is a narrow line. Most estate sites read corporate; warmth is what converts. Balancing a composed, established tone with a human welcome taught us that luxury and approachability aren't a trade-off — and that large, cinematic imagery can stay performant with the right compression budget.
+
 ---
 
 _Plotted — an estate charted, ready to rise._

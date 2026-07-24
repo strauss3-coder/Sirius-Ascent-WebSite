@@ -15,17 +15,27 @@ export async function getStaticPaths() {
   const all = (await getCollection("work")).sort(
     (a, b) => a.data.system - b.data.system,
   );
-  return all.map((entry, i) => ({
-    params: { slug: entry.id },
-    props: {
-      entry,
-      prev: all[(i - 1 + all.length) % all.length],
-      next: all[(i + 1) % all.length],
-    },
-  }));
+  return all.map((entry) => {
+    // constellation-as-navigation: nearest three systems by real star distance
+    const nearby = all
+      .filter((o) => o.id !== entry.id)
+      .map((o) => ({
+        slug: o.id,
+        name: o.data.name,
+        system: o.data.system,
+        status: o.data.status,
+        accent: o.data.accent,
+        au: +(
+          Math.hypot(o.data.x - entry.data.x, o.data.y - entry.data.y) * 5
+        ).toFixed(1),
+      }))
+      .sort((a, b) => a.au - b.au)
+      .slice(0, 3);
+    return { params: { slug: entry.id }, props: { entry, nearby } };
+  });
 }
 
-const { entry, prev, next } = Astro.props;
+const { entry, nearby } = Astro.props;
 const d = entry.data;
 const base = import.meta.env.BASE_URL;
 const sysNo = String(d.system).padStart(2, "0");
@@ -117,6 +127,13 @@ const shot = shotFor(entry.id);
       <figcaption class="frame__cap mono">Live capture · {host}</figcaption>
     </section>
 
+    <!-- OBSERVATIONS — the design journal -->
+    <section class="obs">
+      <p class="obs__ey mono">Observations · lessons from this system</p>
+      <p class="obs__body">{d.observations}</p>
+      <p class="obs__sign mono">— logged in the Sirius Ascent journal</p>
+    </section>
+
     <!-- LAUNCH BEACON -->
     <section class="beacon">
       <span class="beacon__ring" aria-hidden="true"></span>
@@ -125,16 +142,24 @@ const shot = shotFor(entry.id);
       <p class="beacon__note mono">{host}</p>
     </section>
 
-    <!-- STAR NAVIGATION -->
-    <nav class="starnav" aria-label="Neighbouring systems">
-      <a class="starnav__link" href={`${base}work/${prev.id}`}>
-        <span class="starnav__dir mono">← Previous system</span>
-        <span class="starnav__name">{String(prev.data.system).padStart(2, "0")} · {prev.data.name}</span>
-      </a>
-      <a class="starnav__link starnav__link--next" href={`${base}work/${next.id}`}>
-        <span class="starnav__dir mono">Next system →</span>
-        <span class="starnav__name">{String(next.data.system).padStart(2, "0")} · {next.data.name}</span>
-      </a>
+    <!-- CONSTELLATION NAVIGATION -->
+    <nav class="starnav" aria-label="Nearby systems">
+      <p class="starnav__head mono">Continue exploring · nearby systems</p>
+      <ul class="starnav__list">
+        {nearby.map((n) => (
+          <li>
+            <a class="nsys" href={`${base}work/${n.slug}`} style={`--accent:${n.accent}`}>
+              <span class="nsys__mark" aria-hidden="true">◉</span>
+              <span class="nsys__body">
+                <span class="nsys__name">{n.name}</span>
+                <span class="nsys__meta mono">System {String(n.system).padStart(2, "0")} · {n.status === "risen" ? "Risen" : "Plotted"}</span>
+              </span>
+              <span class="nsys__au mono">{n.au} AU</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="starnav__back mono" href={`${base}#portfolio`}>◀ Return to the constellation</a>
     </nav>
   </main>
 </Base>
@@ -246,13 +271,36 @@ const shot = shotFor(entry.id);
   .beacon__btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px color-mix(in srgb, var(--accent) 70%, transparent); }
   .beacon__note { margin-top: 1rem; font-size: 0.64rem; color: var(--dim); position: relative; }
 
-  /* STAR NAV */
-  .starnav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
-  .starnav__link { display: grid; gap: 0.4rem; padding: 1.3rem; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); transition: border-color 0.3s, transform 0.3s; }
-  .starnav__link--next { text-align: right; }
-  .starnav__link:hover { border-color: var(--accent); transform: translateY(-3px); }
-  .starnav__dir { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-  .starnav__name { font-family: var(--serif); font-size: 1.15rem; color: var(--sirius); }
+  /* OBSERVATIONS — journal note */
+  .obs {
+    margin-top: clamp(2rem, 6vw, 4rem);
+    padding: clamp(1.8rem, 4vw, 2.8rem);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+    border-left: 2px solid var(--accent);
+    border-radius: 10px;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 7%, transparent), var(--panel));
+  }
+  .obs__ey { font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.2rem; }
+  .obs__body { font-family: var(--serif); font-size: clamp(1.25rem, 2.6vw, 1.7rem); line-height: 1.5; color: var(--sirius); font-weight: 500; }
+  .obs__sign { margin-top: 1.4rem; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+
+  /* CONSTELLATION NAV */
+  .starnav { padding-top: clamp(3rem, 7vw, 5rem); }
+  .starnav__head { font-size: 0.66rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.2rem; }
+  .starnav__list { list-style: none; display: grid; gap: 0.6rem; padding: 0; margin: 0; }
+  .nsys {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.1rem 1.3rem; border: 1px solid var(--line); border-radius: 8px; background: var(--panel);
+    transition: border-color 0.3s, transform 0.3s, background 0.3s;
+  }
+  .nsys:hover { border-color: var(--accent); transform: translateX(4px); background: color-mix(in srgb, var(--accent) 6%, var(--panel)); }
+  .nsys__mark { color: var(--accent); font-size: 0.9rem; }
+  .nsys__body { display: grid; gap: 0.2rem; flex: 1; }
+  .nsys__name { font-family: var(--serif); font-size: 1.2rem; color: var(--sirius); }
+  .nsys__meta { font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+  .nsys__au { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .starnav__back { display: inline-block; margin-top: 1.6rem; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); transition: color 0.3s; }
+  .starnav__back:hover { color: var(--sirius); }
 
   @media (max-width: 560px) {
     .specs { grid-template-columns: 1fr; }

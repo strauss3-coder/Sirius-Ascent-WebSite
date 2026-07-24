@@ -19,6 +19,10 @@ const work = defineCollection({
       designation: z.string(), // α, β, …
       magnitude: z.number(),
       coordinates: z.object({ ra: z.string(), dec: z.string() }),
+      // position in the constellation (matches the homepage star map) — drives
+      // the "nearby systems" distance nav.
+      x: z.number(),
+      y: z.number(),
       url: z.string().url(),
       accent: z.string(), // project atmosphere hex; layered over Sirius base
       summary: z.string(),
@@ -30,6 +34,8 @@ const work = defineCollection({
       development: z.string(),
       performance: z.string(),
       result: z.string(),
+      // the design-journal reflection — honest lessons, not marketing
+      observations: z.string(),
 
       // optional supporting data
       stack: z.array(z.string()).default([]),

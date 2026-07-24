@@ -8,6 +8,8 @@ missionYear: 2025
 designation: "α"
 magnitude: -1.4
 coordinates: { ra: "06ʰ 45ᵐ", dec: "−16° 42′" }
+x: -0.26
+y: -0.16
 url: "https://supremeautonorth.co.za"
 accent: "#7d94ff"
 summary: "A used-car dealership rebuilt as a fast, search-first storefront — live on its own domain and pulling real foot traffic."
@@ -18,6 +20,9 @@ development: "Hand-built, lightweight front end — no bloated page builder. Sem
 performance: "Sub-second loads on mobile, clean Core Web Vitals, and a Google Business Profile brought back to life with weekly posts and on-site photography — the same profile that logged 144 interactions in a single month."
 result: "Supreme Auto is risen — live on its own domain, sending real enquiries and direction requests to the dealership every week. The showroom finally has an online front that matches the work."
 stack: ["Hand-coded", "Semantic HTML", "Vehicle schema", "WebP imagery", "Mobile-first"]
+observations: >-
+  The biggest lever wasn't the design — it was structured data and a revived Google Business Profile. Making the dealership legible to search, and answering every review, did more for real foot traffic than any visual flourish. It taught us to treat the profile and the site as one system, and that's now the first thing we set up on any local build.
+
 ---
 
 _Charted, built, and risen — now holding its own coordinates on the open web._

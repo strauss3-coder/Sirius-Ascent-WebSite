@@ -8,6 +8,8 @@ missionYear: 2026
 designation: "ε"
 magnitude: 1.4
 coordinates: { ra: "09ʰ 27ᵐ", dec: "−31° 09′" }
+x: 0.08
+y: 0.27
 url: "https://strauss3-coder.github.io/xtreme-bikes-website/"
 accent: "#ff7a2d"
 summary: "A motorcycle retailer concept with an electric, high-energy front end built to move stock and parts."
@@ -18,6 +20,9 @@ development: "Hand-coded, responsive and quick, with a structure ready to hold a
 performance: "Compressed imagery and lean markup keep a visually heavy concept fast and stable on mobile."
 result: "A demo that gives Xtreme Bikes a front end with the same energy as the showroom floor — ready to rise into a full retail presence."
 stack: ["Hand-coded", "Responsive", "Inventory-ready", "WebP imagery"]
+observations: >-
+  Bold imagery sells bikes, but big images are heavy. Getting the machines to feel enormous while still loading instantly pushed our image pipeline hard, and the responsive-art-direction approach we worked out here — different crops at different sizes — became a default. Energy and speed aren't opposites if you art-direct the payload.
+
 ---
 
 _Plotted — charged and charted, ready to rise._

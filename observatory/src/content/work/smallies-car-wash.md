@@ -8,6 +8,8 @@ missionYear: 2026
 designation: "κ"
 magnitude: 1.4
 coordinates: { ra: "15ʰ 19ᵐ", dec: "−04° 33′" }
+x: 0.07
+y: -0.29
 url: "https://strauss3-coder.github.io/smallies-car-wash/"
 accent: "#45c6ff"
 summary: "A car wash and detailing concept built to feel clean and premium — showcasing results and making a wash easy to book."
@@ -18,6 +20,9 @@ development: "Hand-coded and responsive, structured for services, pricing and a 
 performance: "Optimised imagery and lean code keep the bright, image-led design quick on any device."
 result: "A demo that makes a local wash look genuinely premium — clear proof, easy booking, and ready to rise into a live site that fills the bays."
 stack: ["Hand-coded", "Responsive", "Booking-ready", "WebP imagery"]
+observations: >-
+  A humble local service can look genuinely premium — it just needs proof and air. Clean results shown proudly, plenty of whitespace, and an effortless booking path made a car wash feel high-end. It reinforced that polish is mostly editing: fewer elements, more confidence.
+
 ---
 
 _Plotted — a clean system charted, ready to rise._

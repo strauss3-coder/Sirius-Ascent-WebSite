@@ -8,6 +8,8 @@ missionYear: 2026
 designation: "ζ"
 magnitude: 1.5
 coordinates: { ra: "10ʰ 44ᵐ", dec: "−18° 55′" }
+x: -0.13
+y: 0.24
 url: "https://strauss3-coder.github.io/revline-panelbeating-website/"
 accent: "#f0a23c"
 summary: "A panel beater concept built on trust — before-and-after proof and an obvious path to a quote."
@@ -18,6 +20,9 @@ development: "Hand-coded and responsive, with a quote flow and gallery structure
 performance: "Lean code and optimised imagery keep the proof-heavy layout fast and clean on any device."
 result: "A demo that turns a workshop's craftsmanship into online trust — clear, credible, and ready to rise into a live site that books jobs."
 stack: ["Hand-coded", "Responsive", "Quote flow", "WebP imagery"]
+observations: >-
+  Proof beats persuasion. The single most effective decision was putting real before-and-after repairs above the fold and a quote request one tap away — trust came from evidence, not adjectives. It reset how we open any service business: lead with the work, not the pitch.
+
 ---
 
 _Plotted — proof charted, ready to rise._

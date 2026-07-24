@@ -8,6 +8,8 @@ missionYear: 2026
 designation: "γ"
 magnitude: 1.5
 coordinates: { ra: "05ʰ 55ᵐ", dec: "+07° 24′" }
+x: 0.39
+y: 0.03
 url: "https://strauss3-coder.github.io/riverside-padel-website/"
 accent: "#4dd6a0"
 summary: "A padel club concept designed to feel vibrant and social — booking-forward and built for a fast-growing community sport."
@@ -18,6 +20,9 @@ development: "Hand-coded and responsive, structured so a real booking system and
 performance: "Lightweight delivery and mobile-first layout, so the experience stays quick and smooth on the phones players actually use courtside."
 result: "A demo that shows exactly how Riverside Padel could own its category online — energetic, frictionless, and ready to turn interest into booked courts."
 stack: ["Hand-coded", "Responsive", "Booking-ready", "WebP imagery"]
+observations: >-
+  Padel taught us that a booking flow lives or dies on the phone, courtside, one-handed. We stopped designing the schedule as a desktop table and started designing it as a thumb-reachable sequence — a mobile-first booking pattern we now reuse for every club and studio.
+
 ---
 
 _Plotted — a system charted and ready to rise._
