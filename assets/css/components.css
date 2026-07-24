@@ -997,6 +997,19 @@ em { font-style: italic; }
 .audit__review-title { margin: 0 0 0.5rem; font-family: var(--display); font-size: 1.1rem; font-weight: 400; color: var(--white); }
 .audit__review-text { margin: 0; color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
 
+.audit__assurances {
+  display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem;
+  margin: 1.75rem 0 clamp(1.5rem, 3vw, 2.25rem);
+  padding: 0; list-style: none;
+}
+.audit__assurances li {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.78rem; letter-spacing: 0.02em;
+  color: var(--silver);
+}
+.audit__assurances svg { width: 15px; height: 15px; color: var(--blue-bright); flex-shrink: 0; }
+
 .audit__methods { display: grid; gap: 0.75rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
 .audit__method {
   display: grid;
