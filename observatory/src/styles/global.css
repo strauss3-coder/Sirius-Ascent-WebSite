@@ -121,3 +121,8 @@
 .sr-nav{position:absolute;left:0;right:0;z-index:60}
 .sr-nav a{position:absolute;left:-9999px;top:0}
 .sr-nav a:focus{left:50%;top:0;transform:translateX(-50%);width:max-content;max-width:90vw;background:var(--silver);color:var(--carbon);font-family:var(--mono);font-size:.72rem;padding:.7rem 1rem;border-radius:6px}
+
+/* reduced-motion: kill all looping CSS animations (canvas motion is JS-gated separately) */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important}
+}
