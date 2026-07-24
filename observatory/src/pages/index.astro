@@ -1,0 +1,68 @@
+---
+import Base from "../layouts/Base.astro";
+import Cosmos from "../components/Cosmos.astro";
+import Hud from "../components/Hud.astro";
+---
+
+<Base
+  title="Sirius Ascent — Digital Architecture Studio, Pretoria"
+  description="A living star map of the work we've built. Sirius Ascent designs and builds websites engineered like instruments — for South African businesses that intend to be taken seriously."
+>
+  <Cosmos />
+  <Hud />
+
+  <main id="main">
+    <section class="sec" id="hero">
+      <p class="hero__eye">A living star map</p>
+      <h1 class="hero__title">We design websites<br />engineered like <em>instruments.</em></h1>
+      <div class="hero__row">
+        <p class="hero__sub">
+          This is our universe. <b>Sirius is the studio;</b> every other light is a
+          business we built. Follow the star — it will guide you down through the observatory.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--p" data-mag href="#portfolio">Enter the sky ↓</a>
+          <a class="btn btn--g" data-mag href="#contact">Establish contact</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="portfolio">
+      <div class="head" data-head>
+        <p class="eye">The stars · portfolio</p>
+        <h2 class="h2">Every project <em>is a star.</em></h2>
+        <p class="subl">Sirius connects to the work it built. <b>Hover to identify</b> — the risen ones are live sites you can visit.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="services">
+      <div class="head" data-head>
+        <p class="eye">Galaxies · services</p>
+        <h2 class="h2">What we <em>set in orbit.</em></h2>
+        <p class="subl">Each capability circles the studio. <b>Hover a body</b> to name it.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="process">
+      <div class="head" data-head>
+        <p class="eye">Orbital paths · process</p>
+        <h2 class="h2">How the work <em>comes into orbit.</em></h2>
+        <p class="subl">Five ordered passes, from first contact to long-term care.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="contact">
+      <div class="head" data-head>
+        <p class="eye">Establish communication · contact</p>
+        <h2 class="h2">Send a <em>signal.</em></h2>
+      </div>
+      <form class="cform" id="cform" data-head novalidate>
+        <input type="text" name="name" placeholder="Your name" autocomplete="name" aria-label="Your name" />
+        <input type="text" name="biz" placeholder="Your business" autocomplete="organization" aria-label="Your business" />
+        <textarea name="msg" placeholder="What are you building?" aria-label="What are you building?"></textarea>
+        <button class="btn btn--p" data-mag type="submit">Transmit →</button>
+        <p class="cform__ok" aria-live="polite">✦ Signal received — we'll respond within hours.</p>
+      </form>
+    </section>
+  </main>
+</Base>

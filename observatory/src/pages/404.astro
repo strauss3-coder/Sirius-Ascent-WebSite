@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Lost in Deep Space — Sirius Ascent"
+  description="This coordinate holds no signal. Return to the observatory."
+  noindex={true}
+>
+  <main id="main" class="lost">
+    <p class="lost__tag">404 · NO SIGNAL · COORDINATE UNCHARTED</p>
+    <h1 class="lost__title">Lost in <em>deep space.</em></h1>
+    <p class="lost__body">
+      There's no body at these coordinates — the star you were following has drifted
+      beyond the map. Let's navigate you back to the observatory.
+    </p>
+    <a class="btn btn--p" href="/">Return to the observatory ↓</a>
+    <p class="lost__coords" aria-hidden="true">RA 00ʰ 00ᵐ · DEC +00° 00′ · MAG —</p>
+  </main>
+</Base>
+
+<style>
+  .lost {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.4rem;
+    padding: 6rem clamp(1.25rem, 5vw, 3rem);
+    background:
+      radial-gradient(90% 60% at 50% 30%, rgba(77, 107, 255, 0.1), transparent 60%),
+      var(--carbon);
+  }
+  .lost__tag {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--blue-lit);
+  }
+  .lost__title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 8vw, 5.5rem);
+    line-height: 1;
+    color: var(--sirius);
+    text-wrap: balance;
+  }
+  .lost__title em { font-style: italic; color: var(--blue-lit); }
+  .lost__body { max-width: 44ch; color: var(--muted); }
+  .lost__coords {
+    margin-top: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    color: var(--dim);
+  }
+</style>

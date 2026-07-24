@@ -1,0 +1,38 @@
+---
+// The observatory HUD — always legible over the spectacle: who the studio is,
+// where to go, and the reading legend. This is the clarity layer.
+const nav = [
+  { href: "#portfolio", label: "Work" },
+  { href: "#services", label: "Services" },
+  { href: "#process", label: "Process" },
+  { href: "#contact", label: "Contact" },
+];
+const sections = ["hero", "portfolio", "services", "process", "contact"];
+---
+
+<div class="hud" id="hud">
+  <div class="studio pad">
+    <div class="studio__name">
+      <span aria-hidden="true" style="color:var(--sirius)">✦</span> SIRIUS <b>ASCENT</b>
+    </div>
+    <div class="studio__role">Digital Architecture Studio · Pretoria</div>
+  </div>
+  <div class="sys pad">
+    <button class="snd" id="snd" type="button" aria-pressed="false">
+      <span class="snd__i" aria-hidden="true"></span> Sound Off
+    </button>
+  </div>
+  <nav class="nav" aria-label="Primary">
+    {nav.map((n) => <a data-mag href={n.href}>{n.label}</a>)}
+  </nav>
+</div>
+
+<nav class="prog" id="prog" aria-label="Sections">
+  {sections.map((s, i) => <a href={`#${s}`} data-i={i} aria-label={s} />)}
+</nav>
+
+<div class="legend" id="legend">
+  <i><span class="k k--r"></span> Risen — live</i>
+  <i><span class="k k--p"></span> Plotted — demo</i>
+  <i>◆ Hover a star · click a live one</i>
+</div>
