@@ -39,14 +39,6 @@ const work = defineCollection({
 
       // optional supporting data
       stack: z.array(z.string()).default([]),
-      metrics: z
-        .object({
-          performance: z.number(),
-          accessibility: z.number(),
-          bestPractices: z.number(),
-          seo: z.number(),
-        })
-        .optional(),
     }),
 });
 

@@ -6,8 +6,8 @@
    Returns the visitor exactly where they left the journey. */
 export function initConsole() {
   const el = document.getElementById("console");
-  const opener = document.querySelector("[data-console-open]");
-  if (!el || !opener) return;
+  const openers = document.querySelectorAll("[data-console-open]");
+  if (!el || !openers.length) return;
 
   const statusEl = el.querySelector("[data-console-status]");
   const stageEl = el.querySelector("[data-console-stage]");
@@ -229,7 +229,7 @@ export function initConsole() {
     }, 700);
   }
 
-  opener.addEventListener("click", open);
+  openers.forEach((o) => o.addEventListener("click", open));
   closeBtn.addEventListener("click", close);
   el.addEventListener("keydown", (e) => {
     if (e.key === "Escape") close();

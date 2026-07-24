@@ -355,3 +355,7 @@ body.console-open{overflow:hidden}
 .log-readout.show{opacity:1}
 .log-readout.pulse{color:var(--blue-lit)}
 @media (max-width:680px){.log-readout{display:none}}
+
+/* console: the native cursor must always be visible over every element */
+body.console-open, body.console-open *{cursor:auto!important}
+body.console-open button,body.console-open a,body.console-open [role="radio"]{cursor:pointer!important}
