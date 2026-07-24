@@ -62,8 +62,11 @@ export function initDeepField() {
       if (!noMotion) {
         const dec = f.querySelector("[data-df-decode]");
         if (dec) {
-          if (e > 0.55 && !f._decoded) { f._decoded = true; decode(dec); }
-          else if (e < 0.2 && f._decoded) { f._decoded = false; }
+          if (e > 0.55 && !f._decoded) {
+            f._decoded = true;
+            decode(dec);
+            if (window.__markExplored) window.__markExplored(f.dataset.slug);
+          } else if (e < 0.2 && f._decoded) { f._decoded = false; }
         }
       }
     }

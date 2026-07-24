@@ -347,3 +347,11 @@ body.console-open{overflow:hidden}
 .outro__line2{font-family:var(--serif);font-style:italic;font-size:clamp(1.4rem,3.4vw,2.2rem);color:var(--blue-lit);margin-top:1rem}
 .outro__btn{margin-top:2.4rem;font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--carbon);background:var(--silver);padding:1rem 2rem;border-radius:100px;cursor:pointer;transition:background .3s,box-shadow .3s}
 .outro__btn:hover{background:var(--sirius);box-shadow:0 14px 44px -12px rgba(125,148,255,.7)}
+
+/* welcome back + observatory log */
+.welcome-back{position:fixed;top:12vh;left:50%;transform:translateX(-50%) translateY(-10px);z-index:45;font-family:var(--mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--sirius);background:rgba(10,12,18,.62);border:1px solid rgba(125,148,255,.3);border-radius:100px;padding:.7rem 1.3rem;opacity:0;transition:opacity .9s ease,transform .9s ease;pointer-events:none;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.welcome-back.in{opacity:1;transform:translateX(-50%) translateY(0)}
+.log-readout{position:fixed;right:clamp(1rem,4vw,2.2rem);bottom:clamp(1rem,4vh,2rem);z-index:40;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);opacity:0;transition:opacity .6s ease,color .4s ease;pointer-events:none}
+.log-readout.show{opacity:1}
+.log-readout.pulse{color:var(--blue-lit)}
+@media (max-width:680px){.log-readout{display:none}}

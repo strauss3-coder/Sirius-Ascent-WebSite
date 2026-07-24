@@ -76,7 +76,7 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
         const shot = shotFor(p.slug);
         const sys = String(i + 1).padStart(2, "0");
         return (
-          <article class="df-field" style={`--accent:${p.accent};--tempo:${p.tempo}s`}>
+          <article class="df-field" data-slug={p.slug} style={`--accent:${p.accent};--tempo:${p.tempo}s`}>
             <div class="df-atmos" aria-hidden="true">
               <span class="df-nebula"></span>
               <span class="df-particles">
@@ -176,6 +176,7 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
 <script>
   import { initConsole } from "../scripts/console.js";
   import { initDeepField } from "../scripts/deepfield.js";
+  import { initMagic } from "../scripts/magic.js";
   function initScrollCue() {
     const cue = document.getElementById("scrollCue");
     if (!cue) return;
@@ -183,7 +184,7 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
     const onScroll = () => { if ((window.scrollY || 0) > 60) hide(); };
     addEventListener("scroll", onScroll, { passive: true });
   }
-  const run = () => { initConsole(); initDeepField(); initScrollCue(); };
+  const run = () => { initMagic(); initConsole(); initDeepField(); initScrollCue(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
   else run();
 </script>

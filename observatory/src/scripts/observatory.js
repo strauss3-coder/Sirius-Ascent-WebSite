@@ -82,6 +82,7 @@ export function initObservatory(opts){
   });
 
   var nextShoot=6000+Math.random()*8000;
+  var sat=null,nextSat=50000+Math.random()*70000; // rare satellite easter egg
   function spawnShoot(){var sx=Math.random()*W*.7+W*.15,sy=Math.random()*H*.4,ang=Math.PI*(.15+Math.random()*.2);shooters.push({x:sx,y:sy,vx:Math.cos(ang)*(14+Math.random()*8)*DPR,vy:Math.sin(ang)*(14+Math.random()*8)*DPR,life:1,len:120+Math.random()*120});}
 
   /* opt-in audio */
@@ -174,6 +175,9 @@ export function initObservatory(opts){
     // shooters (only when not docked)
     if(!reduce&&darken<0.25){if(t>3600&&(nextShoot-=16)<=0){spawnShoot();nextShoot=22000+Math.random()*22000;}}
     for(var shi=shooters.length-1;shi>=0;shi--){var sh=shooters[shi];sh.x+=sh.vx;sh.y+=sh.vy;sh.life-=.012;if(sh.life<=0){shooters.splice(shi,1);continue;}var hl=Math.hypot(sh.vx,sh.vy),tx2=sh.x-sh.vx/hl*sh.len*DPR,ty2=sh.y-sh.vy/hl*sh.len*DPR;var gg=ctx.createLinearGradient(sh.x,sh.y,tx2,ty2);gg.addColorStop(0,"rgba(234,240,255,"+(.9*sh.life)+")");gg.addColorStop(1,"rgba(234,240,255,0)");ctx.strokeStyle=gg;ctx.lineWidth=1.4*DPR;ctx.beginPath();ctx.moveTo(sh.x,sh.y);ctx.lineTo(tx2,ty2);ctx.stroke();}
+    // easter egg: a lone satellite drifts across, its light blinking
+    if(!reduce&&darken<0.2){if(!sat&&(nextSat-=16)<=0){sat={x:-30*DPR,y:innerHeight*(0.12+Math.random()*0.3)*DPR,vx:(0.5+Math.random()*0.5)*DPR};nextSat=90000+Math.random()*90000;}}
+    if(sat){sat.x+=sat.vx;if(sat.x>W+30*DPR){sat=null;}else{ctx.strokeStyle="rgba(180,200,255,.35)";ctx.lineWidth=1*DPR;ctx.beginPath();ctx.moveTo(sat.x-6*DPR,sat.y);ctx.lineTo(sat.x+6*DPR,sat.y);ctx.stroke();var blink=(Math.sin(t*0.006)>0.6)?1:0.25;ctx.beginPath();ctx.arc(sat.x,sat.y,1.4*DPR,0,7);ctx.fillStyle="rgba(125,148,255,"+blink+")";ctx.fill();}}
     ctx.globalCompositeOperation="source-over";
 
     // darken veil for docks
