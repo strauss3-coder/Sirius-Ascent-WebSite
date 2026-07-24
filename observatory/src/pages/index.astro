@@ -75,21 +75,55 @@ const base = import.meta.env.BASE_URL;
     <section class="sec" id="contact">
       <div class="head" data-head>
         <p class="eye">Establish communication · contact</p>
-        <h2 class="h2">Send a <em>signal.</em></h2>
+        <h2 class="h2">Open a <em>channel.</em></h2>
       </div>
-      <form class="cform" id="cform" data-head novalidate>
-        <div class="cform__fields">
-          <input type="text" name="name" placeholder="Your name" autocomplete="name" aria-label="Your name" required />
-          <input type="text" name="biz" placeholder="Your business" autocomplete="organization" aria-label="Your business" />
-          <textarea name="msg" placeholder="What are you building?" aria-label="What are you building?"></textarea>
-          <button class="btn btn--p" data-mag type="submit">Transmit →</button>
-        </div>
-        <div class="cform__done" role="status" aria-live="polite">
-          <span class="cform__star" aria-hidden="true"></span>
-          <p class="cform__done-t">Transmission received.</p>
-          <p class="cform__done-b">Your signal has been logged by Sirius Ascent. We'll respond shortly and begin plotting your journey.</p>
-        </div>
-      </form>
+
+      <div class="tx" id="tx" data-head>
+        <!-- dormant beacon -->
+        <button type="button" class="tx__activate" data-tx-activate aria-expanded="false" aria-controls="txPanel">
+          <span class="tx__beacon" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="tx__activate-label">Activate the beacon</span>
+          <span class="tx__activate-sub mono">Begin transmission to Sirius Ascent</span>
+        </button>
+
+        <!-- transmission sequence -->
+        <form class="tx__panel" id="txPanel" novalidate hidden>
+          <div class="tx__head">
+            <span class="tx__signal" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="tx__status mono" data-tx-status>Channel open</span>
+          </div>
+
+          <div class="tx__log" data-tx-log aria-live="polite"></div>
+
+          <div class="tx__stage" data-tx-stage>
+            <label class="tx__prompt" for="txInput" data-tx-prompt>My name is…</label>
+            <div class="tx__row">
+              <input class="tx__input" id="txInput" data-tx-input autocomplete="name" enterkeyhint="send" />
+              <button class="tx__go" type="submit" aria-label="Transmit this signal">↵</button>
+            </div>
+            <p class="tx__hint mono">Press Enter to transmit</p>
+            <p class="tx__error mono" data-tx-error role="alert" hidden>The channel needs this to continue.</p>
+          </div>
+
+          <div class="tx__ready" data-tx-ready hidden>
+            <p class="tx__ready-label mono">✦ Transmission ready</p>
+            <button class="btn btn--p tx__send" type="submit" data-mag>Send signal →</button>
+          </div>
+
+          <div class="tx__done" data-tx-done hidden>
+            <span class="tx__done-star" aria-hidden="true"></span>
+            <p class="tx__done-t">Transmission received.</p>
+            <p class="tx__done-b">Your signal has been logged by Sirius Ascent. We'll respond shortly and begin plotting your journey.</p>
+          </div>
+        </form>
+      </div>
     </section>
   </main>
 </Base>
+
+<script>
+  import { initBeacon } from "../scripts/beacon.js";
+  const run = () => initBeacon();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+</script>
