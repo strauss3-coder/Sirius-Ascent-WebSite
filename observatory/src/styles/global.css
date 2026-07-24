@@ -67,13 +67,25 @@
   #hero.revealed .hero__eye,#hero.revealed .hero__title,#hero.revealed .hero__row{opacity:1;transform:none}
 
   /* contact form docks under the beacon */
-  .cform{position:sticky;top:52vh;align-self:center;width:min(440px,90vw);display:grid;gap:.6rem;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;margin-top:1.4rem}
+  .cform{position:sticky;top:52vh;align-self:center;width:min(440px,90vw);display:grid;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;margin-top:1.4rem}
+  .cform__fields{grid-area:1/1;display:grid;gap:.6rem;transition:opacity .6s ease,filter .6s ease}
   .cform input,.cform textarea{background:rgba(12,14,20,.6);border:1px solid rgba(228,232,238,.16);border-radius:6px;color:var(--silver);font-family:var(--sans);font-size:.9rem;padding:.8rem .9rem;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
   .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--blue-lit)}
   .cform textarea{resize:vertical;min-height:70px}
   .cform button{justify-self:start}
-  .cform__ok{font-family:var(--mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--risen);opacity:0;transition:opacity .5s;height:0}
-  .cform.sent .cform__ok{opacity:1;height:auto}
+  /* completion moment — the journey lands */
+  .cform__done{grid-area:1/1;align-self:center;text-align:center;opacity:0;transform:translateY(12px);transition:opacity .9s ease .35s,transform .9s ease .35s;pointer-events:none}
+  .cform__star{display:block;width:12px;height:12px;border-radius:50%;margin:0 auto 1.4rem;background:var(--sirius);box-shadow:0 0 8px rgba(125,148,255,.4)}
+  .cform__done-t{font-family:var(--serif);font-size:1.7rem;color:var(--sirius);margin-bottom:.7rem}
+  .cform__done-b{font-size:.95rem;color:var(--muted);line-height:1.6;max-width:36ch;margin-inline:auto}
+  .cform.sent .cform__fields{opacity:0;filter:blur(3px);pointer-events:none}
+  .cform.sent .cform__done{opacity:1;transform:none}
+  .cform.sent .cform__star{animation:transmit 2.6s ease forwards}
+  @keyframes transmit{
+    0%{transform:scale(.5);opacity:.4;box-shadow:0 0 6px rgba(125,148,255,.35)}
+    45%{transform:scale(1.25);opacity:1;box-shadow:0 0 44px 10px rgba(125,148,255,.6)}
+    100%{transform:scale(1);opacity:1;box-shadow:0 0 22px 3px rgba(125,148,255,.35)}
+  }
 
   .legend{position:fixed;z-index:40;left:clamp(1.25rem,5vw,2.6rem);bottom:clamp(1.1rem,4vh,2rem);font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:flex;gap:1rem;flex-wrap:wrap;opacity:0;transition:opacity .4s;pointer-events:none}
   .legend.show{opacity:1}

@@ -104,7 +104,9 @@ export function initObservatory(opts){
     btn.classList.toggle("on",audio.on);btn.setAttribute("aria-pressed",audio.on?"true":"false");btn.lastChild.nodeValue=audio.on?" Sound On":" Sound Off";
   });
 
-  document.getElementById("cform").addEventListener("submit",function(e){e.preventDefault();this.classList.add("sent");});
+  var transmitAt=-1;
+  var _cf=document.getElementById("cform");
+  if(_cf)_cf.addEventListener("submit",function(e){e.preventDefault();this.classList.add("sent");transmitAt=performance.now();});
 
   var START=performance.now(),smoothScroll=window.scrollY||0,starX=null,starY=null,starS=null;
   var revealed=false,hudIn=false;
@@ -251,6 +253,8 @@ export function initObservatory(opts){
     var sirBright=(reduce?1:ease(c01((t-200)/1500)))*twinkle*beaconBoost;
     // recede behind docked content so section text always reads over the star
     if(sec.type!=="beacon")sirBright*=(1-darken*0.34);
+    // transmission flare: on contact submit Sirius brightens, then settles back
+    if(transmitAt>0){var te=t-transmitAt;if(te<3200){sirBright+=Math.sin(c01(te/3200)*Math.PI)*1.4;}}
     var pulse=reduce?1:1+Math.sin(t*.0016)*.12;
     var sr=Math.max(2.7*DPR,3.2*DPR*sirScale)*beaconBoost;
     var sp=34*DPR*pulse*Math.max(0.92,sirScale);
