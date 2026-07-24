@@ -20,6 +20,12 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
   <Cosmos />
   <Hud />
 
+  <!-- onboarding cue: tells first-time visitors the universe responds to scroll -->
+  <div class="scroll-cue" id="scrollCue" aria-hidden="true">
+    <span class="scroll-cue__label mono">Scroll to begin the descent</span>
+    <span class="scroll-cue__rail"><i></i></span>
+  </div>
+
   <main id="main">
     <section class="sec" id="hero">
       <p class="hero__eye">A living star map</p>
@@ -161,7 +167,14 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
 <script>
   import { initConsole } from "../scripts/console.js";
   import { initDeepField } from "../scripts/deepfield.js";
-  const run = () => { initConsole(); initDeepField(); };
+  function initScrollCue() {
+    const cue = document.getElementById("scrollCue");
+    if (!cue) return;
+    const hide = () => { cue.classList.add("gone"); removeEventListener("scroll", onScroll); };
+    const onScroll = () => { if ((window.scrollY || 0) > 60) hide(); };
+    addEventListener("scroll", onScroll, { passive: true });
+  }
+  const run = () => { initConsole(); initDeepField(); initScrollCue(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
   else run();
 </script>

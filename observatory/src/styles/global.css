@@ -329,3 +329,13 @@ body.console-open{overflow:hidden}
   .console__star,.console__stage{transition:opacity .2s}
   .console__particles i{animation:none;opacity:.8;transform:translate(-50%,-50%)}
 }
+
+/* onboarding scroll cue */
+.scroll-cue{position:fixed;left:50%;bottom:2rem;transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:.7rem;opacity:0;pointer-events:none;animation:cueIn 1.2s ease 4.2s forwards;transition:opacity .6s ease}
+.scroll-cue.gone{opacity:0!important}
+@keyframes cueIn{to{opacity:1}}
+.scroll-cue__label{font-size:.58rem;letter-spacing:.26em;text-transform:uppercase;color:var(--muted)}
+.scroll-cue__rail{position:relative;width:1px;height:42px;background:linear-gradient(180deg,var(--blue-lit),transparent)}
+.scroll-cue__rail i{position:absolute;top:0;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--sirius);box-shadow:0 0 8px var(--blue-lit);animation:cueDot 2.2s ease-in-out infinite}
+@keyframes cueDot{0%{top:0;opacity:0}20%{opacity:1}80%{opacity:1}100%{top:38px;opacity:0}}
+@media (prefers-reduced-motion:reduce){.scroll-cue{animation:none;opacity:1}.scroll-cue__rail i{animation:none;top:18px;opacity:1}}
