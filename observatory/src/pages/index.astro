@@ -2,8 +2,15 @@
 import Base from "../layouts/Base.astro";
 import Cosmos from "../components/Cosmos.astro";
 import Hud from "../components/Hud.astro";
+import { Image } from "astro:assets";
 import { projects, services, processStages } from "../data/universe.js";
 const base = import.meta.env.BASE_URL;
+
+const shots = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/work/*.webp",
+  { eager: true },
+);
+const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
 ---
 
 <Base
@@ -48,6 +55,49 @@ const base = import.meta.env.BASE_URL;
           ))}
         </ul>
       </nav>
+    </section>
+
+    <!-- ===================== THE DEEP FIELD ===================== -->
+    <section class="sec-df" id="deepfield" aria-label="The deep field — discovered work">
+      <div class="df-intro">
+        <p class="eye">The deep field</p>
+        <h2 class="h2">The work, <em>resolving.</em></h2>
+        <p class="subl">Beyond the constellation, each system's light finally reaches the observatory. Keep descending — approach a system and it comes into focus.</p>
+        <p class="df-cue mono" aria-hidden="true">Incoming signal ↓</p>
+      </div>
+
+      {projects.map((p, i) => {
+        const shot = shotFor(p.slug);
+        const sys = String(i + 1).padStart(2, "0");
+        return (
+          <article class="df-field">
+            <div class="df-window" style="--resolve:0">
+              {shot && (
+                <Image
+                  class="df-shot"
+                  src={shot}
+                  alt={`The ${p.name} website, resolving into focus`}
+                  widths={[480, 800, 1200, 1600]}
+                  sizes="(max-width: 900px) 100vw, 860px"
+                  loading="lazy"
+                />
+              )}
+              <span class="df-scan" aria-hidden="true"></span>
+              <span class="df-grain" aria-hidden="true"></span>
+              <span class="df-reticle" aria-hidden="true"></span>
+            </div>
+            <div class="df-tele">
+              <p class="df-sys mono">System {sys} <span class="df-slash">//</span> <span data-df-decode>{p.name}</span></p>
+              <p class="df-meta mono">
+                <span class={`df-status df-status--${p.status}`}>{p.status === "risen" ? "Risen" : "Plotted"}</span>
+                <span class="df-dot" aria-hidden="true">·</span> {p.industry}
+                <span class="df-dot" aria-hidden="true">·</span> mag {p.magnitude}
+              </p>
+              <a class="df-enter" href={`${base}work/${p.slug}`}>Enter the system →</a>
+            </div>
+          </article>
+        );
+      })}
     </section>
 
     <section class="sec" id="services">
@@ -123,7 +173,8 @@ const base = import.meta.env.BASE_URL;
 
 <script>
   import { initBeacon } from "../scripts/beacon.js";
-  const run = () => initBeacon();
+  import { initDeepField } from "../scripts/deepfield.js";
+  const run = () => { initBeacon(); initDeepField(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
   else run();
 </script>

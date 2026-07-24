@@ -13,6 +13,7 @@ export function initObservatory(opts){
   var SECS=[
     {id:"hero",     tx:0.00,ty:-0.16,ts:0.85,type:"hero"},
     {id:"portfolio",tx:0.00,ty:-0.02,ts:1.15,type:"constellation"},
+    {id:"deepfield",tx:0.54,ty:-0.34,ts:0.45,type:"drift"},
     {id:"services", tx:0.00,ty:-0.02,ts:0.85,type:"orbit"},
     {id:"process",  tx:0.00,ty:-0.02,ts:0.80,type:"solar"},
     {id:"contact",  tx:0.00,ty:-0.05,ts:1.30,type:"beacon"}
