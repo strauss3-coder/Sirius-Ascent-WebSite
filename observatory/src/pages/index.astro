@@ -133,56 +133,35 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
     <section class="sec" id="contact">
       <div class="head" data-head>
         <p class="eye">Establish communication · contact</p>
-        <h2 class="h2">Open a <em>channel.</em></h2>
+        <h2 class="h2">Make <em>first contact.</em></h2>
       </div>
 
-      <div class="tx" id="tx" data-head>
-        <!-- dormant beacon -->
-        <button type="button" class="tx__activate" data-tx-activate aria-expanded="false" aria-controls="txPanel">
+      <div class="tx" data-head>
+        <button type="button" class="tx__activate" data-console-open>
           <span class="tx__beacon" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="tx__activate-label">Activate the beacon</span>
-          <span class="tx__activate-sub mono">Begin transmission to Sirius Ascent</span>
+          <span class="tx__activate-label">Transmit a signal</span>
+          <span class="tx__activate-sub mono">Initiate first contact with Sirius Ascent</span>
         </button>
-
-        <!-- transmission sequence -->
-        <form class="tx__panel" id="txPanel" novalidate hidden>
-          <div class="tx__head">
-            <span class="tx__signal" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-            <span class="tx__status mono" data-tx-status>Channel open</span>
-          </div>
-
-          <div class="tx__log" data-tx-log aria-live="polite"></div>
-
-          <div class="tx__stage" data-tx-stage>
-            <label class="tx__prompt" for="txInput" data-tx-prompt>My name is…</label>
-            <div class="tx__row">
-              <input class="tx__input" id="txInput" data-tx-input autocomplete="name" enterkeyhint="send" />
-              <button class="tx__go" type="submit" aria-label="Transmit this signal">↵</button>
-            </div>
-            <p class="tx__hint mono">Press Enter to transmit</p>
-            <p class="tx__error mono" data-tx-error role="alert" hidden>The channel needs this to continue.</p>
-          </div>
-
-          <div class="tx__ready" data-tx-ready hidden>
-            <p class="tx__ready-label mono">✦ Transmission ready</p>
-            <button class="btn btn--p tx__send" type="submit" data-mag>Send signal →</button>
-          </div>
-
-          <div class="tx__done" data-tx-done hidden>
-            <span class="tx__done-star" aria-hidden="true"></span>
-            <p class="tx__done-t">Transmission received.</p>
-            <p class="tx__done-b">Your signal has been logged by Sirius Ascent. We'll respond shortly and begin plotting your journey.</p>
-          </div>
-        </form>
       </div>
     </section>
   </main>
+
+  <!-- ===================== FIRST CONTACT CONSOLE ===================== -->
+  <div class="console" id="console" role="dialog" aria-modal="true" aria-label="Transmission console" aria-hidden="true" hidden>
+    <div class="console__veil" aria-hidden="true"></div>
+    <div class="console__star" aria-hidden="true"><span class="console__beam"></span></div>
+    <div class="console__inner">
+      <p class="console__status mono" data-console-status aria-live="polite">Establishing connection…</p>
+      <div class="console__stage" data-console-stage></div>
+    </div>
+    <button type="button" class="console__close mono" data-console-close aria-label="Abort transmission">Abort ✕</button>
+  </div>
 </Base>
 
 <script>
-  import { initBeacon } from "../scripts/beacon.js";
+  import { initConsole } from "../scripts/console.js";
   import { initDeepField } from "../scripts/deepfield.js";
-  const run = () => { initBeacon(); initDeepField(); };
+  const run = () => { initConsole(); initDeepField(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
   else run();
 </script>
