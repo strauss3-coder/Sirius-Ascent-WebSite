@@ -1,7 +1,7 @@
 /* =========================================================
    Sirius Ascent — forms
    Custom dropdowns, the enquiry wizard (-> WhatsApp), the
-   website cost estimator, and the free website audit lead form.
+   and the free website audit lead form.
    None of these have a real backend — see each section's own
    comment for why that's a deliberate choice, not an oversight.
    ========================================================= */
@@ -360,45 +360,6 @@ Thank you.`;
   });
 
   wizard.dataset.current = "welcome";
-}
-
-/* ---- Website Cost Estimator ----
-   Pure client-side, rough-range calculator — there's no backend to price
-   a project properly, so this is deliberately framed as a starting
-   estimate, not a quote. Recomputes on every change; no submit step. */
-const estimator = document.querySelector("[data-estimator]");
-if (estimator) {
-  const output = estimator.querySelector("[data-estimator-output]");
-  // Pricing tuned for a growing premium agency: a minimum website lands at
-  // R4,500, most business sites fall in the R4,500–R7,000 band, and only
-  // stacking several optional features (or a rush timeline) pushes a project
-  // meaningfully above that.
-  const MIN_PRICE = 4500;
-  const TYPE_BASE = { landing: 4500, business: 5000 };
-  const PAGES_ADD = { "1-3": 0, "4-7": 1000, "8+": 2500 };
-  const FEATURE_ADD = { booking: 900, animations: 800, seo: 700, gbp: 500 };
-
-  const formatRand = (n) => `R ${Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
-  const round500 = (n) => Math.round(n / 500) * 500;
-
-  const recalc = () => {
-    const type = estimator.querySelector('input[name="est-type"]:checked').value;
-    const pages = estimator.querySelector('input[name="est-pages"]:checked').value;
-    const timeline = estimator.querySelector('input[name="est-timeline"]:checked').value;
-    const features = Array.from(estimator.querySelectorAll('input[name="est-feature"]:checked')).map((f) => f.value);
-
-    let total = (TYPE_BASE[type] || MIN_PRICE) + (PAGES_ADD[pages] || 0);
-    features.forEach((f) => { total += FEATURE_ADD[f] || 0; });
-    if (timeline === "rush") total *= 1.1;
-
-    const low = Math.max(MIN_PRICE, round500(total * 0.92));
-    let high = round500(total * 1.12);
-    if (high <= low) high = low + 500;
-    output.innerHTML = `${formatRand(low)} – <span>${formatRand(high)}</span>`;
-  };
-
-  estimator.addEventListener("change", recalc);
-  recalc();
 }
 
 /* ---- Free Website Audit lead form ----
