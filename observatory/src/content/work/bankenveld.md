@@ -18,7 +18,6 @@ development: "Hand-coded and responsive, structured for amenities, membership an
 performance: "Optimised media and lean code keep an image-rich estate site quick and stable on every device."
 result: "A demo that gives the estate a presence as composed as its grounds — ready to rise into a site that drives membership and stays."
 stack: ["Hand-coded", "Responsive", "Membership-ready", "WebP imagery"]
-metrics: { performance: 97, accessibility: 98, bestPractices: 100, seo: 93 }
 ---
 
 _Plotted — an estate charted, ready to rise._

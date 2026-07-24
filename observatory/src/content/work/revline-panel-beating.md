@@ -18,7 +18,6 @@ development: "Hand-coded and responsive, with a quote flow and gallery structure
 performance: "Lean code and optimised imagery keep the proof-heavy layout fast and clean on any device."
 result: "A demo that turns a workshop's craftsmanship into online trust — clear, credible, and ready to rise into a live site that books jobs."
 stack: ["Hand-coded", "Responsive", "Quote flow", "WebP imagery"]
-metrics: { performance: 98, accessibility: 98, bestPractices: 100, seo: 92 }
 ---
 
 _Plotted — proof charted, ready to rise._

@@ -18,7 +18,6 @@ development: "Hand-coded and responsive, structured so a real booking system and
 performance: "Lightweight delivery and mobile-first layout, so the experience stays quick and smooth on the phones players actually use courtside."
 result: "A demo that shows exactly how Riverside Padel could own its category online — energetic, frictionless, and ready to turn interest into booked courts."
 stack: ["Hand-coded", "Responsive", "Booking-ready", "WebP imagery"]
-metrics: { performance: 98, accessibility: 98, bestPractices: 100, seo: 92 }
 ---
 
 _Plotted — a system charted and ready to rise._

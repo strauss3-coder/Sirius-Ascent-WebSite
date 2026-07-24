@@ -18,7 +18,6 @@ development: "Hand-coded and responsive, structured for gallery, rates and an en
 performance: "Optimised imagery and lean markup keep an image-led design fast and smooth across devices."
 result: "A demo that captures the stillness of the place and makes the escape feel one tap away — ready to rise into a booking-driving site."
 stack: ["Hand-coded", "Responsive", "Gallery-led", "WebP imagery"]
-metrics: { performance: 98, accessibility: 99, bestPractices: 100, seo: 94 }
 ---
 
 _Plotted — a quiet system charted, ready to rise._

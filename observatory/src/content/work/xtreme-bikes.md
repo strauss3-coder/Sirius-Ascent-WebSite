@@ -18,7 +18,6 @@ development: "Hand-coded, responsive and quick, with a structure ready to hold a
 performance: "Compressed imagery and lean markup keep a visually heavy concept fast and stable on mobile."
 result: "A demo that gives Xtreme Bikes a front end with the same energy as the showroom floor — ready to rise into a full retail presence."
 stack: ["Hand-coded", "Responsive", "Inventory-ready", "WebP imagery"]
-metrics: { performance: 97, accessibility: 96, bestPractices: 100, seo: 90 }
 ---
 
 _Plotted — charged and charted, ready to rise._

@@ -18,7 +18,6 @@ development: "Hand-coded and responsive, structured for class schedules, coachin
 performance: "Lean markup and optimised imagery keep a high-energy design quick and stable on mobile."
 result: "A demo that captures the community and drive of the box — ready to rise into a site that fills classes."
 stack: ["Hand-coded", "Responsive", "Schedule-ready", "WebP imagery"]
-metrics: { performance: 97, accessibility: 97, bestPractices: 100, seo: 91 }
 ---
 
 _Plotted — energy charted, ready to rise._

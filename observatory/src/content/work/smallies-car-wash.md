@@ -18,7 +18,6 @@ development: "Hand-coded and responsive, structured for services, pricing and a 
 performance: "Optimised imagery and lean code keep the bright, image-led design quick on any device."
 result: "A demo that makes a local wash look genuinely premium — clear proof, easy booking, and ready to rise into a live site that fills the bays."
 stack: ["Hand-coded", "Responsive", "Booking-ready", "WebP imagery"]
-metrics: { performance: 98, accessibility: 98, bestPractices: 100, seo: 92 }
 ---
 
 _Plotted — a clean system charted, ready to rise._

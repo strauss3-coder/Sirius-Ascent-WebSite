@@ -18,7 +18,6 @@ development: "Hand-built, lightweight front end — no bloated page builder. Sem
 performance: "Sub-second loads on mobile, clean Core Web Vitals, and a Google Business Profile brought back to life with weekly posts and on-site photography — the same profile that logged 144 interactions in a single month."
 result: "Supreme Auto is risen — live on its own domain, sending real enquiries and direction requests to the dealership every week. The showroom finally has an online front that matches the work."
 stack: ["Hand-coded", "Semantic HTML", "Vehicle schema", "WebP imagery", "Mobile-first"]
-metrics: { performance: 97, accessibility: 100, bestPractices: 100, seo: 100 }
 ---
 
 _Charted, built, and risen — now holding its own coordinates on the open web._

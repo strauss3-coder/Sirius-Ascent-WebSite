@@ -18,7 +18,6 @@ development: "Hand-coded with layered visuals and smooth motion kept efficient, 
 performance: "Optimised media and lean code keep the mood-heavy design loading fast and running smoothly on mobile."
 result: "A demo that proves a recreation brand can feel genuinely premium — an experience that makes you want to be there, chart-ready to launch."
 stack: ["Hand-coded", "Cinematic UI", "Responsive", "WebP imagery"]
-metrics: { performance: 95, accessibility: 97, bestPractices: 100, seo: 92 }
 ---
 
 _Plotted — atmosphere charted, waiting to rise._

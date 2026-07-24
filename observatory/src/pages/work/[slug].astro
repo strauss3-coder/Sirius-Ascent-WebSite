@@ -80,14 +80,17 @@ const shot = shotFor(entry.id);
               {d.stack.map((s) => <li>{s}</li>)}
             </ul>
           )}
-          {p.label === "Performance" && d.metrics && (
-            <ul class="metrics" aria-label="Lighthouse scores">
-              <li><b>{d.metrics.performance}</b><span>Performance</span></li>
-              <li><b>{d.metrics.accessibility}</b><span>Accessibility</span></li>
-              <li><b>{d.metrics.bestPractices}</b><span>Best practices</span></li>
-              <li><b>{d.metrics.seo}</b><span>SEO</span></li>
-            </ul>
-          )}
+          {p.label === "Performance" &&
+            (d.metrics ? (
+              <ul class="metrics" aria-label="Lighthouse scores">
+                <li><b>{d.metrics.performance}</b><span>Performance</span></li>
+                <li><b>{d.metrics.accessibility}</b><span>Accessibility</span></li>
+                <li><b>{d.metrics.bestPractices}</b><span>Best practices</span></li>
+                <li><b>{d.metrics.seo}</b><span>SEO</span></li>
+              </ul>
+            ) : (
+              <p class="metrics-pending mono">◷ Lighthouse audit — pending verification</p>
+            ))}
         </section>
       ))}
     </div>
@@ -210,6 +213,7 @@ const shot = shotFor(entry.id);
   .metrics li { border: 1px solid var(--line); border-radius: 6px; padding: 1rem 0.6rem; text-align: center; background: var(--panel); }
   .metrics b { display: block; font-family: var(--display); font-size: 1.7rem; font-weight: 600; color: var(--accent); }
   .metrics span { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
+  .metrics-pending { margin-top: 1.4rem; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); border: 1px dashed var(--line); border-radius: 6px; padding: 0.7rem 0.9rem; display: inline-block; }
 
   /* RESULT FRAME */
   .result { padding-block: clamp(1rem, 4vw, 2.5rem); }

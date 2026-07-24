@@ -18,7 +18,6 @@ development: "Lean hand-coded front end tuned for instant response — no jank o
 performance: "Fast first paint, stable layout, and mobile-first delivery so the site keeps pace with the brand it represents."
 result: "Venom Racing is risen — live on its own domain with a presence as sharp as the machinery, ready to convert attention into bookings and builds."
 stack: ["Hand-coded", "Semantic HTML", "Responsive", "WebP imagery", "Zero layout shift"]
-metrics: { performance: 96, accessibility: 100, bestPractices: 100, seo: 96 }
 ---
 
 _Ignition. Risen and running on its own coordinates._
