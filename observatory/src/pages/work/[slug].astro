@@ -154,7 +154,7 @@ const shot = shotFor(entry.id);
                 <span class="nsys__name">{n.name}</span>
                 <span class="nsys__meta mono">System {String(n.system).padStart(2, "0")} · {n.status === "risen" ? "Risen" : "Plotted"}</span>
               </span>
-              <span class="nsys__au mono">{n.au} AU</span>
+              <span class="nsys__au mono">{n.au.toFixed(1)} AU</span>
             </a>
           </li>
         ))}
