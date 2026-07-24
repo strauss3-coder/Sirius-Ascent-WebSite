@@ -1215,7 +1215,30 @@ em { font-style: italic; }
   display: flex; align-items: center; justify-content: center;
   color: var(--blue-bright);
 }
-.service-detail__art svg { width: min(50%, 180px); height: auto; }
+.service-detail__art { position: relative; overflow: hidden; }
+.service-detail__art svg { position: relative; z-index: 1; width: min(50%, 180px); height: auto; }
+/* Large editorial ghost numeral behind each service icon (keyed to section id) */
+.service-detail__art::before {
+  content: "";
+  position: absolute;
+  top: -0.12em;
+  left: 0.14em;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(6rem, 3rem + 14vw, 12rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(125, 148, 255, 0.16);
+  pointer-events: none;
+  z-index: 0;
+}
+#design .service-detail__art::before { content: "01"; }
+#development .service-detail__art::before { content: "02"; }
+#seo .service-detail__art::before { content: "03"; }
+#gbp .service-detail__art::before { content: "04"; }
+#branding .service-detail__art::before { content: "05"; }
+#management .service-detail__art::before { content: "06"; }
 
 /* ============================ PORTFOLIO PAGE ============================ */
 .portfolio-hero { padding-block: clamp(8rem, 6rem + 6vw, 11rem) clamp(3rem, 2rem + 4vw, 5rem); background: var(--carbon); position: relative; isolation: isolate; }
