@@ -12,8 +12,8 @@
    through. Falls back to fully visible with no JS or reduced motion. */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transform: translateY(26px) scale(0.988);
+  transition: opacity 0.85s var(--ease), transform 0.9s var(--ease);
 }
 [data-reveal].is-visible { opacity: 1; transform: none; }
 .no-js [data-reveal] { opacity: 1; transform: none; }

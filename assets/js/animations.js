@@ -107,10 +107,24 @@ if (hero && !reduceMotion) {
   });
 }
 
-/* ---- Reveal-on-scroll for sections (natural transitions) ---- */
+/* ---- Reveal-on-scroll for sections (natural transitions) ----
+   Items inside a grid/row reveal in a short cascade rather than popping in
+   together: each direct [data-reveal] child gets a stagger delay derived
+   from its position. Pure transition-delay, so still one paint per element. */
 const revealables = document.querySelectorAll("[data-reveal]");
 // Hero reveals are handled by the cinematic intro above; observe the rest.
 const observed = Array.from(revealables).filter((el) => !el.closest(".hero"));
+
+const STAGGER_GROUPS = ".card-grid, .project-grid, .values-grid, .tech-grid, .timeline, .shot-gallery, .compare__grid, .audit__methods";
+document.querySelectorAll(STAGGER_GROUPS).forEach((group) => {
+  let i = 0;
+  Array.from(group.children).forEach((child) => {
+    if (child.matches("[data-reveal]")) {
+      child.style.transitionDelay = `${(i * 0.07).toFixed(2)}s`;
+      i += 1;
+    }
+  });
+});
 
 if (reduceMotion || !("IntersectionObserver" in window)) {
   observed.forEach((el) => el.classList.add("is-visible"));
