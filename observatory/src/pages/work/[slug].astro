@@ -1,0 +1,238 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const all = (await getCollection("work")).sort(
+    (a, b) => a.data.system - b.data.system,
+  );
+  return all.map((entry, i) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      prev: all[(i - 1 + all.length) % all.length],
+      next: all[(i + 1) % all.length],
+    },
+  }));
+}
+
+const { entry, prev, next } = Astro.props;
+const d = entry.data;
+const base = import.meta.env.BASE_URL;
+const sysNo = String(d.system).padStart(2, "0");
+const statusLabel = d.status === "risen" ? "Risen" : "Plotted";
+const statusNote = d.status === "risen" ? "Live on its own domain" : "Interactive demo";
+const launchLabel = d.status === "risen" ? "Visit the live site" : "Explore the demo";
+
+const phases = [
+  { n: "01", label: "Mission Brief", body: d.brief },
+  { n: "02", label: "Research", body: d.research },
+  { n: "03", label: "Design Strategy", body: d.design },
+  { n: "04", label: "Development", body: d.development },
+  { n: "05", label: "Performance", body: d.performance },
+  { n: "06", label: "Result", body: d.result },
+];
+const host = new URL(d.url).host;
+---
+
+<Base title={`System ${sysNo} // ${d.name} — Sirius Ascent`} description={d.summary}>
+  <canvas id="ambient" aria-hidden="true"></canvas>
+
+  <a class="return" href={`${base}#portfolio`}>← Back to the constellation</a>
+
+  <main id="main" class="cs" style={`--accent:${d.accent}`}>
+    <!-- ARRIVAL -->
+    <header class="arrival">
+      <div class="arrival__star" aria-hidden="true"></div>
+      <p class="sys mono">System {sysNo} <span>//</span> {d.classification}</p>
+      <h1 class="arrival__name">{d.name}</h1>
+      <div class="catalogue">
+        <span class={`pill pill--${d.status}`}>{statusLabel.toUpperCase()}</span>
+        <span class="catalogue__note mono">{statusNote}</span>
+      </div>
+      <dl class="specs">
+        <div><dt>Classification</dt><dd>{d.classification}</dd></div>
+        <div><dt>Mission year</dt><dd>{d.missionYear}</dd></div>
+        <div><dt>Designation</dt><dd>{d.designation} · mag {d.magnitude}</dd></div>
+        <div><dt>Coordinates</dt><dd>{d.coordinates.ra} · {d.coordinates.dec}</dd></div>
+      </dl>
+      <p class="arrival__cue mono" aria-hidden="true">Descend into the system ↓</p>
+    </header>
+
+    <!-- MISSION LOG -->
+    <div class="log">
+      {phases.map((p) => (
+        <section class="phase">
+          <p class="phase__ey mono"><span>{p.n}</span> {p.label}</p>
+          <p class="phase__body">{p.body}</p>
+          {p.label === "Development" && d.stack.length > 0 && (
+            <ul class="chips" aria-label="Stack">
+              {d.stack.map((s) => <li>{s}</li>)}
+            </ul>
+          )}
+          {p.label === "Performance" && d.metrics && (
+            <ul class="metrics" aria-label="Lighthouse scores">
+              <li><b>{d.metrics.performance}</b><span>Performance</span></li>
+              <li><b>{d.metrics.accessibility}</b><span>Accessibility</span></li>
+              <li><b>{d.metrics.bestPractices}</b><span>Best practices</span></li>
+              <li><b>{d.metrics.seo}</b><span>SEO</span></li>
+            </ul>
+          )}
+        </section>
+      ))}
+    </div>
+
+    <!-- RESULT FRAME -->
+    <section class="result">
+      <div class="frame" aria-hidden="true">
+        <div class="frame__bar">
+          <span class="frame__dot"></span><span class="frame__dot"></span><span class="frame__dot"></span>
+          <span class="frame__url mono">{host}</span>
+        </div>
+        <div class="frame__body">
+          <span class="frame__mark">{d.designation}</span>
+          <span class="frame__name">{d.name}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAUNCH BEACON -->
+    <section class="beacon">
+      <span class="beacon__ring" aria-hidden="true"></span>
+      <p class="beacon__ey mono">Launch beacon</p>
+      <a class="beacon__btn" href={d.url} target="_blank" rel="noopener">{launchLabel} ↗</a>
+      <p class="beacon__note mono">{host}</p>
+    </section>
+
+    <!-- STAR NAVIGATION -->
+    <nav class="starnav" aria-label="Neighbouring systems">
+      <a class="starnav__link" href={`${base}work/${prev.id}`}>
+        <span class="starnav__dir mono">← Previous system</span>
+        <span class="starnav__name">{String(prev.data.system).padStart(2, "0")} · {prev.data.name}</span>
+      </a>
+      <a class="starnav__link starnav__link--next" href={`${base}work/${next.id}`}>
+        <span class="starnav__dir mono">Next system →</span>
+        <span class="starnav__name">{String(next.data.system).padStart(2, "0")} · {next.data.name}</span>
+      </a>
+    </nav>
+  </main>
+</Base>
+
+<script>
+  import { initAmbient } from "../../scripts/ambient.js";
+  const run = () => initAmbient();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+</script>
+
+<style>
+  #ambient { position: fixed; inset: 0; z-index: 0; display: block; }
+  .return {
+    position: fixed; top: 1.2rem; left: 1.2rem; z-index: 30;
+    font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); padding: 0.5rem 0.85rem; border: 1px solid rgba(228, 232, 238, 0.14);
+    border-radius: 100px; background: rgba(10, 12, 18, 0.5);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    transition: color 0.3s, border-color 0.3s;
+  }
+  .return:hover { color: var(--sirius); border-color: var(--accent); }
+
+  .cs {
+    position: relative; z-index: 10;
+    max-width: 780px; margin-inline: auto;
+    padding: 0 clamp(1.25rem, 5vw, 2.5rem) 4rem;
+  }
+
+  /* ARRIVAL */
+  .arrival {
+    min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
+    padding-block: 7rem 3rem; position: relative;
+  }
+  .arrival__star {
+    position: absolute; top: 12%; right: -4%; width: min(46vw, 320px); aspect-ratio: 1; z-index: -1;
+    background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 55%, #eaf0ff) 0%, var(--accent) 12%, transparent 60%);
+    filter: blur(8px); opacity: 0.55; border-radius: 50%;
+    animation: breathe 6s ease-in-out infinite;
+  }
+  @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.5; } 50% { transform: scale(1.08); opacity: 0.62; } }
+  .sys { font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); }
+  .sys span { color: var(--dim); margin: 0 0.2rem; }
+  .arrival__name {
+    font-family: var(--serif); font-weight: 500; font-size: clamp(2.8rem, 9vw, 5.5rem);
+    line-height: 0.98; letter-spacing: -0.01em; color: var(--sirius); margin: 1rem 0 1.5rem; text-wrap: balance;
+  }
+  .catalogue { display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap; }
+  .pill {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.16em;
+    padding: 0.4rem 0.7rem; border-radius: 100px; border: 1px solid;
+  }
+  .pill--risen { color: #6ff0c0; border-color: rgba(111, 240, 192, 0.4); background: rgba(111, 240, 192, 0.08); }
+  .pill--plotted { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+  .catalogue__note { font-size: 0.66rem; letter-spacing: 0.06em; color: var(--muted); }
+  .specs {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    margin-top: 2.4rem; border: 1px solid var(--line); background: var(--line); border-radius: 6px; overflow: hidden;
+  }
+  .specs > div { background: var(--panel); padding: 1rem 1.1rem; }
+  .specs dt { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+  .specs dd { margin: 0.35rem 0 0; font-size: 0.9rem; color: var(--silver); }
+  .arrival__cue { margin-top: 3rem; font-size: 0.64rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--muted); }
+
+  /* MISSION LOG */
+  .log { display: grid; gap: clamp(3rem, 7vw, 5rem); padding-block: clamp(3rem, 8vw, 6rem); }
+  .phase__ey {
+    font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent);
+    display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1.1rem;
+  }
+  .phase__ey span { color: var(--dim); }
+  .phase__body { font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.6; color: var(--silver); font-weight: 300; }
+  .chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; padding: 0; }
+  .chips li { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.04em; color: var(--muted); border: 1px solid var(--line); border-radius: 100px; padding: 0.4rem 0.8rem; }
+  .metrics { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-top: 1.6rem; padding: 0; }
+  .metrics li { border: 1px solid var(--line); border-radius: 6px; padding: 1rem 0.6rem; text-align: center; background: var(--panel); }
+  .metrics b { display: block; font-family: var(--display); font-size: 1.7rem; font-weight: 600; color: var(--accent); }
+  .metrics span { font-family: var(--mono); font-size: 0.54rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim); }
+
+  /* RESULT FRAME */
+  .result { padding-block: clamp(1rem, 4vw, 2.5rem); }
+  .frame { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--panel); box-shadow: 0 40px 120px -40px color-mix(in srgb, var(--accent) 40%, transparent); }
+  .frame__bar { display: flex; align-items: center; gap: 0.4rem; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line); background: var(--panel-2, #14171f); }
+  .frame__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dim); }
+  .frame__url { margin-left: 0.8rem; font-size: 0.66rem; color: var(--muted); }
+  .frame__body { aspect-ratio: 16 / 9; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
+    background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 60%); }
+  .frame__mark { font-family: var(--serif); font-style: italic; font-size: 2.4rem; color: var(--accent); }
+  .frame__name { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+
+  /* LAUNCH BEACON */
+  .beacon { position: relative; text-align: center; padding-block: clamp(4rem, 10vw, 7rem); }
+  .beacon__ring { position: absolute; top: 50%; left: 50%; width: 220px; height: 220px; transform: translate(-50%, -50%);
+    border-radius: 50%; border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    box-shadow: 0 0 80px color-mix(in srgb, var(--accent) 30%, transparent); animation: beacon 3.5s ease-out infinite; }
+  @keyframes beacon { 0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.8; } 100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; } }
+  .beacon__ey { font-size: 0.64rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); position: relative; }
+  .beacon__btn {
+    position: relative; display: inline-block; margin-top: 1.2rem;
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--carbon); background: var(--sirius); padding: 1rem 1.8rem; border-radius: 100px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .beacon__btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px color-mix(in srgb, var(--accent) 70%, transparent); }
+  .beacon__note { margin-top: 1rem; font-size: 0.64rem; color: var(--dim); position: relative; }
+
+  /* STAR NAV */
+  .starnav { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+  .starnav__link { display: grid; gap: 0.4rem; padding: 1.3rem; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); transition: border-color 0.3s, transform 0.3s; }
+  .starnav__link--next { text-align: right; }
+  .starnav__link:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .starnav__dir { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .starnav__name { font-family: var(--serif); font-size: 1.15rem; color: var(--sirius); }
+
+  @media (max-width: 560px) {
+    .specs { grid-template-columns: 1fr; }
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .arrival__star, .beacon__ring { animation: none; }
+  }
+</style>

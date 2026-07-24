@@ -10,7 +10,8 @@
 
 <script>
   import { initObservatory } from "../scripts/observatory.js";
-  const run = () => initObservatory();
+  const base = import.meta.env.BASE_URL;
+  const run = () => initObservatory({ base });
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", run);
   } else {

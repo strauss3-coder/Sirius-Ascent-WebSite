@@ -1,6 +1,7 @@
 /* The Observatory engine — ported verbatim from the approved Phase-1 prototype.
    Exposed as initObservatory() so Astro can (re)initialise it per page load. */
-export function initObservatory(){
+export function initObservatory(opts){
+  var BASE=(opts&&opts.base)||"/";
 
   "use strict";
   var cv=document.getElementById("cosmos"),ctx=cv.getContext("2d");
@@ -19,17 +20,18 @@ export function initObservatory(){
   SECS.forEach(function(s){s.el=document.getElementById(s.id);s.heads=[].slice.call(s.el.querySelectorAll("[data-head]"));s.focus=0;});
 
   // Order = the order the star travels to them. Two live (custom-domain) first.
+  // slug → the star flies into that case study (/work/<slug>).
   var PROJECTS=[
-    {name:"Supreme Auto",tag:"α · risen",nx:-0.26,ny:-0.16,mag:2.2,live:true,url:"https://supremeautonorth.co.za"},
-    {name:"Venom Racing",tag:"β · risen",nx:0.25,ny:-0.19,mag:2.1,live:true,url:"https://venomracing.co.za/"},
-    {name:"Riverside Padel",tag:"γ · plotted",nx:0.39,ny:0.03,mag:1.5,live:false,url:"https://strauss3-coder.github.io/riverside-padel-website/"},
-    {name:"Rhino's Pool Club",tag:"δ · plotted",nx:0.30,ny:0.21,mag:1.5,live:false,url:"https://strauss3-coder.github.io/rhinos-pool-club/"},
-    {name:"Xtreme Bikes",tag:"ε · plotted",nx:0.08,ny:0.27,mag:1.4,live:false,url:"https://strauss3-coder.github.io/xtreme-bikes-website/"},
-    {name:"Revline Panel Beating",tag:"ζ · plotted",nx:-0.13,ny:0.24,mag:1.5,live:false,url:"https://strauss3-coder.github.io/revline-panelbeating-website/"},
-    {name:"The View Lodge",tag:"η · plotted",nx:-0.31,ny:0.15,mag:1.5,live:false,url:"https://strauss3-coder.github.io/the-view-lodge/"},
-    {name:"Bankenveld",tag:"θ · plotted",nx:-0.40,ny:-0.03,mag:1.4,live:false,url:"https://strauss3-coder.github.io/bankenveld-demo/index.html"},
-    {name:"CrossFit Indefinite",tag:"ι · plotted",nx:-0.19,ny:-0.25,mag:1.4,live:false,url:"https://strauss3-coder.github.io/crossfit-indefinite/"},
-    {name:"Smallie's Car Wash",tag:"κ · plotted",nx:0.07,ny:-0.29,mag:1.4,live:false,url:"https://strauss3-coder.github.io/smallies-car-wash/"}
+    {name:"Supreme Auto",tag:"α · risen",slug:"supreme-auto",nx:-0.26,ny:-0.16,mag:2.2,live:true},
+    {name:"Venom Racing",tag:"β · risen",slug:"venom-racing",nx:0.25,ny:-0.19,mag:2.1,live:true},
+    {name:"Riverside Padel",tag:"γ · plotted",slug:"riverside-padel",nx:0.39,ny:0.03,mag:1.5,live:false},
+    {name:"Rhino's Pool Club",tag:"δ · plotted",slug:"rhinos-pool-club",nx:0.30,ny:0.21,mag:1.5,live:false},
+    {name:"Xtreme Bikes",tag:"ε · plotted",slug:"xtreme-bikes",nx:0.08,ny:0.27,mag:1.4,live:false},
+    {name:"Revline Panel Beating",tag:"ζ · plotted",slug:"revline-panel-beating",nx:-0.13,ny:0.24,mag:1.5,live:false},
+    {name:"The View Lodge",tag:"η · plotted",slug:"the-view-lodge",nx:-0.31,ny:0.15,mag:1.5,live:false},
+    {name:"Bankenveld",tag:"θ · plotted",slug:"bankenveld",nx:-0.40,ny:-0.03,mag:1.4,live:false},
+    {name:"CrossFit Indefinite",tag:"ι · plotted",slug:"crossfit-indefinite",nx:-0.19,ny:-0.25,mag:1.4,live:false},
+    {name:"Smallie's Car Wash",tag:"κ · plotted",slug:"smallies-car-wash",nx:0.07,ny:-0.29,mag:1.4,live:false}
   ];
   var SERVICES=[
     {name:"Web Design",ring:1,ang:0.3,sp:0.00016},
@@ -71,9 +73,10 @@ export function initObservatory(){
   if(fine&&!reduce)addEventListener("pointermove",function(e){magEls.forEach(function(el,i){var r=el.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);if(Math.hypot(dx,dy)<80){magS[i].tx=dx*.28;magS[i].ty=dy*.28;}else{magS[i].tx=0;magS[i].ty=0;}});},{passive:true});
 
   // click a live star to visit it
+  // click a project star to fly INTO its case study (same tab, internal nav)
   addEventListener("click",function(e){
     if(e.target.closest("a,button,input,textarea")) return;
-    for(var i=0;i<clickTargets.length;i++){var c=clickTargets[i];if(c.url&&Math.hypot(e.clientX-c.x,e.clientY-c.y)<26){window.open(c.url,"_blank","noopener");return;}}
+    for(var i=0;i<clickTargets.length;i++){var c=clickTargets[i];if(c.href&&Math.hypot(e.clientX-c.x,e.clientY-c.y)<26){location.href=c.href;return;}}
   });
 
   var nextShoot=6000+Math.random()*8000;
@@ -182,7 +185,7 @@ export function initObservatory(){
     var k=reduce?1:0.04;
     starX+=(tX-starX)*k;starY+=(tY-starY)*k;starS+=(tS-starS)*k;
     var sirX=starX,sirY=starY,sirScale=starS;
-    clickTargets=[];hoverName=null;
+    clickTargets=[];hoverName=null;hoverHref=null;
     var showAll=!fine;bodyLabels.length=0; // touch has no hover, so name every body
 
     // ================= SET-PIECES =================
@@ -207,8 +210,9 @@ export function initObservatory(){
         var isCur=(pj===curIdx);
         var scr={x:sx3/DPR,y:sy3/DPR};
         var hov=fine&&Math.hypot(px-scr.x,py-scr.y)<26;
-        if(hov){hoverName=pp.name;hoverLive=pp.live;hoverX=sx3;hoverY=sy3;hoverSub=pp.tag;}
-        if(pp.url)clickTargets.push({x:scr.x,y:scr.y,url:pp.url});
+        var href=BASE+"work/"+pp.slug;
+        if(hov){hoverName=pp.name;hoverLive=pp.live;hoverX=sx3;hoverY=sy3;hoverSub=pp.tag;hoverHref=href;}
+        clickTargets.push({x:scr.x,y:scr.y,href:href});
         if(showAll||isCur)bodyLabels.push({x:sx3,y:sy3,name:pp.name,live:pp.live});
         var rr=pp.mag*DPR*(hov||isCur?1.55:1);
         var em=(hov||isCur?1.7:1)*rev;
@@ -279,7 +283,7 @@ export function initObservatory(){
       dot.style.transform="translate3d("+px+"px,"+py+"px,0)";
       ring.style.transform="translate3d("+rx+"px,"+ry+"px,0)";
       ring.classList.toggle("mag",magnet||!!hoverName);
-      ring.style.cursor=hoverName&&hoverLive?"pointer":"";
+      ring.style.cursor=hoverHref?"pointer":"";
       magEls.forEach(function(el,i){var m=magS[i];m.x+=(m.tx-m.x)*.15;m.y+=(m.ty-m.y)*.15;el.style.transform="translate("+m.x.toFixed(2)+"px,"+m.y.toFixed(2)+"px)";});
     }
 
@@ -291,7 +295,7 @@ export function initObservatory(){
 
     requestAnimationFrame(frame);
   }
-  var stageLabels=[],bodyLabels=[],hoverSub=null;
+  var stageLabels=[],bodyLabels=[],hoverSub=null,hoverHref=null;
 
   addEventListener("resize",resize,{passive:true});
   resize();
