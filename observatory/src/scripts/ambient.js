@@ -5,6 +5,7 @@ export function initAmbient() {
   const cv = document.getElementById("ambient");
   if (!cv) return;
   const ctx = cv.getContext("2d");
+  if (!ctx) return;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   let W, H, DPR, stars = [], mx = 0, my = 0, tx = 0, ty = 0;
 

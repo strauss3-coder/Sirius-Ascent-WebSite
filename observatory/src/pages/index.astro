@@ -2,6 +2,8 @@
 import Base from "../layouts/Base.astro";
 import Cosmos from "../components/Cosmos.astro";
 import Hud from "../components/Hud.astro";
+import { projects, services, processStages } from "../data/universe.js";
+const base = import.meta.env.BASE_URL;
 ---
 
 <Base
@@ -34,6 +36,18 @@ import Hud from "../components/Hud.astro";
         <p class="subl">Scroll to travel the constellation — Sirius reaches out to each project it built, one by one.</p>
         <p class="count mono" id="portfolioCount" aria-hidden="true">01 / 10</p>
       </div>
+      <!-- Canvas is decorative; this is the real, accessible route to every case study -->
+      <nav class="sr-nav" aria-label="Project case studies">
+        <ul>
+          {projects.map((p) => (
+            <li>
+              <a href={`${base}work/${p.slug}`}>
+                {p.name} — {p.status === "risen" ? "live site" : "demo"} case study
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
     </section>
 
     <section class="sec" id="services">
@@ -41,6 +55,9 @@ import Hud from "../components/Hud.astro";
         <p class="eye">Galaxies · services</p>
         <h2 class="h2">What we <em>set in orbit.</em></h2>
         <p class="subl">Each capability circles the studio. <b>Hover a body</b> to name it.</p>
+        <ul class="sr-only">
+          {services.map((s) => <li>{s}</li>)}
+        </ul>
       </div>
     </section>
 
@@ -49,6 +66,9 @@ import Hud from "../components/Hud.astro";
         <p class="eye">Orbital paths · process</p>
         <h2 class="h2">How the work <em>comes into orbit.</em></h2>
         <p class="subl">Five ordered passes, from first contact to long-term care.</p>
+        <ol class="sr-only">
+          {processStages.map((s) => <li>{s}</li>)}
+        </ol>
       </div>
     </section>
 

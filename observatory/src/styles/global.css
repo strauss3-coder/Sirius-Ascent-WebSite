@@ -114,3 +114,10 @@
 /* --- portfolio travel: tall section gives the star room to journey star-to-star --- */
 .sec--travel{min-height:340vh}
 .count{margin-top:1.4rem;font-size:.72rem;letter-spacing:.28em;color:var(--blue-lit);font-variant-numeric:tabular-nums}
+
+/* --- a11y: visually-hidden, still focusable/readable --- */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* screen-reader nav that reveals on keyboard focus (canvas alternative) */
+.sr-nav{position:absolute;left:0;right:0;z-index:60}
+.sr-nav a{position:absolute;left:-9999px;top:0}
+.sr-nav a:focus{left:50%;top:0;transform:translateX(-50%);width:max-content;max-width:90vw;background:var(--silver);color:var(--carbon);font-family:var(--mono);font-size:.72rem;padding:.7rem 1rem;border-radius:6px}

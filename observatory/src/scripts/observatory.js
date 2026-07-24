@@ -4,7 +4,7 @@ export function initObservatory(opts){
   var BASE=(opts&&opts.base)||"/";
 
   "use strict";
-  var cv=document.getElementById("cosmos"),ctx=cv.getContext("2d");
+  var cv=document.getElementById("cosmos");if(!cv)return;var ctx=cv.getContext("2d");if(!ctx)return;
   var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
   var fine=matchMedia("(pointer:fine)").matches;
   var W,H,DPR,bg=null,layers=[],shooters=[];

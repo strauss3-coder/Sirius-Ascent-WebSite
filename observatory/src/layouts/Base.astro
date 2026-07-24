@@ -8,6 +8,8 @@ export interface Props {
   image?: string;
   /** Overrides the <html> theme; the site is a committed night sky */
   noindex?: boolean;
+  /** Extra JSON-LD injected into <head> (e.g. per-project CreativeWork) */
+  schema?: Record<string, unknown>;
 }
 
 const base = import.meta.env.BASE_URL; // "/" in prod, "/sirius-observatory/" in preview
@@ -17,6 +19,7 @@ const {
   description,
   image = `${base}og/observatory.png`,
   noindex = false,
+  schema,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -74,6 +77,7 @@ const org = {
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(org)} />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
