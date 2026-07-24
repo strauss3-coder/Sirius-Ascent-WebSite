@@ -70,7 +70,13 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
         const shot = shotFor(p.slug);
         const sys = String(i + 1).padStart(2, "0");
         return (
-          <article class="df-field">
+          <article class="df-field" style={`--accent:${p.accent};--tempo:${p.tempo}s`}>
+            <div class="df-atmos" aria-hidden="true">
+              <span class="df-nebula"></span>
+              <span class="df-particles">
+                {Array.from({ length: 14 }).map(() => <i></i>)}
+              </span>
+            </div>
             <div class="df-window" style="--resolve:0">
               {shot && (
                 <Image
@@ -82,11 +88,13 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
                   loading="lazy"
                 />
               )}
-              <span class="df-scan" aria-hidden="true"></span>
               <span class="df-grain" aria-hidden="true"></span>
+              <span class="df-scan" aria-hidden="true"></span>
+              <span class="df-rings" aria-hidden="true"><i></i><i></i><i></i></span>
               <span class="df-reticle" aria-hidden="true"></span>
             </div>
             <div class="df-tele">
+              <p class="df-class mono">{p.system}</p>
               <p class="df-sys mono">System {sys} <span class="df-slash">//</span> <span data-df-decode>{p.name}</span></p>
               <p class="df-meta mono">
                 <span class={`df-status df-status--${p.status}`}>{p.status === "risen" ? "Risen" : "Plotted"}</span>
