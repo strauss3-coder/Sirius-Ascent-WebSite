@@ -1,10 +1,9 @@
 name: Deploy to GitHub Pages
 
-# Deploys the static site to GitHub Pages on every push to main. Replaces the
-# legacy "pages-build-deployment" auto-builder, which intermittently failed
-# with "Deployment failed, try again later" when concurrent builds raced for
-# the deployment lock. The concurrency group below serialises deploys so that
-# can't happen; workflow_dispatch allows a manual re-run from the Actions tab.
+# Builds the Astro observatory (in observatory/) and deploys it to GitHub Pages
+# at the custom domain (siriusascent.co.za). Production build uses the config
+# defaults (site = siriusascent.co.za, base = /). CNAME ships in the artifact
+# via observatory/public/CNAME so the custom domain persists across deploys.
 
 on:
   push:
@@ -16,27 +15,35 @@ permissions:
   pages: write
   id-token: write
 
-# Serialise deployments; let an in-flight deploy finish rather than cancelling
-# it (cancelling mid-deploy is what tends to leave the lock stuck).
+# Serialise deployments; let an in-flight deploy finish rather than cancelling.
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: observatory
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: observatory/dist
+
   deploy:
+    needs: build
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: "."
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v4
