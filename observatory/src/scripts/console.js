@@ -26,6 +26,25 @@ export function initConsole() {
   let idx = 0;
   let lastFocus = null;
 
+  // WhatsApp hand-off — opened inside the final click gesture (no popup block)
+  const WA_NUMBER = "27816614559";
+  function openWhatsApp() {
+    const lines = [
+      "✦ New transmission — Sirius Ascent",
+      "",
+      "Name: " + (answers.identity || ""),
+      "Business: " + (answers.origin || ""),
+      "Objective: " + (answers.objective || ""),
+      "Mission: " + (answers.log || ""),
+      "Email: " + (answers.email || ""),
+      answers.phone ? "Phone: " + answers.phone : "",
+      "Preferred channel: " + (answers.method || ""),
+    ].filter(Boolean).join("\n");
+    try {
+      window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines), "_blank", "noopener");
+    } catch (e) { /* pop-up blocked — the cinematic success still plays */ }
+  }
+
   const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   const wait = (ms) => new Promise((r) => setTimeout(r, noMotion ? Math.min(ms, 120) : ms));
 
@@ -118,7 +137,9 @@ export function initConsole() {
       email.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); attempt(); } });
       function attempt() {
         if (!emailOk(email.value.trim())) return fail(err);
-        answers.email = email.value.trim(); answers.phone = phone.value.trim(); answers.method = method; advance();
+        answers.email = email.value.trim(); answers.phone = phone.value.trim(); answers.method = method;
+        openWhatsApp(); // still in the click gesture → not blocked
+        advance();
       }
     }
   }
