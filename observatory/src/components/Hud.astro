@@ -27,8 +27,17 @@ const sections = ["hero", "portfolio", "deepfield", "services", "process", "cont
   </nav>
 </div>
 
-<nav class="prog" id="prog" aria-label="Sections">
+<nav class="prog" id="prog" aria-label="Journey progress">
+  <span class="prog__origin" aria-hidden="true"></span>
   {sections.map((s, i) => <a href={`#${s}`} data-i={i} aria-label={s} />)}
+  <span class="prog__ship" data-ship aria-hidden="true">
+    <span class="prog__trail"></span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M12 21c2.5-2 4-4.7 4-8 0-3.2-1.6-6.4-4-8.5C9.6 6.6 8 9.8 8 13c0 3.3 1.5 6 4 8Z" fill="currentColor" stroke="none"/>
+      <circle cx="12" cy="11" r="1.5" fill="#4d6bff"/>
+      <path d="M8.3 13.5 5.5 16.5M15.7 13.5 18.5 16.5"/>
+    </svg>
+  </span>
 </nav>
 
 <div class="legend" id="legend">

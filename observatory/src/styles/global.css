@@ -127,11 +127,26 @@
   .legend .k--p{background:var(--blue-lit);box-shadow:0 0 7px var(--blue)}
   @media (max-width:680px){.legend{display:none}}
 
-  .prog{position:fixed;z-index:40;right:clamp(1rem,4vw,2rem);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.9rem;opacity:0;transition:opacity .6s;pointer-events:auto}
+  /* ===== the flight path — a craft travelling from launch to first contact ===== */
+  .prog{position:fixed;z-index:40;right:clamp(.85rem,2.4vw,1.5rem);top:16vh;bottom:16vh;width:20px;opacity:0;transition:opacity .6s;pointer-events:none}
   .prog.show{opacity:1}
-  .prog a{width:8px;height:8px;border-radius:50%;border:1px solid rgba(228,232,238,.3);display:block;transition:background .3s,border-color .3s,transform .3s}
-  .prog a.on{background:var(--sirius);border-color:var(--sirius);transform:scale(1.3);box-shadow:0 0 10px var(--blue)}
-  @media (max-width:680px){.prog{display:none}}
+  /* the flight line */
+  .prog::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;transform:translateX(-50%);background:linear-gradient(180deg,rgba(125,148,255,.06),rgba(125,148,255,.32) 12%,rgba(125,148,255,.32) 88%,rgba(125,148,255,.06))}
+  /* the destination beacon at the end of the journey (first contact) */
+  .prog::after{content:"";position:absolute;left:50%;bottom:-3px;width:9px;height:9px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#fff,var(--blue-lit));box-shadow:0 0 12px var(--blue);animation:destPulse 2.6s ease-in-out infinite}
+  @keyframes destPulse{0%,100%{opacity:.7}50%{opacity:1;box-shadow:0 0 18px var(--blue)}}
+  /* launch point at the top */
+  .prog__origin{position:absolute;left:50%;top:-2px;width:5px;height:5px;transform:translateX(-50%);border-radius:50%;background:rgba(228,232,238,.5)}
+  /* section waypoints (positioned by scroll fraction in JS) */
+  .prog a{position:absolute;left:50%;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:rgba(228,232,238,.28);pointer-events:auto;transition:background .3s,transform .3s,box-shadow .3s}
+  .prog a:hover{background:var(--sirius);transform:scale(1.5)}
+  .prog a.on{background:var(--sirius);transform:scale(1.35);box-shadow:0 0 9px var(--blue)}
+  /* the craft */
+  .prog__ship{position:absolute;left:50%;top:0;width:16px;height:20px;transform:translate(-50%,-50%);pointer-events:none}
+  .prog__trail{position:absolute;left:50%;bottom:calc(100% - 3px);width:1px;height:30px;transform:translateX(-50%);background:linear-gradient(180deg,transparent,rgba(125,148,255,.75));opacity:.9}
+  .prog__ship svg{position:relative;display:block;width:100%;height:100%;color:var(--sirius);filter:drop-shadow(0 0 5px var(--blue-lit))}
+  @media (max-width:520px){.prog{width:16px;right:.6rem}}
+  @media (prefers-reduced-motion:reduce){.prog::after{animation:none}}
 
   .boot{position:fixed;z-index:50;left:clamp(1.25rem,5vw,2.6rem);bottom:clamp(1.1rem,4vh,2rem);font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);transition:opacity .8s}
   .boot.gone{opacity:0;pointer-events:none}
@@ -393,3 +408,7 @@ body.console-open button,body.console-open a,body.console-open [role="radio"]{cu
 .df-sys-cta{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s;margin-top:.2rem}
 .df-system:hover .df-sys-cta,.df-system:focus-visible .df-sys-cta{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.df-core,.df-ring,.df-belt{animation:none}}
+
+/* replace the native scrollbar with the flight path */
+html{scrollbar-width:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}

@@ -157,6 +157,7 @@ const deepField = deepFieldSlugs.map((slug) => {
   import { initConsole } from "../scripts/console.js";
   import { initDeepField } from "../scripts/deepfield.js";
   import { initMagic } from "../scripts/magic.js";
+  import { initFlightpath } from "../scripts/flightpath.js";
   function initScrollCue() {
     const cue = document.getElementById("scrollCue");
     if (!cue) return;
@@ -164,7 +165,7 @@ const deepField = deepFieldSlugs.map((slug) => {
     const onScroll = () => { if ((window.scrollY || 0) > 60) hide(); };
     addEventListener("scroll", onScroll, { passive: true });
   }
-  const run = () => { initMagic(); initConsole(); initDeepField(); initScrollCue(); };
+  const run = () => { initMagic(); initConsole(); initDeepField(); initScrollCue(); initFlightpath(); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
   else run();
 </script>
