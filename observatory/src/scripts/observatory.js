@@ -143,8 +143,16 @@ export function initObservatory(opts){
     // focus per section, computed from the SMOOTHED scroll so docks ease in with weight
     var sum=0,star={x:0,y:0,s:0},active=0,amax=0,darken=0;
     SECS.forEach(function(s,i){
-      var mid=s.top+s.h/2-smoothScroll;
-      var f=1-c01(Math.abs(mid-vpMid)/(innerHeight*0.62));s.focus=f;
+      var mid=s.top+s.h/2-smoothScroll,f;
+      if(s.type==="constellation"||s.type==="recede"){
+        // tall reveal sections stay fully lit while they span the viewport centre,
+        // so every star reveals at a consistent brightness and pace
+        var topOn=s.top-smoothScroll,botOn=topOn+s.h;
+        f=Math.min(c01((vpMid-topOn)/(innerHeight*0.5)),c01((botOn-vpMid)/(innerHeight*0.5)));
+      } else {
+        f=1-c01(Math.abs(mid-vpMid)/(innerHeight*0.62));
+      }
+      s.focus=f;
       var w=f*f;sum+=w;star.x+=s.tx*w;star.y+=s.ty*w;star.s+=s.ts*w;
       if(f>amax){amax=f;active=i;}
       if(s.type!=="hero")darken=Math.max(darken,f);
@@ -220,14 +228,17 @@ export function initObservatory(opts){
         ctx.beginPath();ctx.moveTo(sirX,sirY);ctx.lineTo(sirX+(sx3-sirX)*Math.min(1,rev/0.6),sirY+(sy3-sirY)*Math.min(1,rev/0.6));ctx.stroke();
         if(rev<0.55)continue; // star arrives once the line reaches it
         var isCur=(pj===curIdx);
+        // the newest star logs to the Observatory Log the first time it fully arrives
+        if(rev>0.92&&!pp._seen){pp._seen=true;if(window.__markExplored)window.__markExplored(pp.slug);}
+        var pls=(isCur&&!reduce)?(1+Math.sin(t*0.006)*0.22):1; // the current star pulses
         var scr={x:sx3/DPR,y:sy3/DPR};
         var hov=fine&&Math.hypot(px-scr.x,py-scr.y)<26;
         var href=BASE+"work/"+pp.slug;
         if(hov){hoverName=pp.name;hoverLive=pp.live;hoverX=sx3;hoverY=sy3;hoverSub=pp.tag;hoverHref=href;}
         clickTargets.push({x:scr.x,y:scr.y,href:href});
         if(showAll||isCur)bodyLabels.push({x:sx3,y:sy3,name:pp.name,live:pp.live});
-        var rr=pp.mag*DPR*(hov||isCur?1.55:1);
-        var em=(hov||isCur?1.7:1)*rev;
+        var rr=pp.mag*DPR*(hov?1.55:1)*(isCur?1.45*pls:1);
+        var em=(hov?1.7:isCur?1.7*pls:1)*rev;
         gstar(sx3,sy3,rr,(pp.live?.75:.45)*A*em,pp.live?"rgba(234,240,255,"+(A*rev)+")":"rgba(205,216,242,"+(A*rev*.9)+")");
       }
       if(portfolioCount){var shown=Math.min(PROJECTS.length,Math.floor(activeF)+1);portfolioCount.textContent=(shown<10?"0"+shown:""+shown)+" / "+(PROJECTS.length<10?"0"+PROJECTS.length:PROJECTS.length);}

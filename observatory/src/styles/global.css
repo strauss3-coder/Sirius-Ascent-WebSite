@@ -156,7 +156,7 @@
 }
 
 /* --- portfolio travel: tall section gives the star room to journey star-to-star --- */
-.sec--travel{min-height:340vh}
+.sec--travel{min-height:640vh}
 .count{margin-top:1.4rem;font-size:.72rem;letter-spacing:.28em;color:var(--blue-lit);font-variant-numeric:tabular-nums}
 
 /* --- a11y: visually-hidden, still focusable/readable --- */
@@ -362,3 +362,34 @@ body.console-open button,body.console-open a,body.console-open [role="radio"]{cu
 
 /* transmission-return confirmation (returning from WhatsApp) */
 .return-note{max-width:min(88vw,34rem);white-space:normal;text-align:center;line-height:1.5;color:var(--risen);border-color:rgba(111,240,192,.35)}
+
+/* ===== Deep Field v2: three light star-systems (no imagery) ===== */
+.sec-df{min-height:auto}
+.df-systems{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:clamp(2rem,6vw,4.5rem);max-width:1100px;margin:0 auto;padding:1rem clamp(1.25rem,5vw,3rem) clamp(5rem,12vw,9rem)}
+.df-system{display:flex;flex-direction:column;align-items:center;text-align:center;gap:.9rem;width:min(280px,82vw);opacity:0;transform:translateY(30px) scale(.92);filter:blur(8px);transition:opacity 1s ease,transform 1.1s cubic-bezier(.22,1,.36,1),filter 1s ease}
+.df-system.in{opacity:1;transform:none;filter:none}
+.df-orb{position:relative;width:clamp(130px,32vw,175px);aspect-ratio:1;display:grid;place-items:center}
+.df-core{width:26%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#fff,var(--accent) 58%,transparent 76%);box-shadow:0 0 40px 6px color-mix(in srgb,var(--accent) 45%,transparent);animation:dfpulse 4s ease-in-out infinite;transition:box-shadow .45s}
+@keyframes dfpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.14)}}
+.df-system:hover .df-core,.df-system:focus-visible .df-core{box-shadow:0 0 64px 14px color-mix(in srgb,var(--accent) 60%,transparent)}
+.df-ring{position:absolute;inset:16%;border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);border-radius:50%;animation:dfspin 15s linear infinite}
+.df-ring--2{inset:3%;animation-duration:24s;animation-direction:reverse;border-style:dashed;border-color:color-mix(in srgb,var(--accent) 20%,transparent)}
+.df-ring i{position:absolute;top:-3px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.df-ring--2 i{width:4px;height:4px;background:#eaf0ff}
+@keyframes dfspin{to{transform:rotate(360deg)}}
+.df-belt{position:absolute;inset:0;animation:dfspin 46s linear infinite}
+.df-belt i{position:absolute;top:50%;left:50%;width:2px;height:2px;border-radius:50%;background:color-mix(in srgb,var(--accent) 75%,#fff);opacity:.7}
+.df-belt i:nth-child(1){transform:translate(-50%,-50%) rotate(10deg) translateX(74px)}
+.df-belt i:nth-child(2){transform:translate(-50%,-50%) rotate(55deg) translateX(66px)}
+.df-belt i:nth-child(3){transform:translate(-50%,-50%) rotate(100deg) translateX(80px)}
+.df-belt i:nth-child(4){transform:translate(-50%,-50%) rotate(140deg) translateX(62px)}
+.df-belt i:nth-child(5){transform:translate(-50%,-50%) rotate(185deg) translateX(76px)}
+.df-belt i:nth-child(6){transform:translate(-50%,-50%) rotate(225deg) translateX(68px)}
+.df-belt i:nth-child(7){transform:translate(-50%,-50%) rotate(275deg) translateX(82px)}
+.df-belt i:nth-child(8){transform:translate(-50%,-50%) rotate(320deg) translateX(64px)}
+.df-sys-name{font-size:.82rem;letter-spacing:.08em;color:var(--sirius)}
+.df-sys-name .df-slash{color:var(--dim)}
+.df-sys-meta{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.df-sys-cta{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s;margin-top:.2rem}
+.df-system:hover .df-sys-cta,.df-system:focus-visible .df-sys-cta{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.df-core,.df-ring,.df-belt{animation:none}}

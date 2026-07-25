@@ -2,15 +2,16 @@
 import Base from "../layouts/Base.astro";
 import Cosmos from "../components/Cosmos.astro";
 import Hud from "../components/Hud.astro";
-import { Image } from "astro:assets";
 import { projects, services, processStages } from "../data/universe.js";
 const base = import.meta.env.BASE_URL;
 
-const shots = import.meta.glob<{ default: ImageMetadata }>(
-  "../assets/work/*.webp",
-  { eager: true },
-);
-const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
+// Deep Field: the three flagship systems (no heavy imagery), tagged with their
+// number in the full constellation.
+const deepFieldSlugs = ["venom-racing", "rhinos-pool-club", "riverside-padel"];
+const deepField = deepFieldSlugs.map((slug) => {
+  const i = projects.findIndex((p) => p.slug === slug);
+  return { ...projects[i], sys: String(i + 1).padStart(2, "0") };
+});
 ---
 
 <Base
@@ -64,54 +65,33 @@ const shotFor = (slug: string) => shots[`../assets/work/${slug}.webp`]?.default;
     </section>
 
     <!-- ===================== THE DEEP FIELD ===================== -->
-    <section class="sec-df" id="deepfield" aria-label="The deep field — discovered work">
+    <section class="sec-df" id="deepfield" aria-label="The deep field — featured systems">
       <div class="df-intro">
         <p class="eye">The deep field</p>
-        <h2 class="h2">The work, <em>resolving.</em></h2>
-        <p class="subl">Beyond the constellation, each system's light finally reaches the observatory. Keep descending — approach a system and it comes into focus.</p>
-        <p class="df-cue mono" aria-hidden="true">Incoming signal ↓</p>
+        <h2 class="h2">A cluster of <em>living systems.</em></h2>
+        <p class="subl">Three signals glinting in the dark — the flagship builds. Approach one and enter its system.</p>
       </div>
 
-      {projects.map((p, i) => {
-        const shot = shotFor(p.slug);
-        const sys = String(i + 1).padStart(2, "0");
-        return (
-          <article class="df-field" data-slug={p.slug} style={`--accent:${p.accent};--tempo:${p.tempo}s`}>
-            <div class="df-atmos" aria-hidden="true">
-              <span class="df-nebula"></span>
-              <span class="df-particles">
-                {Array.from({ length: 14 }).map(() => <i></i>)}
+      <div class="df-systems">
+        {deepField.map((p) => (
+          <a class="df-system" href={`${base}work/${p.slug}`} style={`--accent:${p.accent}`} aria-label={`${p.name} — enter the system`}>
+            <span class="df-orb" aria-hidden="true">
+              <span class="df-core"></span>
+              <span class="df-ring"><i></i></span>
+              <span class="df-ring df-ring--2"><i></i></span>
+              <span class="df-belt">
+                {Array.from({ length: 8 }).map(() => <i></i>)}
               </span>
-            </div>
-            <div class="df-window" style="--resolve:0">
-              {shot && (
-                <Image
-                  class="df-shot"
-                  src={shot}
-                  alt={`The ${p.name} website, resolving into focus`}
-                  widths={[480, 800, 1200, 1600]}
-                  sizes="(max-width: 900px) 100vw, 860px"
-                  loading="lazy"
-                />
-              )}
-              <span class="df-grain" aria-hidden="true"></span>
-              <span class="df-scan" aria-hidden="true"></span>
-              <span class="df-rings" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="df-reticle" aria-hidden="true"></span>
-            </div>
-            <div class="df-tele">
-              <p class="df-class mono">{p.system}</p>
-              <p class="df-sys mono">System {sys} <span class="df-slash">//</span> <span data-df-decode>{p.name}</span></p>
-              <p class="df-meta mono">
-                <span class={`df-status df-status--${p.status}`}>{p.status === "risen" ? "Risen" : "Plotted"}</span>
-                <span class="df-dot" aria-hidden="true">·</span> {p.industry}
-                <span class="df-dot" aria-hidden="true">·</span> mag {p.magnitude}
-              </p>
-              <a class="df-enter" href={`${base}work/${p.slug}`}>Enter the system →</a>
-            </div>
-          </article>
-        );
-      })}
+            </span>
+            <span class="df-sys-name mono">System {p.sys} <span class="df-slash">//</span> {p.name}</span>
+            <span class="df-sys-meta mono">
+              <span class={`df-status df-status--${p.status}`}>{p.status === "risen" ? "Risen" : "Plotted"}</span>
+              <span class="df-dot" aria-hidden="true">·</span> {p.industry}
+            </span>
+            <span class="df-sys-cta mono">Enter the system →</span>
+          </a>
+        ))}
+      </div>
     </section>
 
     <section class="sec" id="services">
