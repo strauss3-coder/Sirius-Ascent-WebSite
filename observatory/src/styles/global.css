@@ -45,7 +45,7 @@
   main{position:relative;z-index:10}
   .sec{min-height:145vh;position:relative;display:flex;flex-direction:column;padding:0 clamp(1.25rem,5vw,3rem)}
   #hero{min-height:100svh;justify-content:flex-end;padding-bottom:clamp(2.5rem,7vh,4.5rem)}
-  .head{position:sticky;top:22vh;align-self:center;text-align:center;max-width:44ch;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease;will-change:opacity,transform}
+  .head{position:sticky;top:22vh;align-self:center;text-align:center;max-width:44ch;opacity:0;transform:translateY(20px);will-change:opacity,transform}
   .eye{font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--blue-lit)}
   .h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,5vw,3.6rem);line-height:1.02;color:var(--sirius);margin-top:1rem;text-wrap:balance}
   .h2 em{font-style:italic;color:var(--blue-lit)}

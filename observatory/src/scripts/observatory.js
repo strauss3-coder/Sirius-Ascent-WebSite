@@ -336,13 +336,22 @@ export function initObservatory(opts){
     if(t>3900&&!hudIn){hudIn=true;hud.classList.add("in");boot.classList.add("gone");prog.classList.add("show");}
     legend.classList.toggle("show",SECS[1].focus>0.4);
 
-    requestAnimationFrame(frame);
+    raf=requestAnimationFrame(frame);
   }
-  var stageLabels=[],bodyLabels=[],hoverSub=null,hoverHref=null;
+  var stageLabels=[],bodyLabels=[],hoverSub=null,hoverHref=null,raf=0;
+
+  // start every session cleanly at the top (no restored-scroll jump on first scroll)
+  if("scrollRestoration" in history) history.scrollRestoration="manual";
+  try{ scrollTo(0,0); }catch(e){}
 
   addEventListener("resize",resize,{passive:true});
+  // pause the loop while the tab is hidden — saves battery and helps the tab
+  // survive the WhatsApp hand-off instead of being discarded blank on return
+  document.addEventListener("visibilitychange",function(){
+    if(document.hidden){ if(raf)cancelAnimationFrame(raf); raf=0; }
+    else if(!raf){ smoothScroll=window.scrollY||0; raf=requestAnimationFrame(frame); }
+  });
   resize();
   if(reduce){hero.classList.add("revealed");hud.classList.add("in");boot.classList.add("gone");prog.classList.add("show");}
-  requestAnimationFrame(frame);
-
+  raf=requestAnimationFrame(frame);
 }
