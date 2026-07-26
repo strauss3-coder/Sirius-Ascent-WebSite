@@ -70,6 +70,12 @@ export function initObservatory(opts){
   function resize(){
     DPR=Math.min(devicePixelRatio||1,2);VW=innerWidth;VH=innerHeight;
     W=cv.width=VW*DPR;H=cv.height=VH*DPR;
+    // A canvas is a replaced element — inset:0 does NOT stretch it, so its CSS
+    // display size must be set explicitly (viewport px), or it renders at its
+    // backing-store size and appears zoomed/off-centre. Set here (width-gated),
+    // so address-bar toggles don't re-run it; the locked height just leaves a
+    // harmless black gap (invisible on the black ground) when the bar hides.
+    cv.style.width=VW+"px";cv.style.height=VH+"px";
     var defs=[[Math.min(150,(W*H/9000)|0),.2,.8,.15,0,.15,.5],[Math.min(80,(W*H/20000)|0),.5,1.3,.4,0,.25,.7],[Math.min(22,(W*H/70000)|0),1.4,2.8,.85,6,.2,.55]];
     layers=defs.map(function(d){var a=[];for(var i=0;i<d[0];i++)a.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*(d[2]-d[1])+d[1])*DPR,b:Math.random()*(d[6]-d[5])+d[5],tw:Math.random()*6.28,sp:Math.random()*.9+.3,blue:Math.random()>.85});return{arr:a,depth:d[3],blur:d[4]};});
     backdrop();
