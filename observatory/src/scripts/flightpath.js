@@ -35,9 +35,16 @@ export function initFlightpath() {
     if (!raf) raf = requestAnimationFrame(tick);
   }
 
+  let lastW = -1;
   addEventListener("scroll", onScroll, { passive: true });
-  addEventListener("resize", () => { layout(); onScroll(); }, { passive: true });
+  // only re-position waypoints on a real width/orientation change — an
+  // address-bar height toggle just moves the ship (via onScroll), never the layout
+  addEventListener("resize", () => {
+    if (innerWidth === lastW) { onScroll(); return; }
+    lastW = innerWidth; layout(); onScroll();
+  }, { passive: true });
+  addEventListener("orientationchange", () => { lastW = -1; setTimeout(() => { lastW = innerWidth; layout(); onScroll(); }, 180); });
   // position once layout settles (fonts/sections), then keep in sync
-  requestAnimationFrame(() => { layout(); onScroll(); });
+  requestAnimationFrame(() => { lastW = innerWidth; layout(); onScroll(); });
   setTimeout(() => { layout(); onScroll(); }, 1600);
 }

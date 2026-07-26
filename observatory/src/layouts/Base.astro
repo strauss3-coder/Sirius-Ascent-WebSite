@@ -47,6 +47,22 @@ const org = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/* Stable viewport unit: locked to width/orientation, NOT the mobile address
+        bar. Section heights use calc(var(--vh)*N) so the layout can't shift when
+        the browser chrome expands or collapses — the core scroll-stability fix. */}
+    <script is:inline>
+      (function () {
+        var d = document.documentElement, w = -1;
+        function set() {
+          if (window.innerWidth === w) return;
+          w = window.innerWidth;
+          d.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+        }
+        set();
+        window.addEventListener("resize", set, { passive: true });
+        window.addEventListener("orientationchange", function () { w = -1; setTimeout(set, 180); });
+      })();
+    </script>
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <meta name="theme-color" content="#08090c" />
 

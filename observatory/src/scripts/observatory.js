@@ -8,6 +8,10 @@ export function initObservatory(opts){
   var reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
   var fine=matchMedia("(pointer:fine)").matches;
   var W,H,DPR,bg=null,layers=[],shooters=[];
+  // Stable viewport metrics: locked to width/orientation, NOT to the mobile
+  // address bar showing/hiding. All scroll/focus math keys off these so the
+  // journey never jumps when the browser chrome expands or collapses.
+  var VW=innerWidth,VH=innerHeight,lastW=-1;
 
   /* sections: star target (normalized, centre origin) + type */
   var SECS=[
@@ -59,14 +63,19 @@ export function initObservatory(opts){
     var vg=b.createRadialGradient(cx(),cy(),Math.min(W,H)*.3,cx(),cy(),Math.max(W,H)*.85);
     vg.addColorStop(0,"rgba(8,9,12,0)");vg.addColorStop(1,"rgba(4,4,7,.85)");b.fillStyle=vg;b.fillRect(0,0,W,H);
   }
+  // Full re-layout: only on first run + real width/orientation changes. The
+  // canvas display size is handled by CSS (#cosmos{inset:0}); we do NOT set it
+  // inline, so an address-bar height change just scales the field imperceptibly
+  // instead of rebuilding the stars (which caused flicker) or shifting layout.
   function resize(){
-    DPR=Math.min(devicePixelRatio||1,2);W=cv.width=innerWidth*DPR;H=cv.height=innerHeight*DPR;
-    cv.style.width=innerWidth+"px";cv.style.height=innerHeight+"px";
+    DPR=Math.min(devicePixelRatio||1,2);VW=innerWidth;VH=innerHeight;
+    W=cv.width=VW*DPR;H=cv.height=VH*DPR;
     var defs=[[Math.min(150,(W*H/9000)|0),.2,.8,.15,0,.15,.5],[Math.min(80,(W*H/20000)|0),.5,1.3,.4,0,.25,.7],[Math.min(22,(W*H/70000)|0),1.4,2.8,.85,6,.2,.55]];
     layers=defs.map(function(d){var a=[];for(var i=0;i<d[0];i++)a.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*(d[2]-d[1])+d[1])*DPR,b:Math.random()*(d[6]-d[5])+d[5],tw:Math.random()*6.28,sp:Math.random()*.9+.3,blue:Math.random()>.85});return{arr:a,depth:d[3],blur:d[4]};});
     backdrop();
     SECS.forEach(function(s){s.top=s.el.offsetTop;s.h=s.el.offsetHeight;});
   }
+  function onResize(){ if(innerWidth===lastW)return; lastW=innerWidth; resize(); }
 
   var dot=document.querySelector(".cur-dot"),ring=document.querySelector(".cur-ring");
   var px=innerWidth/2,py=innerHeight/2,rx=px,ry=py,hoverName=null,hoverLive=false,hoverX=0,hoverY=0,clickTargets=[];
@@ -136,7 +145,7 @@ export function initObservatory(opts){
   function label(txt,sub,lx,ly,live){ctx.font=(13*DPR)+"px ui-monospace,'SF Mono',Menlo,monospace";ctx.textBaseline="middle";ctx.fillStyle="rgba(234,240,255,.97)";ctx.fillText(txt.toUpperCase(),lx+16*DPR,ly-(sub?4*DPR:0));if(sub){ctx.font=(9.5*DPR)+"px ui-monospace,'SF Mono',Menlo,monospace";ctx.fillStyle=live?"rgba(111,240,192,.95)":"rgba(125,148,255,.95)";ctx.fillText(sub.toUpperCase(),lx+16*DPR,ly+11*DPR);}ctx.strokeStyle="rgba(125,148,255,.55)";ctx.lineWidth=1*DPR;ctx.beginPath();ctx.moveTo(lx+7*DPR,ly);ctx.lineTo(lx+13*DPR,ly);ctx.stroke();}
 
   function frame(now){
-    var t=now-START,vpMid=innerHeight/2;
+    var t=now-START,vpMid=VH/2;
     // inertial scroll: the world carries momentum and eases into place (mass)
     var realSc=window.scrollY||0;
     smoothScroll+=reduce?(realSc-smoothScroll):(realSc-smoothScroll)*0.075;
@@ -148,9 +157,9 @@ export function initObservatory(opts){
         // tall reveal sections stay fully lit while they span the viewport centre,
         // so every star reveals at a consistent brightness and pace
         var topOn=s.top-smoothScroll,botOn=topOn+s.h;
-        f=Math.min(c01((vpMid-topOn)/(innerHeight*0.5)),c01((botOn-vpMid)/(innerHeight*0.5)));
+        f=Math.min(c01((vpMid-topOn)/(VH*0.5)),c01((botOn-vpMid)/(VH*0.5)));
       } else {
-        f=1-c01(Math.abs(mid-vpMid)/(innerHeight*0.62));
+        f=1-c01(Math.abs(mid-vpMid)/(VH*0.62));
       }
       s.focus=f;
       var w=f*f;sum+=w;star.x+=s.tx*w;star.y+=s.ty*w;star.s+=s.ts*w;
@@ -168,10 +177,10 @@ export function initObservatory(opts){
     });
     document.querySelectorAll(".nav a").forEach(function(a){a.classList.toggle("active",a.getAttribute("href")==="#"+SECS[active].id);});
 
-    var camY=Math.min(smoothScroll,innerHeight)*0.25*DPR;
+    var camY=Math.min(smoothScroll,VH)*0.25*DPR;
     ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,W,H);
     if(bg)ctx.drawImage(bg,0,-camY*0.3);
-    var ntx=(px/innerWidth-.5)*2,nty=(py/innerHeight-.5)*2;
+    var ntx=(px/VW-.5)*2,nty=(py/VH-.5)*2;
     var fieldA=reduce?1:ease(c01((t-700)/2200));
 
     // ambient layers
@@ -184,7 +193,7 @@ export function initObservatory(opts){
     if(!reduce&&darken<0.25){if(t>3600&&(nextShoot-=16)<=0){spawnShoot();nextShoot=22000+Math.random()*22000;}}
     for(var shi=shooters.length-1;shi>=0;shi--){var sh=shooters[shi];sh.x+=sh.vx;sh.y+=sh.vy;sh.life-=.012;if(sh.life<=0){shooters.splice(shi,1);continue;}var hl=Math.hypot(sh.vx,sh.vy),tx2=sh.x-sh.vx/hl*sh.len*DPR,ty2=sh.y-sh.vy/hl*sh.len*DPR;var gg=ctx.createLinearGradient(sh.x,sh.y,tx2,ty2);gg.addColorStop(0,"rgba(234,240,255,"+(.9*sh.life)+")");gg.addColorStop(1,"rgba(234,240,255,0)");ctx.strokeStyle=gg;ctx.lineWidth=1.4*DPR;ctx.beginPath();ctx.moveTo(sh.x,sh.y);ctx.lineTo(tx2,ty2);ctx.stroke();}
     // easter egg: a lone satellite drifts across, its light blinking
-    if(!reduce&&darken<0.2){if(!sat&&(nextSat-=16)<=0){sat={x:-30*DPR,y:innerHeight*(0.12+Math.random()*0.3)*DPR,vx:(0.5+Math.random()*0.5)*DPR};nextSat=90000+Math.random()*90000;}}
+    if(!reduce&&darken<0.2){if(!sat&&(nextSat-=16)<=0){sat={x:-30*DPR,y:VH*(0.12+Math.random()*0.3)*DPR,vx:(0.5+Math.random()*0.5)*DPR};nextSat=90000+Math.random()*90000;}}
     if(sat){sat.x+=sat.vx;if(sat.x>W+30*DPR){sat=null;}else{ctx.strokeStyle="rgba(180,200,255,.35)";ctx.lineWidth=1*DPR;ctx.beginPath();ctx.moveTo(sat.x-6*DPR,sat.y);ctx.lineTo(sat.x+6*DPR,sat.y);ctx.stroke();var blink=(Math.sin(t*0.006)>0.6)?1:0.25;ctx.beginPath();ctx.arc(sat.x,sat.y,1.4*DPR,0,7);ctx.fillStyle="rgba(125,148,255,"+blink+")";ctx.fill();}}
     ctx.globalCompositeOperation="source-over";
 
@@ -217,7 +226,7 @@ export function initObservatory(opts){
       var R=scl();
       // Travel: the star reaches out to each project in turn as you scroll THROUGH
       // the (tall) portfolio section. Cinematic but free — never locks the scroll.
-      var travelP=c01((smoothScroll - sec.top + innerHeight*0.5)/Math.max(1,sec.h - innerHeight*0.55));
+      var travelP=c01((smoothScroll - sec.top + VH*0.5)/Math.max(1,sec.h - VH*0.55));
       var activeF=travelP*PROJECTS.length;
       var curIdx=Math.max(0,Math.min(PROJECTS.length-1,Math.round(activeF-0.5)));
       for(var pj=0;pj<PROJECTS.length;pj++){
@@ -269,7 +278,7 @@ export function initObservatory(opts){
     }
     else if(sec.type==="recede"&&A>0.02){
       // the ending: the work recomposes into the constellation and pulls back
-      var op=c01((smoothScroll - sec.top + innerHeight*0.5)/Math.max(1,sec.h - innerHeight*0.6));
+      var op=c01((smoothScroll - sec.top + VH*0.5)/Math.max(1,sec.h - VH*0.6));
       outroP=op;outroVeil=op*op;
       var shrink=1-op*0.82,Ro=scl()*shrink;
       for(var ri=0;ri<PROJECTS.length;ri++){
@@ -344,14 +353,17 @@ export function initObservatory(opts){
   if("scrollRestoration" in history) history.scrollRestoration="manual";
   try{ scrollTo(0,0); }catch(e){}
 
-  addEventListener("resize",resize,{passive:true});
+  // Width-gated: address-bar height changes are ignored; only true width /
+  // orientation changes relayout. This is the core stability fix.
+  addEventListener("resize",onResize,{passive:true});
+  addEventListener("orientationchange",function(){ lastW=-1; setTimeout(onResize,180); });
   // pause the loop while the tab is hidden — saves battery and helps the tab
   // survive the WhatsApp hand-off instead of being discarded blank on return
   document.addEventListener("visibilitychange",function(){
     if(document.hidden){ if(raf)cancelAnimationFrame(raf); raf=0; }
     else if(!raf){ smoothScroll=window.scrollY||0; raf=requestAnimationFrame(frame); }
   });
-  resize();
+  resize(); lastW=innerWidth;
   if(reduce){hero.classList.add("revealed");hud.classList.add("in");boot.classList.add("gone");prog.classList.add("show");}
   raf=requestAnimationFrame(frame);
 }
