@@ -372,4 +372,6 @@ export function initObservatory(opts){
   resize(); lastW=innerWidth;
   if(reduce){hero.classList.add("revealed");hud.classList.add("in");boot.classList.add("gone");prog.classList.add("show");}
   raf=requestAnimationFrame(frame);
+  // tell the failsafe the experience booted, so it won't force the plain fallback
+  try{window.__siriusBooted=true;}catch(e){}
 }

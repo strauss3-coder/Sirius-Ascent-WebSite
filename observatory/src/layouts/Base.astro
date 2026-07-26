@@ -63,6 +63,17 @@ const org = {
         window.addEventListener("orientationchange", function () { w = -1; setTimeout(set, 180); });
       })();
     </script>
+    {/* Failsafe: if the experience engine hasn't booted a few seconds after load
+        (e.g. a CDN cache window served a stale page whose bundle 404'd, or a
+        script errored on an old browser), reveal all content as a plain, fully
+        readable page instead of leaving it blank. The site can never break. */}
+    <script is:inline>
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          if (!window.__siriusBooted) document.documentElement.classList.add("sirius-fallback");
+        }, 4000);
+      });
+    </script>
     <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
     <meta name="theme-color" content="#08090c" />
 

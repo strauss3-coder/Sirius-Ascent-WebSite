@@ -64,4 +64,5 @@ export function initAmbient() {
   }
   resize();
   if (!reduce) requestAnimationFrame(draw);
+  try { window.__siriusBooted = true; } catch (e) {}
 }

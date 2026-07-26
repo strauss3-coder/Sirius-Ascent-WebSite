@@ -412,3 +412,14 @@ body.console-open button,body.console-open a,body.console-open [role="radio"]{cu
 /* replace the native scrollbar with the flight path */
 html{scrollbar-width:none}
 html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
+
+/* failsafe: if the experience engine never boots, reveal everything as a plain
+   readable page (no blank/broken state, ever) */
+.sirius-fallback .head,
+.sirius-fallback #hero .hero__eye,
+.sirius-fallback #hero .hero__title,
+.sirius-fallback #hero .hero__row,
+.sirius-fallback .df-system,
+.sirius-fallback .rv{opacity:1!important;transform:none!important;filter:none!important}
+.sirius-fallback .hud{opacity:1!important}
+.sirius-fallback .scroll-cue,.sirius-fallback .boot{display:none!important}
