@@ -46,5 +46,8 @@ export function initFlightpath() {
   addEventListener("orientationchange", () => { lastW = -1; setTimeout(() => { lastW = innerWidth; layout(); onScroll(); }, 180); });
   // position once layout settles (fonts/sections), then keep in sync
   requestAnimationFrame(() => { lastW = innerWidth; layout(); onScroll(); });
-  setTimeout(() => { layout(); onScroll(); }, 1600);
+  const relayout = () => { layout(); onScroll(); };
+  if (document.fonts && document.fonts.ready && document.fonts.ready.then) document.fonts.ready.then(relayout).catch(() => {});
+  addEventListener("load", relayout, { passive: true });
+  setTimeout(relayout, 1600);
 }

@@ -79,8 +79,13 @@ export function initObservatory(opts){
     var defs=[[Math.min(150,(W*H/9000)|0),.2,.8,.15,0,.15,.5],[Math.min(80,(W*H/20000)|0),.5,1.3,.4,0,.25,.7],[Math.min(22,(W*H/70000)|0),1.4,2.8,.85,6,.2,.55]];
     layers=defs.map(function(d){var a=[];for(var i=0;i<d[0];i++)a.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*(d[2]-d[1])+d[1])*DPR,b:Math.random()*(d[6]-d[5])+d[5],tw:Math.random()*6.28,sp:Math.random()*.9+.3,blue:Math.random()>.85});return{arr:a,depth:d[3],blur:d[4]};});
     backdrop();
-    SECS.forEach(function(s){s.top=s.el.offsetTop;s.h=s.el.offsetHeight;});
+    cacheOffsets();
   }
+  // Cache each section's scroll position/height. Must be re-run after web fonts
+  // load, because on a first visit the sections are first measured in a fallback
+  // font (wrong metrics) and everything reflows once the real fonts arrive —
+  // without this the whole scroll choreography is misaligned until a refresh.
+  function cacheOffsets(){ SECS.forEach(function(s){s.top=s.el.offsetTop;s.h=s.el.offsetHeight;}); }
   function onResize(){ if(innerWidth===lastW)return; lastW=innerWidth; resize(); }
 
   var dot=document.querySelector(".cur-dot"),ring=document.querySelector(".cur-ring");
@@ -370,6 +375,12 @@ export function initObservatory(opts){
     else if(!raf){ smoothScroll=window.scrollY||0; raf=requestAnimationFrame(frame); }
   });
   resize(); lastW=innerWidth;
+  // Re-measure once the real fonts have loaded (and again after full load) so a
+  // first visit isn't misaligned by fallback-font metrics — the fix for
+  // "broken on first open, fine after refresh".
+  if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){document.fonts.ready.then(cacheOffsets).catch(function(){});}
+  addEventListener("load",cacheOffsets,{passive:true});
+  setTimeout(cacheOffsets,1200);setTimeout(cacheOffsets,2600);
   if(reduce){hero.classList.add("revealed");hud.classList.add("in");boot.classList.add("gone");prog.classList.add("show");}
   raf=requestAnimationFrame(frame);
   // tell the failsafe the experience booted, so it won't force the plain fallback
