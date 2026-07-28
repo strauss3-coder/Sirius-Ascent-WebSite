@@ -14,7 +14,18 @@ export default defineConfig({
   base,
   output: "static",
   compressHTML: true,
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // never advertise the noindex 404 in the sitemap
+      filter: (page) => !page.includes("/404"),
+      serialize(item) {
+        item.lastmod = new Date().toISOString();
+        item.changefreq = "monthly";
+        item.priority = item.url === `${site}/` ? 1.0 : 0.7;
+        return item;
+      },
+    }),
+  ],
   build: { inlineStylesheets: "auto" },
   prefetch: { prefetchAll: true, defaultStrategy: "viewport" },
 });

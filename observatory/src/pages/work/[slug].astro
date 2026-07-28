@@ -73,7 +73,7 @@ function canonicalOf(a: typeof Astro) {
 }
 ---
 
-<Base title={`System ${sysNo} // ${d.name} — Sirius Ascent`} description={d.summary} image={ogImage} schema={schema}>
+<Base title={`System ${sysNo} // ${d.name} — Sirius Ascent`} description={d.summary} image={ogImage} imageAlt={`${d.name} — ${d.classification}, built by Sirius Ascent`} type="article" schema={schema}>
   <canvas id="ambient" aria-hidden="true"></canvas>
 
   <a class="return" href={`${base}#portfolio`}>← Back to the constellation</a>
