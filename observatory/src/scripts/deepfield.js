@@ -1,4 +1,4 @@
-/* The Deep Field — three flagship systems resolving out of the dark.
+/* The Deep Field: three flagship systems resolving out of the dark.
    Lightweight: a scroll-in reveal on three CSS bodies (no image filters, so it
    stays smooth on mobile). Orbiting satellites + asteroid belts are pure CSS. */
 export function initDeepField() {

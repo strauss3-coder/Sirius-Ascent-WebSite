@@ -12,17 +12,17 @@ x: -0.4
 y: -0.03
 url: "https://strauss3-coder.github.io/bankenveld-demo/index.html"
 accent: "#8fb56a"
-summary: "A golf estate concept that balances prestige and calm — selling lifestyle, membership and the setting."
+summary: "A golf estate concept that balances prestige and calm: selling lifestyle, membership and the setting."
 brief: "A golf estate sells belonging and setting. The concept needed to feel established and calm, present the estate and its amenities with prestige, and open clear paths to membership and enquiries."
-research: "We looked at how estates and clubs communicate exclusivity without feeling cold. The balance is warmth plus polish — most rivals lean too corporate, so a calmer, more human tone was the opening."
+research: "We looked at how estates and clubs communicate exclusivity without feeling cold. The balance is warmth plus polish: most rivals lean too corporate, so a calmer, more human tone was the opening."
 design: "Prestige and calm: a fairway-green accent, wide cinematic imagery of the course, refined type and unhurried pacing that signals an established place."
-development: "Hand-coded and responsive, structured for amenities, membership and enquiry sections, kept fast despite the large imagery the setting demands."
+development: "Custom-developed and responsive, structured for amenities, membership and enquiry sections, kept fast despite the large imagery the setting demands."
 performance: "Optimised media and lean code keep an image-rich estate site quick and stable on every device."
-result: "A demo that gives the estate a presence as composed as its grounds — ready to rise into a site that drives membership and stays."
-stack: ["Hand-coded", "Responsive", "Membership-ready", "WebP imagery"]
+result: "A demo that gives the estate a presence as composed as its grounds, ready to rise into a site that drives membership and stays."
+stack: ["Custom-built", "Responsive", "Membership-ready", "WebP imagery"]
 observations: >-
-  Prestige without coldness is a narrow line. Most estate sites read corporate; warmth is what converts. Balancing a composed, established tone with a human welcome taught us that luxury and approachability aren't a trade-off — and that large, cinematic imagery can stay performant with the right compression budget.
+  Prestige without coldness is a narrow line. Most estate sites read corporate; warmth is what converts. Balancing a composed, established tone with a human welcome taught us that luxury and approachability aren't a trade-off, and that large, cinematic imagery can stay performant with the right compression budget.
 
 ---
 
-_Plotted — an estate charted, ready to rise._
+_Plotted. An estate charted, ready to rise._

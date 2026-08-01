@@ -12,17 +12,17 @@ x: -0.31
 y: 0.15
 url: "https://strauss3-coder.github.io/the-view-lodge/"
 accent: "#d8b06a"
-summary: "A lodge concept designed to feel calm and cinematic — the kind of presence that makes someone book the escape."
+summary: "A lodge concept designed to feel calm and cinematic: the kind of presence that makes someone book the escape."
 brief: "A lodge sells a feeling of getting away. The concept needed to feel serene, premium and cinematic, and make booking a stay feel effortless and inviting."
-research: "We studied how travellers choose lodges and guesthouses — imagery and atmosphere decide it, and slow, cluttered sites break the spell. Calm and clarity would set The View apart."
+research: "We studied how travellers choose lodges and guesthouses: imagery and atmosphere decide it, and slow, cluttered sites break the spell. Calm and clarity would set The View apart."
 design: "Calm and cinematic: warm gold light, generous whitespace, unhurried imagery of the setting. Everything breathes, so the site feels like the retreat it's selling."
-development: "Hand-coded and responsive, structured for gallery, rates and an enquiry-to-book flow, kept light so the atmosphere loads instantly."
+development: "Custom-developed and responsive, structured for gallery, rates and an enquiry-to-book flow, kept light so the atmosphere loads instantly."
 performance: "Optimised imagery and lean markup keep an image-led design fast and smooth across devices."
-result: "A demo that captures the stillness of the place and makes the escape feel one tap away — ready to rise into a booking-driving site."
-stack: ["Hand-coded", "Responsive", "Gallery-led", "WebP imagery"]
+result: "A demo that captures the stillness of the place and makes the escape feel one tap away, ready to rise into a booking-driving site."
+stack: ["Custom-built", "Responsive", "Gallery-led", "WebP imagery"]
 observations: >-
-  Restraint was the hardest and best decision. Every instinct on a hospitality site is to add; the lodge got better each time we removed. Learning to let whitespace and a single wide image carry the mood — while keeping an image-led page fast — refined how we pace calm, premium experiences.
+  Restraint was the hardest and best decision. Every instinct on a hospitality site is to add; the lodge got better each time we removed. Learning to let whitespace and a single wide image carry the mood, while keeping an image-led page fast, refined how we pace calm, premium experiences.
 
 ---
 
-_Plotted — a quiet system charted, ready to rise._
+_Plotted. A quiet system charted, ready to rise._

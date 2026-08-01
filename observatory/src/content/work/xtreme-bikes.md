@@ -13,16 +13,16 @@ y: 0.27
 url: "https://strauss3-coder.github.io/xtreme-bikes-website/"
 accent: "#ff7a2d"
 summary: "A motorcycle retailer concept with an electric, high-energy front end built to move stock and parts."
-brief: "Xtreme Bikes needed a presence with real attitude — one that showcases machines and gear, and turns riders browsing on their phones into walk-ins and enquiries."
-research: "Riders shop visually and impulsively. We looked at how bike retailers present inventory and found most bury the machines under clutter — so bold imagery and a clear path to enquire became the priority."
+brief: "Xtreme Bikes needed a presence with real attitude, one that showcases machines and gear, and turns riders browsing on their phones into walk-ins and enquiries."
+research: "Riders shop visually and impulsively. We looked at how bike retailers present inventory and found most bury the machines under clutter, so bold imagery and a clear path to enquire became the priority."
 design: "Electric and kinetic: a hot orange accent, strong photography of the bikes, punchy type and motion that carries the energy of the ride without tipping into noise."
-development: "Hand-coded, responsive and quick, with a structure ready to hold a full inventory and parts catalogue as the business grows."
+development: "Custom-developed, responsive and quick, with a structure ready to hold a full inventory and parts catalogue as the business grows."
 performance: "Compressed imagery and lean markup keep a visually heavy concept fast and stable on mobile."
-result: "A demo that gives Xtreme Bikes a front end with the same energy as the showroom floor — ready to rise into a full retail presence."
-stack: ["Hand-coded", "Responsive", "Inventory-ready", "WebP imagery"]
+result: "A demo that gives Xtreme Bikes a front end with the same energy as the showroom floor, ready to rise into a full retail presence."
+stack: ["Custom-built", "Responsive", "Inventory-ready", "WebP imagery"]
 observations: >-
-  Bold imagery sells bikes, but big images are heavy. Getting the machines to feel enormous while still loading instantly pushed our image pipeline hard, and the responsive-art-direction approach we worked out here — different crops at different sizes — became a default. Energy and speed aren't opposites if you art-direct the payload.
+  Bold imagery sells bikes, but big images are heavy. Getting the machines to feel enormous while still loading instantly pushed our image pipeline hard, and the responsive-art-direction approach we worked out here (different crops at different sizes) became a default. Energy and speed aren't opposites if you art-direct the payload.
 
 ---
 
-_Plotted — charged and charted, ready to rise._
+_Plotted. Charged and charted, ready to rise._

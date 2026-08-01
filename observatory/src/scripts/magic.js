@@ -30,7 +30,7 @@ export function initMagic() {
       }, 4600);
     }
     localStorage.setItem("sa-visited", String(Date.now()));
-  } catch (e) { /* private mode — no memory, no harm */ }
+  } catch (e) { /* private mode, no memory, no harm */ }
 
   // ---- Observatory Log ----
   const readout = document.querySelector("[data-log]");

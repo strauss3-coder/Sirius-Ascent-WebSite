@@ -1,4 +1,4 @@
-/* FIRST CONTACT — the transmission console.
+/* FIRST CONTACT: the transmission console.
    Not a modal: activating the beacon powers the observatory down and the whole
    interface becomes a deep-space communication console. Questions arrive one at
    a time; each answer is confirmed; then the answers compress into light and
@@ -26,11 +26,11 @@ export function initConsole() {
   let idx = 0;
   let lastFocus = null;
 
-  // WhatsApp hand-off — opened inside the final click gesture (no popup block)
+  // WhatsApp hand-off, opened inside the final click gesture (no popup block)
   const WA_NUMBER = "27816614559";
   function openWhatsApp() {
     const lines = [
-      "✦ New transmission — Sirius Ascent",
+      "✦ New transmission to Sirius Ascent",
       "",
       "Name: " + (answers.identity || ""),
       "Business: " + (answers.origin || ""),
@@ -45,7 +45,7 @@ export function initConsole() {
     try { sessionStorage.setItem("sa-tx-sent", String(Date.now())); } catch (e) {}
     try {
       window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(lines), "_blank", "noopener");
-    } catch (e) { /* pop-up blocked — the cinematic success still plays */ }
+    } catch (e) { /* pop-up blocked, the cinematic success still plays */ }
   }
 
   const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);

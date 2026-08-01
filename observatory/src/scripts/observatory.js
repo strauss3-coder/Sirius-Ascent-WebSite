@@ -1,4 +1,4 @@
-/* The Observatory engine — ported verbatim from the approved Phase-1 prototype.
+/* The Observatory engine, ported verbatim from the approved Phase-1 prototype.
    Exposed as initObservatory() so Astro can (re)initialise it per page load. */
 export function initObservatory(opts){
   var BASE=(opts&&opts.base)||"/";
@@ -70,7 +70,7 @@ export function initObservatory(opts){
   function resize(){
     DPR=Math.min(devicePixelRatio||1,2);VW=innerWidth;VH=innerHeight;
     W=cv.width=VW*DPR;H=cv.height=VH*DPR;
-    // A canvas is a replaced element — inset:0 does NOT stretch it, so its CSS
+    // A canvas is a replaced element: inset:0 does NOT stretch it, so its CSS
     // display size must be set explicitly (viewport px), or it renders at its
     // backing-store size and appears zoomed/off-centre. Set here (width-gated),
     // so address-bar toggles don't re-run it; the locked height just leaves a
@@ -83,7 +83,7 @@ export function initObservatory(opts){
   }
   // Cache each section's scroll position/height. Must be re-run after web fonts
   // load, because on a first visit the sections are first measured in a fallback
-  // font (wrong metrics) and everything reflows once the real fonts arrive —
+  // font (wrong metrics) and everything reflows once the real fonts arrive,
   // without this the whole scroll choreography is misaligned until a refresh.
   function cacheOffsets(){ SECS.forEach(function(s){s.top=s.el.offsetTop;s.h=s.el.offsetHeight;}); }
   function onResize(){ if(innerWidth===lastW)return; lastW=innerWidth; resize(); }
@@ -236,7 +236,7 @@ export function initObservatory(opts){
     if(sec.type==="constellation"&&A>0.02){
       var R=scl();
       // Travel: the star reaches out to each project in turn as you scroll THROUGH
-      // the (tall) portfolio section. Cinematic but free — never locks the scroll.
+      // the (tall) portfolio section. Cinematic but free, and never locks the scroll.
       var travelP=c01((smoothScroll - sec.top + VH*0.5)/Math.max(1,sec.h - VH*0.55));
       var activeF=travelP*PROJECTS.length;
       var curIdx=Math.max(0,Math.min(PROJECTS.length-1,Math.round(activeF-0.5)));
@@ -300,7 +300,7 @@ export function initObservatory(opts){
       }
     }
 
-    // Sirius itself (the guide) — the first light in, always readable, never overpowering
+    // Sirius itself (the guide): the first light in, always readable, never overpowering
     var beaconBoost=sec.type==="beacon"?(1+A*0.7):1;
     var twinkle=reduce?1:1+Math.sin(t*0.0013)*0.09;
     var sirBright=(reduce?1:ease(c01((t-200)/1500)))*twinkle*beaconBoost;
@@ -368,7 +368,7 @@ export function initObservatory(opts){
   // orientation changes relayout. This is the core stability fix.
   addEventListener("resize",onResize,{passive:true});
   addEventListener("orientationchange",function(){ lastW=-1; setTimeout(onResize,180); });
-  // pause the loop while the tab is hidden — saves battery and helps the tab
+  // pause the loop while the tab is hidden, saves battery and helps the tab
   // survive the WhatsApp hand-off instead of being discarded blank on return
   document.addEventListener("visibilitychange",function(){
     if(document.hidden){ if(raf)cancelAnimationFrame(raf); raf=0; }
@@ -376,7 +376,7 @@ export function initObservatory(opts){
   });
   resize(); lastW=innerWidth;
   // Re-measure once the real fonts have loaded (and again after full load) so a
-  // first visit isn't misaligned by fallback-font metrics — the fix for
+  // first visit isn't misaligned by fallback-font metrics, the fix for
   // "broken on first open, fine after refresh".
   if(document.fonts&&document.fonts.ready&&document.fonts.ready.then){document.fonts.ready.then(cacheOffsets).catch(function(){});}
   addEventListener("load",cacheOffsets,{passive:true});

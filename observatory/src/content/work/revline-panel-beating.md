@@ -12,17 +12,17 @@ x: -0.13
 y: 0.24
 url: "https://strauss3-coder.github.io/revline-panelbeating-website/"
 accent: "#f0a23c"
-summary: "A panel beater concept built on trust — before-and-after proof and an obvious path to a quote."
-brief: "Panel beating is a trust purchase after a stressful moment. The concept needed to reassure — show the quality of the work and make getting a quote effortless."
+summary: "A panel beater concept built on trust: before-and-after proof and an obvious path to a quote."
+brief: "Panel beating is a trust purchase after a stressful moment. The concept needed to reassure: show the quality of the work and make getting a quote effortless."
 research: "We looked at how people choose a panel beater: reputation, visible proof, and speed of response. Competitors showed little of their actual work, so leading with real repairs was the edge."
 design: "Confident and mechanical: a steel-and-amber palette, before-and-after imagery front and centre, and a quote request that's never more than a tap away. Calm, credible, no gimmicks."
-development: "Hand-coded and responsive, with a quote flow and gallery structured to plug into the real workshop's process."
+development: "Custom-developed and responsive, with a quote flow and gallery structured to plug into the real workshop's process."
 performance: "Lean code and optimised imagery keep the proof-heavy layout fast and clean on any device."
-result: "A demo that turns a workshop's craftsmanship into online trust — clear, credible, and ready to rise into a live site that books jobs."
-stack: ["Hand-coded", "Responsive", "Quote flow", "WebP imagery"]
+result: "A demo that turns a workshop's craftsmanship into online trust: clear, credible, and ready to rise into a live site that books jobs."
+stack: ["Custom-built", "Responsive", "Quote flow", "WebP imagery"]
 observations: >-
-  Proof beats persuasion. The single most effective decision was putting real before-and-after repairs above the fold and a quote request one tap away — trust came from evidence, not adjectives. It reset how we open any service business: lead with the work, not the pitch.
+  Proof beats persuasion. The single most effective decision was putting real before-and-after repairs above the fold and a quote request one tap away. Trust came from evidence, not adjectives. It reset how we open any service business: lead with the work, not the pitch.
 
 ---
 
-_Plotted — proof charted, ready to rise._
+_Plotted. Proof charted, ready to rise._

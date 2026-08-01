@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "private": true,
-  "description": "Sirius Ascent — the Observatory. A living star map built in Astro.",
+  "description": "Sirius Ascent, the Observatory. A living star map built in Astro.",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

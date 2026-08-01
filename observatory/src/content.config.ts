@@ -2,8 +2,8 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 // Each case study is a charted star system: observatory-catalogue metadata up
-// top, then a mission log — Brief → Research → Design → Development →
-// Performance → Result — driven from structured fields so every page is
+// top, then a mission log: Brief → Research → Design → Development →
+// Performance → Result, driven from structured fields so every page is
 // consistently designed, not freeform.
 const work = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/work" }),
@@ -19,7 +19,7 @@ const work = defineCollection({
       designation: z.string(), // α, β, …
       magnitude: z.number(),
       coordinates: z.object({ ra: z.string(), dec: z.string() }),
-      // position in the constellation (matches the homepage star map) — drives
+      // position in the constellation (matches the homepage star map), which drives
       // the "nearby systems" distance nav.
       x: z.number(),
       y: z.number(),
@@ -34,7 +34,7 @@ const work = defineCollection({
       development: z.string(),
       performance: z.string(),
       result: z.string(),
-      // the design-journal reflection — honest lessons, not marketing
+      // the design-journal reflection: honest lessons, not marketing
       observations: z.string(),
 
       // optional supporting data

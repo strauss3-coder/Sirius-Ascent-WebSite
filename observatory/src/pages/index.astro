@@ -15,8 +15,8 @@ const deepField = deepFieldSlugs.map((slug) => {
 ---
 
 <Base
-  title="Sirius Ascent — Digital Architecture Studio, Pretoria"
-  description="A living star map of the work we've built. Sirius Ascent designs and builds websites engineered like instruments — for South African businesses that intend to be taken seriously."
+  title="Sirius Ascent: Digital Architecture Studio, Pretoria"
+  description="A living star map of the work we've built. Sirius Ascent designs and builds websites engineered like instruments, for South African businesses that intend to be taken seriously."
 >
   <Cosmos />
   <Hud />
@@ -34,7 +34,7 @@ const deepField = deepFieldSlugs.map((slug) => {
       <div class="hero__row">
         <p class="hero__sub">
           This is our universe. <b>Sirius is the studio;</b> every other light is a
-          business we built. Follow the star — it will guide you down through the observatory.
+          business we built. Follow the star, and it will guide you down through the observatory.
         </p>
         <div class="hero__cta">
           <a class="btn btn--p" data-mag href="#portfolio">Enter the sky ↓</a>
@@ -47,7 +47,7 @@ const deepField = deepFieldSlugs.map((slug) => {
       <div class="head" data-head>
         <p class="eye">The stars · portfolio</p>
         <h2 class="h2">Every project <em>is a star.</em></h2>
-        <p class="subl">Scroll to travel the constellation — Sirius reaches out to each project it built, one by one.</p>
+        <p class="subl">Scroll to travel the constellation. Sirius reaches out to each project it built, one by one.</p>
         <p class="count mono" id="portfolioCount" aria-hidden="true">01 / 10</p>
       </div>
       <!-- Canvas is decorative; this is the real, accessible route to every case study -->
@@ -56,7 +56,7 @@ const deepField = deepFieldSlugs.map((slug) => {
           {projects.map((p) => (
             <li>
               <a href={`${base}work/${p.slug}`}>
-                {p.name} — {p.status === "risen" ? "live site" : "demo"} case study
+                {p.name}, {p.status === "risen" ? "live site" : "demo"} case study
               </a>
             </li>
           ))}
@@ -65,16 +65,16 @@ const deepField = deepFieldSlugs.map((slug) => {
     </section>
 
     <!-- ===================== THE DEEP FIELD ===================== -->
-    <section class="sec-df" id="deepfield" aria-label="The deep field — featured systems">
+    <section class="sec-df" id="deepfield" aria-label="The deep field: featured systems">
       <div class="df-intro">
         <p class="eye">The deep field</p>
         <h2 class="h2">A cluster of <em>living systems.</em></h2>
-        <p class="subl">Three signals glinting in the dark — the flagship builds. Approach one and enter its system.</p>
+        <p class="subl">Three signals glinting in the dark: the flagship builds. Approach one and enter its system.</p>
       </div>
 
       <div class="df-systems">
         {deepField.map((p) => (
-          <a class="df-system" href={`${base}work/${p.slug}`} style={`--accent:${p.accent}`} aria-label={`${p.name} — enter the system`}>
+          <a class="df-system" href={`${base}work/${p.slug}`} style={`--accent:${p.accent}`} aria-label={`${p.name}, enter the system`}>
             <span class="df-orb" aria-hidden="true">
               <span class="df-core"></span>
               <span class="df-ring"><i></i></span>

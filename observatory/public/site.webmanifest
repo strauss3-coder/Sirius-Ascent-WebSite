@@ -1,7 +1,7 @@
 {
   "name": "Sirius Ascent",
   "short_name": "Sirius Ascent",
-  "description": "Digital architecture studio in Pretoria — websites engineered like instruments.",
+  "description": "Digital architecture studio in Pretoria. Websites engineered like instruments.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

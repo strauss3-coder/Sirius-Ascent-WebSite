@@ -2,7 +2,7 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
-// The Observatory — Sirius Ascent. Static output for GitHub Pages.
+// The Observatory, Sirius Ascent. Static output for GitHub Pages.
 // SITE_URL / SITE_BASE let the same build target either the custom domain
 // (siriusascent.co.za at root) or a project-page preview
 // (strauss3-coder.github.io/sirius-observatory/). Defaults = production.

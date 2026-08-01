@@ -6,7 +6,7 @@
 
 // Order = the order the star travels to them in the constellation.
 // accent = the system's atmosphere colour; tempo = drift speed in seconds
-// (lower = more energetic) — each project becomes its own star system.
+// (lower = more energetic). Each project becomes its own star system.
 export const projects = [
   { slug: "supreme-auto", name: "Supreme Auto", designation: "α", industry: "Automotive", status: "risen", url: "https://supremeautonorth.co.za", magnitude: -1.4, accent: "#cfe0ff", tempo: 10, system: "White dwarf · metallic dust" },
   { slug: "venom-racing", name: "Venom Racing", designation: "β", industry: "Automotive", status: "risen", url: "https://venomracing.co.za/", magnitude: -1.1, accent: "#ff5a4d", tempo: 6, system: "Red giant · high energy" },

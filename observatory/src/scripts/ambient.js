@@ -1,5 +1,5 @@
 /* Inner-page ambient universe: a drifting star field with a persistent Sirius,
-   so case studies still feel like they're inside the same sky. Lightweight —
+   so case studies still feel like they're inside the same sky. Lightweight,
    no docking/sections. Sirius sits toward a corner and holds its glow. */
 export function initAmbient() {
   const cv = document.getElementById("ambient");
@@ -40,7 +40,7 @@ export function initAmbient() {
       ctx.fillStyle = s.blue ? "rgba(125,148,255," + a + ")" : "rgba(228,232,238," + a * 0.9 + ")";
       ctx.fill();
     }
-    // Sirius — persistent, upper-right
+    // Sirius, persistent, upper-right
     const sx = W * 0.82 + tx * 22 * DPR, sy = H * 0.22 + ty * 22 * DPR;
     const pulse = reduce ? 1 : 1 + Math.sin(t * 0.0016) * 0.1;
     const g = ctx.createRadialGradient(sx, sy, 0, sx, sy, 70 * DPR * pulse);

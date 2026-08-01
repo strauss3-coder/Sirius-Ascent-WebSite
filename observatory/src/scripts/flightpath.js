@@ -1,4 +1,4 @@
-/* The flight path — the craft travels the right-hand rail from launch (top) to
+/* The flight path: the craft travels the right-hand rail from launch (top) to
    first contact (bottom) as a smooth progress indicator, replacing the plain
    scrollbar. Section waypoints are positioned by their true scroll fraction, so
    the craft passes each one exactly as you reach that region of the journey. */
@@ -37,7 +37,7 @@ export function initFlightpath() {
 
   let lastW = -1;
   addEventListener("scroll", onScroll, { passive: true });
-  // only re-position waypoints on a real width/orientation change — an
+  // only re-position waypoints on a real width/orientation change, an
   // address-bar height toggle just moves the ship (via onScroll), never the layout
   addEventListener("resize", () => {
     if (innerWidth === lastW) { onScroll(); return; }

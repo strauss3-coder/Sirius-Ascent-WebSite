@@ -59,7 +59,7 @@ const schema = {
   "@context": "https://schema.org",
   "@type": "CreativeWork",
   name: d.name,
-  headline: `${d.name} — ${d.classification}`,
+  headline: `${d.name}: ${d.classification}`,
   description: d.summary,
   about: d.classification,
   dateCreated: String(d.missionYear),
@@ -73,7 +73,7 @@ function canonicalOf(a: typeof Astro) {
 }
 ---
 
-<Base title={`System ${sysNo} // ${d.name} — Sirius Ascent`} description={d.summary} image={ogImage} imageAlt={`${d.name} — ${d.classification}, built by Sirius Ascent`} type="article" schema={schema}>
+<Base title={`System ${sysNo} // ${d.name}, Sirius Ascent`} description={d.summary} image={ogImage} imageAlt={`${d.name} (${d.classification}), built by Sirius Ascent`} type="article" schema={schema}>
   <canvas id="ambient" aria-hidden="true"></canvas>
 
   <a class="return" href={`${base}#portfolio`}>← Back to the constellation</a>
@@ -112,7 +112,7 @@ function canonicalOf(a: typeof Astro) {
       ))}
     </div>
 
-    <!-- RESULT FRAME — the real, built site -->
+    <!-- RESULT FRAME: the real, built site -->
     <section class="result">
       <p class="phase__ey mono"><span>07</span> The built site</p>
       <figure class="frame">
@@ -134,11 +134,11 @@ function canonicalOf(a: typeof Astro) {
       <figcaption class="frame__cap mono">Live capture · {host}</figcaption>
     </section>
 
-    <!-- OBSERVATIONS — the design journal -->
+    <!-- OBSERVATIONS: the design journal -->
     <section class="obs">
       <p class="obs__ey mono">Observations · lessons from this system</p>
       <p class="obs__body">{d.observations}</p>
-      <p class="obs__sign mono">— logged in the Sirius Ascent journal</p>
+      <p class="obs__sign mono">Logged in the Sirius Ascent journal</p>
     </section>
 
     <!-- LAUNCH BEACON -->
@@ -278,7 +278,7 @@ function canonicalOf(a: typeof Astro) {
   .beacon__btn:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -10px color-mix(in srgb, var(--accent) 70%, transparent); }
   .beacon__note { margin-top: 1rem; font-size: 0.64rem; color: var(--dim); position: relative; }
 
-  /* OBSERVATIONS — journal note */
+  /* OBSERVATIONS: journal note */
   .obs {
     margin-top: clamp(2rem, 6vw, 4rem);
     padding: clamp(1.8rem, 4vw, 2.8rem);
